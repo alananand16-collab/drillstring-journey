@@ -1,10 +1,4 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Trophy } from "lucide-react";
 import type { Experience } from "@/data/portfolioData";
@@ -20,53 +14,65 @@ export default function ExperienceModal({ experience, open, onOpenChange }: Prop
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[85vh] overflow-y-auto border-brand/20 bg-[#1a1a1a] text-white sm:max-w-2xl">
-        <DialogHeader>
-          <div className="mb-1 flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded border border-white/10 bg-white/5 text-[8px] text-white/50">
-              {experience.logo}
+      <DialogContent
+        className="max-w-2xl border-0 p-0 overflow-hidden"
+        style={{
+          background: "rgba(12,14,20,0.98)",
+          backdropFilter: "blur(20px)",
+          border: "1px solid rgba(255,255,255,0.06)",
+          boxShadow: "0 25px 80px rgba(0,0,0,0.8)",
+        }}
+      >
+        <div className="p-6 md:p-8">
+          <DialogHeader>
+            <div className="flex items-start gap-4">
+              <div
+                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg text-sm font-bold"
+                style={{
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  color: "hsl(var(--brand))",
+                }}
+              >
+                {experience.logo}
+              </div>
+              <div>
+                <DialogTitle className="text-lg font-bold text-white">{experience.role}</DialogTitle>
+                <DialogDescription className="text-sm text-white/40 mt-1">{experience.location}</DialogDescription>
+                <p className="text-xs text-white/25 mt-0.5 font-mono">{experience.startDate} — {experience.endDate}</p>
+              </div>
             </div>
-            <div>
-              <DialogTitle className="text-lg text-white">{experience.role}</DialogTitle>
-              <DialogDescription className="text-sm text-white/50">
-                {experience.company} • {experience.location} • {experience.dates}
-              </DialogDescription>
-            </div>
-          </div>
-        </DialogHeader>
+          </DialogHeader>
 
-        <div className="space-y-4">
-          <ul className="space-y-3">
-            {experience.bullets.map((b, i) => (
-              <li key={i} className="flex gap-2 text-sm text-white/80">
-                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
-                {b}
-              </li>
+          <div className="mt-6 space-y-3">
+            {experience.bullets.map((bullet, i) => (
+              <div key={i} className="flex gap-2">
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: "hsl(var(--brand) / 0.5)" }} />
+                <p className="text-sm text-white/55 leading-relaxed">{bullet}</p>
+              </div>
             ))}
-          </ul>
+          </div>
 
-          <div>
-            <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-white/40">Tools</h4>
-            <div className="flex flex-wrap gap-2">
-              {experience.tools.map((t) => (
-                <Badge key={t} variant="secondary" className="bg-brand/15 text-brand border-brand/20 text-xs">
-                  {t}
-                </Badge>
-              ))}
-            </div>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {experience.tools.map((tool) => (
+              <Badge
+                key={tool}
+                variant="outline"
+                className="text-[10px] font-medium border-white/10 text-white/40 bg-white/[0.02]"
+              >
+                {tool}
+              </Badge>
+            ))}
           </div>
 
           {experience.awards && experience.awards.length > 0 && (
-            <div>
-              <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-white/40">Awards</h4>
-              <div className="flex flex-wrap gap-2">
-                {experience.awards.map((a) => (
-                  <div key={a} className="flex items-center gap-1.5 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3 py-1">
-                    <Trophy className="h-3 w-3 text-yellow-500" />
-                    <span className="text-xs text-yellow-400">{a}</span>
-                  </div>
-                ))}
-              </div>
+            <div className="mt-5 pt-4 border-t border-white/5">
+              {experience.awards.map((award) => (
+                <div key={award} className="flex items-center gap-2">
+                  <Trophy className="h-3.5 w-3.5 text-yellow-500/70" />
+                  <span className="text-xs text-yellow-500/70">{award}</span>
+                </div>
+              ))}
             </div>
           )}
         </div>
