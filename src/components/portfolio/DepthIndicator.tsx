@@ -3,12 +3,14 @@ import { useScrollDepth } from "@/hooks/useScrollDepth";
 const depthMarkers = [0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000];
 
 const formationZones = [
-  { start: 0, label: "Surface", color: "hsl(var(--brand))" },
-  { start: 0.125, label: "Sandstone", color: "#c4a882" },
-  { start: 0.3, label: "Shale", color: "#555" },
-  { start: 0.55, label: "Reservoir", color: "#b8860b" },
-  { start: 0.75, label: "Pay Zone", color: "#d4af37" },
-  { start: 0.875, label: "Completion", color: "#888" },
+  { pct: 0, label: "Surface", color: "#4a7c59" },
+  { pct: 12.5, label: "Shallow", color: "#a08060" },
+  { pct: 30, label: "Sandstone", color: "#c4a882" },
+  { pct: 55, label: "Shale", color: "#555" },
+  { pct: 70, label: "Reservoir", color: "#b8860b" },
+  { pct: 80, label: "Pay Zone", color: "#d4af37" },
+  { pct: 87.5, label: "Completion", color: "#666" },
+  { pct: 95, label: "Bottom Hole", color: "#333" },
 ];
 
 export default function DepthIndicator() {
@@ -17,35 +19,97 @@ export default function DepthIndicator() {
   return (
     <>
       {/* Desktop sidebar */}
-      <div className="fixed left-0 top-0 z-50 hidden h-full w-16 flex-col items-center py-4 lg:flex"
-        style={{ background: "linear-gradient(180deg, rgba(10,10,10,0.95), rgba(5,5,5,0.98))" }}>
-        <span className="mb-2 text-[10px] font-bold tracking-wider text-brand">DEPTH</span>
-        <div className="relative flex-1 w-px bg-muted-foreground/20">
+      <div className="fixed left-0 top-0 z-50 hidden h-full w-20 flex-col items-center py-6 lg:flex"
+        style={{
+          background: "linear-gradient(180deg, rgba(5,5,5,0.97) 0%, rgba(8,8,8,0.98) 100%)",
+          borderRight: "1px solid rgba(255,255,255,0.06)",
+          boxShadow: "4px 0 20px rgba(0,0,0,0.5)",
+        }}>
+        
+        {/* Depth readout */}
+        <div className="mb-4 text-center">
+          <span className="block text-[9px] font-bold tracking-[0.2em] uppercase text-white/30">Depth</span>
+          <span
+            className="block text-lg font-bold tabular-nums"
+            style={{
+              color: "hsl(var(--brand))",
+              animation: "text-glow 3s ease-in-out infinite",
+            }}
+          >
+            {depth}m
+          </span>
+        </div>
+
+        {/* Vertical wellbore track */}
+        <div className="relative flex-1 w-[2px]" style={{ background: "rgba(255,255,255,0.08)" }}>
+          {/* Formation zone colors */}
+          {formationZones.map((zone, i) => {
+            const nextPct = formationZones[i + 1]?.pct ?? 100;
+            return (
+              <div
+                key={zone.label}
+                className="absolute left-[-3px] w-[8px] rounded-full"
+                style={{
+                  top: `${zone.pct}%`,
+                  height: `${nextPct - zone.pct}%`,
+                  background: zone.color,
+                  opacity: 0.3,
+                }}
+              />
+            );
+          })}
+
+          {/* Depth tick marks */}
           {depthMarkers.map((m) => {
             const pct = (m / 4000) * 100;
             return (
-              <div key={m} className="absolute left-1/2 -translate-x-1/2 flex items-center" style={{ top: `${pct}%` }}>
-                <div className="w-2 h-px bg-muted-foreground/40" />
-                <span className="ml-1 text-[8px] text-muted-foreground whitespace-nowrap">{m}m</span>
+              <div key={m} className="absolute flex items-center" style={{ top: `${pct}%`, left: "-8px" }}>
+                <div className="w-[18px] h-[1px]" style={{ background: "rgba(255,255,255,0.15)" }} />
+                <span className="ml-1.5 text-[9px] font-mono text-white/40 whitespace-nowrap">{m}</span>
               </div>
             );
           })}
-          {/* Moving indicator */}
+
+          {/* Glowing current position indicator */}
           <div
-            className="absolute left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-brand shadow-[0_0_8px_hsl(var(--brand))] transition-all duration-150"
-            style={{ top: `${scrollProgress * 100}%` }}
-          />
+            className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full transition-all duration-200"
+            style={{
+              top: `calc(${scrollProgress * 100}% - 8px)`,
+              background: "hsl(var(--brand))",
+              boxShadow: "0 0 12px 4px hsl(var(--brand) / 0.5), 0 0 24px 8px hsl(var(--brand) / 0.2)",
+            }}
+          >
+            <div className="absolute inset-[2px] rounded-full bg-white/20" />
+          </div>
         </div>
-        <span className="mt-2 text-[10px] text-muted-foreground">{formationName}</span>
+
+        {/* Formation name */}
+        <div className="mt-4 text-center">
+          <span className="text-[9px] font-medium text-white/40 uppercase tracking-wider leading-tight block max-w-[70px]">
+            {formationName}
+          </span>
+        </div>
       </div>
 
       {/* Mobile top bar */}
-      <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-2 lg:hidden"
-        style={{ background: "rgba(5,5,5,0.9)", backdropFilter: "blur(8px)" }}>
-        <span className="text-xs font-bold text-brand">{depth}m</span>
-        <span className="text-xs text-muted-foreground">{formationName}</span>
-        <div className="h-1 w-24 rounded-full bg-muted-foreground/20 overflow-hidden">
-          <div className="h-full bg-brand transition-all duration-150" style={{ width: `${scrollProgress * 100}%` }} />
+      <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-2.5 lg:hidden"
+        style={{
+          background: "rgba(5,5,5,0.92)",
+          backdropFilter: "blur(12px)",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
+          boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
+        }}>
+        <span className="text-sm font-bold font-mono" style={{ color: "hsl(var(--brand))" }}>{depth}m</span>
+        <span className="text-[11px] text-white/50 font-medium">{formationName}</span>
+        <div className="h-1.5 w-28 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.08)" }}>
+          <div
+            className="h-full rounded-full transition-all duration-200"
+            style={{
+              width: `${scrollProgress * 100}%`,
+              background: "hsl(var(--brand))",
+              boxShadow: "0 0 8px hsl(var(--brand) / 0.5)",
+            }}
+          />
         </div>
       </div>
     </>
