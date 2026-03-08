@@ -2,17 +2,22 @@ export interface Experience {
   company: string;
   logo: string;
   role: string;
+  type: string;
   location: string;
-  dates: string;
+  startDate: string;
+  endDate: string;
   preview: string;
   bullets: string[];
   tools: string[];
+  impact?: string;
   awards?: string[];
 }
 
 export interface Project {
   title: string;
+  image: string;
   bullets: string[];
+  tools: string[];
 }
 
 export interface Award {
@@ -25,23 +30,28 @@ export interface Education {
   logo: string;
   degree: string;
   dates: string;
+  description?: string;
   coursework?: string[];
   extras?: string[];
 }
 
 export interface SkillCategory {
   name: string;
-  skills: { name: string; icon?: string }[];
+  icon: string;
+  skills: string[];
 }
 
 export const experiences: Experience[] = [
   {
     company: "S&P Global",
-    logo: "S&P Global Logo",
+    logo: "S&P",
     role: "Data Project Coordinator (Intern)",
-    location: "Calgary, AB",
-    dates: "May 2025 – Aug 2025",
-    preview: "AI Workflow Automation for 200+ ML Models",
+    type: "AI & Workflow",
+    location: "S&P Global · Calgary, AB",
+    startDate: "MAY 2025",
+    endDate: "AUG 2025",
+    preview: "Designed workflow intelligence automation for 200+ AI/ML energy model development programs. Replaced manual tracking with structured Python, Power Automate, and AI API parsing.",
+    impact: "27% increase in tracking accuracy",
     bullets: [
       "Designed workflow intelligence automation for AI/ML energy model development programs spanning 200+ commodity-specific ML model workflows",
       "Architected end-to-end system integrating Power Automate email scraping, Python-based data cleaning, and AI API contextual analysis for risk and bottleneck detection",
@@ -54,11 +64,14 @@ export const experiences: Experience[] = [
   },
   {
     company: "S&P Global",
-    logo: "S&P Global Logo",
-    role: "Data Researcher (Canadian Lands)",
-    location: "Bangalore, IN",
-    dates: "Jan 2022 – Aug 2024",
-    preview: "Alberta Crown Land Database — Hundreds of Thousands of Records",
+    logo: "S&P",
+    role: "Data Researcher",
+    type: "Canadian Energy Assets",
+    location: "S&P Global · Bangalore, IN",
+    startDate: "JAN 2022",
+    endDate: "AUG 2024",
+    preview: "Maintained regulatory-sensitive Alberta Crown & Freehold land database. Co-developed ETL automation and complex SQL reconciliation queries.",
+    impact: "30% reduction in data load cycle times",
     bullets: [
       "Maintained and validated Alberta Crown and Freehold land database covering hundreds of thousands of regulatory-sensitive records across the full land lifecycle",
       "Wrote complex SQL queries (joins, subqueries, validation logic, reconciliation) for post-load QC and data integrity verification",
@@ -66,16 +79,19 @@ export const experiences: Experience[] = [
       "Built SQL-based QC framework during Data Quality Hackathon, automating post-load inconsistency detection",
       "Created Power BI dashboards for monitoring load volumes, achieving 25% faster stakeholder response time",
     ],
-    tools: ["SQL", "ETL workflows", "ETS", "SPIN II", "Power BI", "Accumap"],
+    tools: ["SQL", "ETL", "ETS", "SPIN II", "Power BI", "Accumap"],
     awards: ["CEO Recognition Q2 2024", "Data Quality Hackathon Winner 2024"],
   },
   {
     company: "Enverus",
-    logo: "Enverus Logo",
+    logo: "ENV",
     role: "Application Support Analyst",
-    location: "Bangalore, IN",
-    dates: "Apr 2021 – Jan 2022",
-    preview: "L1/L2 Commodity Trading Platform Support",
+    type: "Energy Platform",
+    location: "Enverus · Bangalore, IN",
+    startDate: "APR 2021",
+    endDate: "JAN 2022",
+    preview: "Supported commodity trading & risk platform. Conducted root cause analysis and executed SQL validation queries to ensure pricing data integrity.",
+    impact: "Improved SLA compliance by 20%",
     bullets: [
       "Provided L1/L2 support for commodity trading and risk platform serving external energy clients, handling 75-100 tickets per week",
       "Performed root cause analysis of data feed issues using SQL validation queries and FTP data verification",
@@ -85,26 +101,15 @@ export const experiences: Experience[] = [
     tools: ["SQL", "ServiceNow", "Jira", "FTP"],
   },
   {
-    company: "Cue Learn Pvt. Ltd",
-    logo: "Cue Learn Logo",
-    role: "Business Development Associate (US Operations)",
-    location: "Bengaluru, IN",
-    dates: "Jun 2020 – Mar 2021",
-    preview: "US Operations — Client Acquisition & Revenue Growth",
-    bullets: [
-      "Served as primary point of contact for all incoming US leads, initiating contact and orchestrating experience sessions",
-      "Cultivated client relationships ensuring customer satisfaction and contributing to revenue growth",
-      "Implemented data-driven strategic actions to enhance sales effectiveness",
-    ],
-    tools: ["CRM", "Sales Analytics"],
-  },
-  {
     company: "ONGC",
-    logo: "ONGC Logo",
-    role: "Research Intern (Petroleum Geomechanics)",
-    location: "Tripura, IN",
-    dates: "Feb 2020 – May 2020",
-    preview: "Geomechanical Pore Pressure Modeling",
+    logo: "ONGC",
+    role: "Research Intern",
+    type: "Petroleum Geomechanics",
+    location: "ONGC · Tripura, IN",
+    startDate: "FEB 2020",
+    endDate: "MAY 2020",
+    preview: "Analyzed core samples and well logs. Calculated overburden stress and fracture gradients. Wrote Python scripts to generate synthetic well logs.",
+    impact: "Delivered accurate predictive mud weight windows to reduce drilling risk",
     bullets: [
       "Conducted geomechanical analysis calculating overburden stress, minimum horizontal stress, fracture gradient, and mud weight window using Eaton's method",
       "Generated synthetic well logs for missing intervals using Drillworks Predict and Python, cross-validating computational vs software outputs",
@@ -116,18 +121,20 @@ export const experiences: Experience[] = [
 
 export const projects: Project[] = [
   {
-    title: "Reservoir Simulation — CMG IMEX",
+    title: "Black Oil Reservoir Simulation",
+    image: "reservoir",
     bullets: [
-      "Built Black Oil simulation model with sensitivity analysis on permeability, porosity, injection rate, and bottomhole pressure",
-      "Evaluated production trends and recovery factor response across water-oil pressure behavior scenarios",
+      "Built in CMG IMEX. Conducted sensitivity analysis on permeability and injection rates to evaluate recovery factor responses.",
     ],
+    tools: ["CMG IMEX", "Reservoir Modeling", "Sensitivity Analysis"],
   },
   {
-    title: "Geomechanical Wellbore Stability Analysis",
+    title: "Automated Data Quality Framework",
+    image: "geomech",
     bullets: [
-      "Calculated overburden stress, minimum horizontal stress, and fracture gradient for wellbore stability assessment",
-      "Cross-validated computational methods against Drillworks Predict software outputs",
+      "Engineered an automated SQL-based ETL validation pipeline replacing manual data injection.",
     ],
+    tools: ["SQL", "ETL", "Automation", "Validation Pipelines"],
   },
 ];
 
@@ -142,9 +149,10 @@ export const awards: Award[] = [
 export const education: Education[] = [
   {
     school: "University of Calgary",
-    logo: "University of Calgary Logo",
+    logo: "UCalgary",
     degree: "M.Eng Petroleum Engineering",
-    dates: "Sept 2024 – May 2026",
+    dates: "2024 – 2026",
+    description: "Specializing in reservoir geomechanics, subsurface data analytics, and AI-driven drilling optimization.",
     coursework: [
       "Advanced Reservoir Engineering",
       "Enhanced Oil Recovery (EOR)",
@@ -155,9 +163,10 @@ export const education: Education[] = [
   },
   {
     school: "Presidency University",
-    logo: "Presidency University Logo",
+    logo: "PU",
     degree: "B.Tech Petroleum Engineering",
-    dates: "Jun 2016 – Mar 2020",
+    dates: "2016 – 2020",
+    description: "Comprehensive foundation in petroleum engineering, well logging, and production technology.",
     extras: [
       "Head Event Organizer, AAPG Student Chapter",
       "International Conference — Technical Paper Presentation",
@@ -167,43 +176,44 @@ export const education: Education[] = [
 
 export const skillCategories: SkillCategory[] = [
   {
-    name: "Engineering & Subsurface",
-    skills: [
-      { name: "CMG IMEX" },
-      { name: "EOR" },
-      { name: "SAGD" },
-      { name: "Pore Pressure Modeling" },
-      { name: "Geomechanical Analysis" },
-      { name: "Aspen HYSYS" },
-    ],
+    name: "Python & AI APIs",
+    icon: "terminal",
+    skills: ["Python", "AI API Integration", "LLM Automation"],
   },
   {
-    name: "Data & Automation",
-    skills: [
-      { name: "Python" },
-      { name: "SQL" },
-      { name: "Power Automate" },
-      { name: "ETL" },
-      { name: "AI API Integration" },
-    ],
+    name: "Advanced SQL & ETL",
+    icon: "database",
+    skills: ["SQL", "ETL Workflows", "Data Validation"],
   },
   {
-    name: "Energy Systems",
-    skills: [
-      { name: "ETS" },
-      { name: "SPIN II" },
-      { name: "Alberta Crown Land Lifecycle" },
-      { name: "Commodity Trading Platforms" },
-    ],
+    name: "Power Automate",
+    icon: "workflow",
+    skills: ["Power Automate", "Email Scraping", "Workflow Orchestration"],
   },
   {
-    name: "Reporting & Tools",
-    skills: [
-      { name: "Power BI" },
-      { name: "Excel" },
-      { name: "ServiceNow" },
-      { name: "Jira" },
-    ],
+    name: "CMG IMEX",
+    icon: "flask",
+    skills: ["Reservoir Simulation", "Sensitivity Analysis", "Recovery Factor"],
+  },
+  {
+    name: "Aspen HYSYS",
+    icon: "settings",
+    skills: ["Process Simulation", "SAGD Modeling"],
+  },
+  {
+    name: "Geomechanical Modeling",
+    icon: "layers",
+    skills: ["Pore Pressure", "Fracture Gradient", "Wellbore Stability"],
+  },
+  {
+    name: "Power BI",
+    icon: "bar-chart",
+    skills: ["Dashboards", "Data Visualization", "KPI Monitoring"],
+  },
+  {
+    name: "Well Log Analysis",
+    icon: "activity",
+    skills: ["Log Interpretation", "Drillworks Predict", "Synthetic Logs"],
   },
 ];
 
