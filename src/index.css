@@ -156,6 +156,40 @@
   50% { text-shadow: 0 0 16px hsl(var(--brand) / 0.6), 0 0 32px hsl(var(--brand) / 0.2); }
 }
 
+/* ===== SHIMMER BORDER ===== */
+@keyframes shimmer-border {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(220,170,30,0.1) 0%,
+    rgba(255,220,80,0.4) 25%,
+    rgba(220,170,30,0.1) 50%,
+    rgba(255,220,80,0.4) 75%,
+    rgba(220,170,30,0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-border 3s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
 /* ===== PARTICLE ANIMATIONS ===== */
 @keyframes float-particle {
   0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
