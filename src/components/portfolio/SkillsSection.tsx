@@ -148,7 +148,7 @@ export default function SkillsSection() {
                     fontFamily: FONT_DISPLAY,
                     fontWeight: 600,
                     fontSize: "14px",
-                    color: "rgba(255,255,255,0.65)",
+                    color: "hsl(210,20%,78%)",
                   }}
                 >
                   {cat.name}
