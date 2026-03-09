@@ -748,8 +748,7 @@ export default function WellboreJourney() {
       {/* ── DRILL PIPE (grows from derrick to BHA) ── */}
       <DrillPipe heightVh={pipeHeightVh} mudYMotion={mudY} />
 
-      {/* ── WELLBORE WALLS + FORMATION (around & below bit) ── */}
-      <FormationAndWalls bitTopVh={bitTopVh} scrollP={scrollYProgress} />
+      {/* Removed brown wellbore walls — cleaner look */}
 
       {/* ── ANNULUS MUD RETURNS (rising beside pipe) ── */}
       <AnnulusReturns bitTopVh={bitTopVh} />
