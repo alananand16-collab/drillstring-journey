@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
-import DepthIndicator from "@/components/portfolio/DepthIndicator";
-import WellboreJourney from "@/components/portfolio/WellboreJourney";
+import WellboreSidebar from "@/components/portfolio/WellboreSidebar";
 import StratigraphyBackground from "@/components/portfolio/StratigraphyBackground";
 import HeroSection from "@/components/portfolio/HeroSection";
 import ExperienceSection from "@/components/portfolio/ExperienceSection";
@@ -24,7 +23,7 @@ const Index = () => {
         <StratigraphyBackground />
       </div>
 
-      {/* ── Fixed full-page grain/noise overlay (z-[51]) ── */}
+      {/* ── Fixed full-page grain/noise overlay ── */}
       <div
         className="fixed inset-0 pointer-events-none"
         style={{
@@ -38,13 +37,12 @@ const Index = () => {
 
       {/* ── FIXED UI ELEMENTS ── */}
       <Navbar />
-      <DepthIndicator />
 
-      {/* ── WELLBORE JOURNEY — cinematic drill string (z-40) ── */}
-      <WellboreJourney />
+      {/* ── UNIFIED WELLBORE SIDEBAR (depth indicator + drill string) ── */}
+      <WellboreSidebar />
 
       {/* ── MAIN CONTENT ── */}
-      <main className="relative z-10 lg:ml-16">
+      <main className="relative z-10 lg:ml-24">
 
         {/* HERO */}
         <HeroSection />
@@ -54,7 +52,7 @@ const Index = () => {
           <ExperienceSection />
         </div>
 
-        {/* PROJECTS — Sandstone / Water zone with water effects */}
+        {/* PROJECTS — Sandstone / Water zone */}
         <div className="relative">
           <div className="absolute inset-0 pointer-events-none z-0">
             <WaterZoneEffect />
@@ -62,7 +60,7 @@ const Index = () => {
           <ProjectsSection />
         </div>
 
-        {/* SKILLS — Oil-bearing sandstone with oil zone effects */}
+        {/* SKILLS — Oil-bearing sandstone */}
         <div className="relative">
           <div className="absolute inset-0 pointer-events-none z-0">
             <OilZoneEffect />
@@ -70,7 +68,7 @@ const Index = () => {
           <SkillsSection />
         </div>
 
-        {/* AWARDS — Perf zone with perforation effects */}
+        {/* AWARDS — Perf zone */}
         <div className="relative">
           <div className="absolute inset-0 pointer-events-none z-0">
             <PerforationEffect />
@@ -78,7 +76,7 @@ const Index = () => {
           <AwardsSection />
         </div>
 
-        {/* EDUCATION — Reservoir with simulation effects */}
+        {/* EDUCATION — Reservoir */}
         <div className="relative">
           <div className="absolute inset-0 pointer-events-none z-0">
             <ReservoirSimEffect />
@@ -86,7 +84,7 @@ const Index = () => {
           <EducationSection />
         </div>
 
-        {/* CONTACT — Basement / geothermal */}
+        {/* CONTACT — Basement */}
         <ContactSection />
 
       </main>
