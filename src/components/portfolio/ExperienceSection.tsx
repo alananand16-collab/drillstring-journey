@@ -9,15 +9,30 @@ export default function ExperienceSection() {
   const [selectedExp, setSelectedExp] = useState<Experience | null>(null);
 
   return (
-    <section
-      id="experience"
-      className="grain-overlay relative px-4 py-24 lg:py-32"
-      style={{
-        background: `
-          linear-gradient(180deg, #080a0f 0%, #0c0e14 30%, #10121a 70%, #0e1018 100%)
-        `,
-      }}
-    >
+    <section id="experience" className="relative px-4 py-24 lg:py-32">
+      {/* Warm-left headlamp ambient for this zone */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 50% 60% at -10% 50%, rgba(80,60,20,0.06) 0%, transparent 70%)",
+        }}
+      />
+
+      {/* Strata emphasis lines for sedimentary zone */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {[15, 35, 55, 75].map((y, i) => (
+          <div
+            key={i}
+            className="absolute w-full"
+            style={{
+              top: `${y}%`,
+              height: "1px",
+              background: `rgba(80,60,25,${0.04 + i * 0.01})`,
+            }}
+          />
+        ))}
+      </div>
+
       <div className="relative z-10 mx-auto max-w-4xl lg:ml-24 lg:mr-auto lg:max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -28,7 +43,7 @@ export default function ExperienceSection() {
           <div className="mb-3 flex items-center gap-3 text-[10px] tracking-[0.2em] uppercase text-white/25">
             <span style={{ color: "hsl(var(--brand))" }}>0 – 2,500 FT</span>
             <span className="h-px w-6 bg-white/10" />
-            <span>Shale Zone</span>
+            <span>Sedimentary Zone</span>
           </div>
           <h2 className="text-3xl font-bold text-white md:text-4xl">Experience</h2>
           <p className="mt-2 text-sm text-white/40 max-w-xl">
@@ -40,26 +55,27 @@ export default function ExperienceSection() {
           {experiences.map((exp, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.55, delay: i * 0.1 }}
               onClick={() => setSelectedExp(exp)}
               className="group cursor-pointer rounded-xl p-5 md:p-6 transition-all duration-300"
               style={{
-                background: "rgba(255,255,255,0.02)",
-                backdropFilter: "blur(8px)",
-                border: "1px solid rgba(255,255,255,0.05)",
+                background: "rgba(255,255,255,0.025)",
+                backdropFilter: "blur(12px)",
+                border: "1px solid rgba(255,255,255,0.055)",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "hsl(var(--brand) / 0.3)";
+                e.currentTarget.style.borderColor = "hsl(var(--brand) / 0.28)";
                 e.currentTarget.style.background = "rgba(255,255,255,0.04)";
-                e.currentTarget.style.boxShadow = "0 0 30px rgba(0,100,200,0.05)";
+                e.currentTarget.style.boxShadow = "0 0 36px rgba(0,100,200,0.07), inset 0 1px 0 rgba(255,255,255,0.06)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.05)";
-                e.currentTarget.style.background = "rgba(255,255,255,0.02)";
-                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.055)";
+                e.currentTarget.style.background = "rgba(255,255,255,0.025)";
+                e.currentTarget.style.boxShadow = "0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)";
               }}
             >
               <div className="flex items-start gap-4">
@@ -67,7 +83,7 @@ export default function ExperienceSection() {
                   className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-xs font-bold"
                   style={{
                     background: "rgba(255,255,255,0.04)",
-                    border: "1px solid rgba(255,255,255,0.06)",
+                    border: "1px solid rgba(255,255,255,0.07)",
                     color: "hsl(var(--brand))",
                   }}
                 >
@@ -113,7 +129,12 @@ export default function ExperienceSection() {
       </div>
 
       <ExperienceModal experience={selectedExp} open={!!selectedExp} onOpenChange={(open) => !open && setSelectedExp(null)} />
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#0a0c12] z-[4] pointer-events-none" />
+
+      {/* Gradient blend into next section */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none z-[4]"
+        style={{ background: "linear-gradient(to bottom, transparent, rgba(12,11,8,0.5) 70%, rgba(12,10,6,0.8) 100%)" }}
+      />
     </section>
   );
 }

@@ -4,16 +4,40 @@ import { Mail, Linkedin, Download } from "lucide-react";
 
 export default function ContactSection() {
   return (
-    <section
-      id="contact"
-      className="grain-overlay relative px-4 py-24 lg:py-32"
-      style={{
-        background: `
-          radial-gradient(ellipse at 50% 60%, rgba(0,50,120,0.08) 0%, transparent 50%),
-          linear-gradient(180deg, #080a0f 0%, #060810 50%, #050709 100%)
-        `,
-      }}
-    >
+    <section id="contact" className="relative px-4 py-24 lg:py-32">
+      {/* Bottom hole — deep warm geothermal glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "radial-gradient(ellipse 80% 60% at 50% 100%, rgba(100,50,5,0.12) 0%, transparent 65%)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "radial-gradient(ellipse 50% 30% at 50% 120%, rgba(60,20,0,0.15) 0%, transparent 70%)",
+          }}
+        />
+        {/* Rising heat shimmer particles */}
+        {Array.from({ length: 12 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full"
+            style={{
+              bottom: `${10 + Math.random() * 30}%`,
+              left: `${10 + Math.random() * 80}%`,
+              width: "2px",
+              height: "2px",
+              background: `rgba(180,80,10,${0.15 + Math.random() * 0.2})`,
+              animation: `rise-bubble ${5 + Math.random() * 6}s ${Math.random() * 5}s infinite ease-out`,
+            }}
+          />
+        ))}
+      </div>
+
       <div className="relative z-10 mx-auto max-w-4xl lg:ml-24 lg:mr-auto lg:max-w-5xl text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -21,7 +45,7 @@ export default function ContactSection() {
           viewport={{ once: true }}
         >
           <div className="mb-3 flex items-center justify-center gap-3 text-[10px] tracking-[0.2em] uppercase text-white/25">
-            <span style={{ color: "hsl(var(--brand))" }}>14,000</span>
+            <span style={{ color: "hsl(var(--brand))" }}>14,000 FT</span>
             <span className="h-px w-6 bg-white/10" />
             <span>Bottom Hole</span>
           </div>
@@ -43,6 +67,7 @@ export default function ContactSection() {
             className="flex items-center gap-2 rounded-lg px-5 py-2.5 text-xs font-medium transition-all duration-300"
             style={{
               background: "rgba(255,255,255,0.03)",
+              backdropFilter: "blur(10px)",
               border: "1px solid rgba(255,255,255,0.08)",
               color: "rgba(255,255,255,0.6)",
             }}
@@ -66,6 +91,7 @@ export default function ContactSection() {
             className="flex items-center gap-2 rounded-lg px-5 py-2.5 text-xs font-medium transition-all duration-300"
             style={{
               background: "rgba(255,255,255,0.03)",
+              backdropFilter: "blur(10px)",
               border: "1px solid rgba(255,255,255,0.08)",
               color: "rgba(255,255,255,0.6)",
             }}
@@ -86,15 +112,12 @@ export default function ContactSection() {
             className="flex items-center gap-2 rounded-lg px-5 py-2.5 text-xs font-medium transition-all duration-300"
             style={{
               background: "hsl(var(--brand) / 0.15)",
+              backdropFilter: "blur(10px)",
               border: "1px solid hsl(var(--brand) / 0.3)",
               color: "hsl(var(--brand))",
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "hsl(var(--brand) / 0.25)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "hsl(var(--brand) / 0.15)";
-            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "hsl(var(--brand) / 0.25)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "hsl(var(--brand) / 0.15)"; }}
           >
             <Download className="h-3.5 w-3.5" />
             Download Resume

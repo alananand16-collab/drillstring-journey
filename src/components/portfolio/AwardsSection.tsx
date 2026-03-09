@@ -4,42 +4,72 @@ import { Trophy } from "lucide-react";
 
 export default function AwardsSection() {
   return (
-    <section
-      id="awards"
-      className="grain-overlay relative px-4 py-24 lg:py-32 overflow-hidden"
-      style={{
-        background: `
-          radial-gradient(ellipse at 50% 70%, rgba(40,30,10,0.3) 0%, transparent 60%),
-          linear-gradient(180deg, #100e14 0%, #0f0d12 30%, #12100a 60%, #0e0c0a 100%)
-        `,
-      }}
-    >
-      {/* Oil gush columns behind content */}
+    <section id="awards" className="relative px-4 py-24 lg:py-32 overflow-hidden">
+      {/* PAY ZONE — golden ambient light bleeding through */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "radial-gradient(ellipse 80% 70% at 50% 60%, rgba(200,140,10,0.08) 0%, transparent 65%)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "radial-gradient(ellipse 60% 40% at 50% 30%, rgba(180,120,5,0.05) 0%, transparent 60%)",
+          }}
+        />
+      </div>
+
+      {/* Oil gush columns — dramatic rising dark liquid */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {Array.from({ length: 8 }).map((_, i) => (
+        {Array.from({ length: 10 }).map((_, i) => (
           <div
             key={i}
             className="absolute bottom-0"
             style={{
-              left: `${10 + i * 11}%`,
-              width: `${12 + Math.random() * 20}px`,
-              background: `linear-gradient(0deg, rgba(25,18,5,0.8), rgba(50,35,10,0.4) 40%, transparent)`,
-              animation: `oil-gush-column ${5 + Math.random() * 4}s ${i * 0.4}s infinite ease-out`,
-              borderRadius: "6px 6px 0 0",
+              left: `${8 + i * 9}%`,
+              width: `${10 + (i % 3) * 8}px`,
+              background: `linear-gradient(0deg,
+                rgba(15,10,2,0.9) 0%,
+                rgba(30,20,4,0.6) 35%,
+                rgba(50,32,6,0.3) 65%,
+                transparent 100%
+              )`,
+              animation: `oil-gush-column ${5.5 + (i % 4) * 1.2}s ${i * 0.35}s infinite ease-out`,
+              borderRadius: "8px 8px 0 0",
             }}
           />
         ))}
-        {Array.from({ length: 15 }).map((_, i) => (
+        {/* Oil splatter particles */}
+        {Array.from({ length: 20 }).map((_, i) => (
           <div
             key={`p-${i}`}
             className="absolute rounded-full"
             style={{
-              bottom: "30%",
+              bottom: `${20 + Math.random() * 30}%`,
               left: `${5 + Math.random() * 90}%`,
               width: `${3 + Math.random() * 5}px`,
               height: `${3 + Math.random() * 5}px`,
-              background: `rgba(${30 + Math.random() * 30}, ${15 + Math.random() * 15}, ${Math.random() * 8}, ${0.4 + Math.random() * 0.4})`,
-              animation: `oil-splatter ${3 + Math.random() * 4}s ${Math.random() * 5}s infinite ease-out`,
+              background: `rgba(${20 + Math.random() * 20}, ${12 + Math.random() * 10}, ${Math.random() * 6}, ${0.35 + Math.random() * 0.35})`,
+              animation: `oil-splatter ${3.5 + Math.random() * 4}s ${Math.random() * 6}s infinite ease-out`,
+            }}
+          />
+        ))}
+        {/* Gold light rays emanating outward */}
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div
+            key={`ray-${i}`}
+            className="absolute"
+            style={{
+              bottom: "10%",
+              left: `${15 + i * 16}%`,
+              width: "1px",
+              height: "40%",
+              background: `linear-gradient(0deg, rgba(200,160,20,0.12), transparent)`,
+              animation: `float-particle-slow ${8 + i * 1.5}s ${i * 0.8}s infinite ease-in-out`,
             }}
           />
         ))}
@@ -53,22 +83,22 @@ export default function AwardsSection() {
           className="mb-10"
         >
           <div className="mb-3 flex items-center gap-3 text-[10px] tracking-[0.2em] uppercase text-white/25">
-            <span className="text-yellow-600/60">6,000</span>
+            <span className="text-yellow-500/60">6,500 FT</span>
             <span className="h-px w-6 bg-yellow-600/20" />
             <span>Pay Zone</span>
           </div>
           <h2
             className="text-3xl font-bold md:text-4xl"
             style={{
-              background: "linear-gradient(135deg, #d4af37, #ffd700, #b8860b)",
+              background: "linear-gradient(135deg, #c8961f, #f0c040, #a87010)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
             }}
           >
-            Oil Strike! 🛢️
+            Oil Strike 🛢️
           </h2>
           <p className="mt-2 text-sm text-yellow-500/30">
-            Recognition & achievements earned along the journey.
+            Recognition &amp; achievements surfaced along the journey.
           </p>
         </motion.div>
 
@@ -82,20 +112,28 @@ export default function AwardsSection() {
               transition={{ delay: i * 0.1 }}
               className="rounded-xl p-4 transition-all duration-300"
               style={{
-                background: "linear-gradient(135deg, rgba(212,175,55,0.06), rgba(184,134,11,0.03))",
-                border: "1px solid rgba(212,175,55,0.12)",
+                background: "linear-gradient(135deg, rgba(200,150,20,0.06), rgba(160,110,8,0.03))",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(200,150,20,0.12)",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.35)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(212,175,55,0.3)";
-                e.currentTarget.style.boxShadow = "0 0 30px rgba(212,175,55,0.08)";
+                e.currentTarget.style.borderColor = "rgba(200,150,20,0.30)";
+                e.currentTarget.style.boxShadow = "0 0 32px rgba(200,140,10,0.10)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(212,175,55,0.12)";
-                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.borderColor = "rgba(200,150,20,0.12)";
+                e.currentTarget.style.boxShadow = "0 4px 20px rgba(0,0,0,0.35)";
               }}
             >
               <div className="flex items-start gap-3">
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-yellow-500/8 border border-yellow-500/15">
+                <div
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
+                  style={{
+                    background: "rgba(200,150,20,0.08)",
+                    border: "1px solid rgba(200,150,20,0.15)",
+                  }}
+                >
                   <Trophy className="h-3.5 w-3.5 text-yellow-500/70" />
                 </div>
                 <div>
@@ -108,7 +146,10 @@ export default function AwardsSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#0a0c10] z-[4] pointer-events-none" />
+      <div
+        className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none z-[4]"
+        style={{ background: "linear-gradient(to bottom, transparent, rgba(10,10,12,0.6) 70%, rgba(10,11,14,0.9) 100%)" }}
+      />
     </section>
   );
 }
