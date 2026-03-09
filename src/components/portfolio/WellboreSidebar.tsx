@@ -455,44 +455,45 @@ function Derrick() {
 /* ══════════════════════════════════════
    MAIN EXPORT — WellboreSidebar
 ══════════════════════════════════════ */
+
+/* BHA total pixel height (NearBitStab36 + DC30 + MWD46 + BitSub10 + PDCBit70 + extras ~10) */
+const BHA_H_PX = 202;
+
 export default function WellboreSidebar() {
   const { scrollYProgress } = useScroll();
 
-  /* Smooth spring for fluid animation */
+  /* Smooth spring */
   const smooth = useSpring(scrollYProgress, { stiffness: 55, damping: 20 });
 
-  /* Sidebar dimensions */
-  const SIDEBAR_W = 96;
-  const DERRICK_H = 100; // px height of derrick SVG
-  const DERRICK_TOP = 8; // px from top of sidebar
+  /* ── Layout constants ── */
+  const DERRICK_H   = 100;  // px
+  const DERRICK_TOP = 8;    // px from top
+  const TRAVEL_TOP  = DERRICK_TOP + DERRICK_H; // 108px — where pipe exits derrick floor
 
-  /* Travel zone: right below derrick → near viewport bottom */
-  const TRAVEL_TOP = DERRICK_TOP + DERRICK_H;   // px — where pipe exits derrick
-  const TRAVEL_BOT_VH = 82;                      // % vh — max bit position
-
-  /* Bit top: from TRAVEL_TOP px to TRAVEL_BOT_VH */
-  const bitTop = useTransform(smooth, [0, 1],
-    [`${TRAVEL_TOP}px`, `${TRAVEL_BOT_VH}vh`]
+  /*
+   * BHA top travels: TRAVEL_TOP → (100vh - BHA_H_PX - 16px)
+   * This ensures the complete BHA + bit stays fully visible at all scroll positions.
+   */
+  const bhaTop = useTransform(smooth, [0, 1],
+    [`${TRAVEL_TOP}px`, `calc(100vh - ${BHA_H_PX + 20}px)`]
   );
 
-  /* Pipe height grows from 0 to (bitTop - derrickBottom) */
-  const pipeH = useTransform(smooth, (p) => {
-    // We can only approximate in pixels here — use vh-based calc
-    return `calc(${TRAVEL_BOT_VH * p}vh + ${(TRAVEL_TOP) * (1 - p)}px - ${TRAVEL_TOP}px + ${(TRAVEL_BOT_VH - TRAVEL_TOP * 0.01) * p * 0}px)`;
-  });
-
-  /* Better: use a % of viewport-based height */
-  const pipeHeightCalc = useTransform(smooth, [0, 1],
-    [`0px`, `calc(${TRAVEL_BOT_VH}vh - ${TRAVEL_TOP}px)`]
+  /*
+   * Pipe height = distance from derrick exit down to where BHA top currently is.
+   * At scroll=0: pipe height=0 (bit is right at derrick)
+   * At scroll=1: pipe height = 100vh - BHA_H_PX - 20px - TRAVEL_TOP
+   */
+  const pipeHeight = useTransform(smooth, [0, 1],
+    [`0px`, `calc(100vh - ${BHA_H_PX + 20 + TRAVEL_TOP}px)`]
   );
 
-  /* Mud flow animation downward */
+  /* Mud flow downward */
   const mudY = useTransform(scrollYProgress, [0, 1], [0, 500]);
 
   /* Depth number */
   const depthNum = useTransform(smooth, [0, 1], [0, MAX_DEPTH]);
 
-  /* Active formation index */
+  /* Active formation */
   const activeFormIdx = useTransform(smooth, (p) => {
     const pct = p * 100;
     let best = 0;
@@ -500,7 +501,7 @@ export default function WellboreSidebar() {
     return best;
   });
 
-  /* Scroll progress for mobile bar */
+  /* Mobile progress bar */
   const progressWidth = useTransform(smooth, [0, 1], ["0%", "100%"]);
 
   return (
@@ -509,17 +510,17 @@ export default function WellboreSidebar() {
           DESKTOP SIDEBAR (left, 96px wide)
       ═══════════════════════════════════════ */}
       <div
-        className="fixed left-0 top-0 z-50 hidden lg:block pointer-events-none"
+        className="fixed left-0 top-0 z-50 hidden lg:flex pointer-events-none"
         style={{
-          width: `${SIDEBAR_W}px`,
+          width: "96px",
           height: "100vh",
-          overflow: "visible",
+          overflow: "hidden",
           background: "linear-gradient(180deg, rgba(5,8,14,0.97) 0%, rgba(5,8,14,0.99) 100%)",
           borderRight: "1px solid rgba(255,255,255,0.05)",
         }}
       >
-        {/* ── Formation color bands (left strip, 4px wide) ── */}
-        <div style={{ position: "absolute", left: 0, top: 0, width: "4px", height: "100%", overflow: "hidden" }}>
+        {/* ── Formation color bands strip (left 4px) ── */}
+        <div style={{ position: "absolute", left: 0, top: 0, width: "4px", height: "100%" }}>
           {FORMATIONS.map((f, i) => {
             const nextPct = FORMATIONS[i + 1]?.pct ?? 100;
             return (
@@ -529,70 +530,33 @@ export default function WellboreSidebar() {
                 height: `${nextPct - f.pct}%`,
                 width: "100%",
                 background: f.color,
-                opacity: 0.35,
+                opacity: 0.4,
               }} />
             );
           })}
         </div>
 
-        {/* ── Formation markers + depth labels (right side of sidebar) ── */}
+        {/* ── Formation marker labels ── */}
         <div style={{ position: "absolute", left: "6px", top: 0, right: 0, height: "100%" }}>
           {FORMATIONS.map((f) => (
-            <motion.div
-              key={f.label}
-              style={{
-                position: "absolute",
-                top: `${f.pct}%`,
-                left: 0, right: 0,
-                display: "flex",
-                alignItems: "center",
-                gap: "3px",
-              }}
-            >
-              {/* Tick mark from left strip */}
-              <div style={{ width: "6px", height: "1px", background: f.color, opacity: 0.6, flexShrink: 0 }} />
-              {/* Formation text */}
-              <div style={{ fontSize: "6px", fontFamily: "monospace", color: f.color, opacity: 0.65, letterSpacing: "0.08em", lineHeight: 1.1 }}>
+            <div key={f.label} style={{
+              position: "absolute",
+              top: `${f.pct}%`,
+              left: 0, right: 0,
+              display: "flex",
+              alignItems: "center",
+              gap: "3px",
+              paddingTop: "1px",
+            }}>
+              <div style={{ width: "5px", height: "1px", background: f.color, opacity: 0.55, flexShrink: 0 }} />
+              <div style={{ fontSize: "5.5px", fontFamily: "monospace", color: f.color, opacity: 0.6, letterSpacing: "0.07em", lineHeight: 1 }}>
                 {f.icon} {f.label}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        {/* ── Depth readout (top centre) ── */}
-        <div style={{
-          position: "absolute",
-          top: `${DERRICK_TOP + DERRICK_H + 4}px`,
-          left: 0, right: 0,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          zIndex: 10,
-        }}>
-          <motion.div
-            style={{
-              fontSize: "13px",
-              fontFamily: "monospace",
-              fontWeight: "bold",
-              color: "hsl(var(--brand))",
-              textShadow: "0 0 10px hsl(var(--brand) / 0.5)",
-              letterSpacing: "0.05em",
-              lineHeight: 1,
-            }}
-          >
-            <motion.span>
-              {/* Live depth counter rendered via CSS counter trick — use transform display */}
-              {useTransform(depthNum, (v) => `${Math.round(v).toLocaleString()}`).get
-                ? null
-                : null}
-            </motion.span>
-          </motion.div>
-          <div style={{ fontSize: "7px", fontFamily: "monospace", color: "rgba(255,255,255,0.25)", letterSpacing: "0.2em", marginTop: "2px" }}>
-            ft MD
-          </div>
-        </div>
-
-        {/* ── DERRICK at very top ── */}
+        {/* ── DERRICK (static at top) ── */}
         <div style={{
           position: "absolute",
           left: "50%",
@@ -601,11 +565,12 @@ export default function WellboreSidebar() {
           width: "48px",
           height: `${DERRICK_H}px`,
           zIndex: 5,
+          flexShrink: 0,
         }}>
           <Derrick />
         </div>
 
-        {/* ── GROWING DRILL PIPE ── */}
+        {/* ── GROWING DRILL PIPE (from derrick exit down to BHA top) ── */}
         <div style={{
           position: "absolute",
           left: "50%",
@@ -613,28 +578,26 @@ export default function WellboreSidebar() {
           top: `${TRAVEL_TOP}px`,
           width: "9px",
           zIndex: 3,
-          overflow: "visible",
         }}>
-          <DrillPipe heightPx={pipeHeightCalc} mudY={mudY} />
+          <DrillPipe heightPx={pipeHeight} mudY={mudY} />
         </div>
 
         {/* ── ANNULUS MUD RETURNS ── */}
-        <AnnulusReturns containerH={window.innerHeight} />
+        <AnnulusReturns containerH={720} />
 
-        {/* ── BHA + BIT (travels from top → bottom) ── */}
+        {/* ── BHA + BIT assembly (travels the full viewport) ── */}
         <motion.div
           style={{
             position: "absolute",
             left: "50%",
             x: "-50%",
-            top: bitTop,
+            top: bhaTop,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             zIndex: 6,
           }}
         >
-          {/* Whole assembly vibrates */}
           <motion.div
             style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
             animate={{ x: [-0.4, 0.4, -0.3, 0.3, 0] }}
@@ -647,23 +610,7 @@ export default function WellboreSidebar() {
           </motion.div>
         </motion.div>
 
-        {/* ── DEPTH READOUT (floating label that travels with bit) ── */}
-        <motion.div
-          style={{
-            position: "absolute",
-            top: bitTop,
-            left: 0,
-            right: 0,
-            display: "flex",
-            justifyContent: "flex-end",
-            paddingRight: "4px",
-            zIndex: 7,
-            pointerEvents: "none",
-          }}
-        >
-        </motion.div>
-
-        {/* ── Bottom depth counter ── */}
+        {/* ── Depth counter + formation label (pinned to bottom) ── */}
         <DepthCounter depthNum={depthNum} activeFormIdx={activeFormIdx} />
       </div>
 
