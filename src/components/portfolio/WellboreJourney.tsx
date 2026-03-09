@@ -13,8 +13,8 @@ import { useEffect, useRef, useState } from "react";
 const DERRICK_TOP_VH  = 2;   // derrick crown top
 const DERRICK_H_VH    = 11;  // height of derrick graphic
 const BIT_MIN_VH      = 18;  // top of bit travel range (near derrick)
-const BIT_MAX_VH      = 80;  // bottom of bit travel range (always in view!)
-const BIT_TRAVEL      = BIT_MAX_VH - BIT_MIN_VH; // 62vh of travel
+const BIT_MAX_VH      = 55;  // bottom of bit travel range — stays visible!
+const BIT_TRAVEL      = BIT_MAX_VH - BIT_MIN_VH;
 
 /* ── Colour palette (steel / carbide / mud) ── */
 const C = {
