@@ -15,9 +15,13 @@ export interface Experience {
 
 export interface Project {
   title: string;
+  tagline: string;
+  narrative: string;
+  description: string;
   image: string;
-  bullets: string[];
   tools: string[];
+  connectsTo: string;
+  status: string;
 }
 
 export interface Award {
@@ -121,20 +125,54 @@ export const experiences: Experience[] = [
 
 export const projects: Project[] = [
   {
-    title: "Black Oil Reservoir Simulation",
+    title: "AI Drilling Report Summarizer",
+    tagline: "Transforming dense daily drilling reports into structured intelligence in seconds",
+    narrative: "Daily drilling reports are 5–15 pages of dense operational text. Engineers and project managers waste hours reading through them to extract what actually matters: NPT events, stuck pipe incidents, mud losses, bit changes, and formation transitions. This tool automates that extraction using AI.",
+    description: "The system accepts PDF uploads or pasted text from daily drilling reports, processes them through an LLM-based AI API, and extracts structured data: current depth, rate of penetration, active formation, non-productive time events, mud properties, and risk flags. The output is a clean one-page summary card with color-coded risk indicators. A trend tracking module compares consecutive reports to flag whether NPT is increasing, ROP is declining, or operational patterns suggest emerging problems.",
     image: "reservoir",
-    bullets: [
-      "Built in CMG IMEX. Conducted sensitivity analysis on permeability and injection rates to evaluate recovery factor responses.",
-    ],
-    tools: ["CMG IMEX", "Reservoir Modeling", "Sensitivity Analysis"],
+    tools: ["Python", "Streamlit", "Claude/OpenAI API", "pdfplumber", "pandas"],
+    connectsTo: "S&P Global Calgary (AI API integration) + ONGC (drilling domain knowledge)",
+    status: "In Development",
   },
   {
-    title: "Automated Data Quality Framework",
+    title: "Production Decline Curve Analyzer",
+    tagline: "Interactive Arps decline curve fitting and EUR forecasting tool",
+    narrative: "Every petroleum engineer needs to forecast production. Arps decline curve analysis is the industry standard method, but most engineers still do it in Excel with manual curve fitting. This tool automates the process with proper statistical fitting and interactive visualization.",
+    description: "Users upload production data as CSV (date, oil rate, gas rate, water cut). The tool auto-fits three decline models: exponential, hyperbolic, and harmonic using scipy curve_fit optimization. An interactive chart displays historical data overlaid with all three forecast curves, letting users compare which model best fits their reservoir behavior. The tool calculates Estimated Ultimate Recovery (EUR) for each model and generates an exportable PDF report with decline parameters, forecast curves, and EUR estimates.",
     image: "geomech",
-    bullets: [
-      "Engineered an automated SQL-based ETL validation pipeline replacing manual data injection.",
-    ],
-    tools: ["SQL", "ETL", "Automation", "Validation Pipelines"],
+    tools: ["Python", "scipy", "plotly", "Streamlit", "pandas"],
+    connectsTo: "CMG IMEX project + M.Eng coursework (Advanced Reservoir Engineering, Production Optimization)",
+    status: "In Development",
+  },
+  {
+    title: "Automated Alberta Land Lease Tracker",
+    tagline: "Proof-of-concept automation for Crown land lifecycle monitoring",
+    narrative: "Alberta Crown land goes through a defined lifecycle: posting, sale, lease activation, encumbrances, expiry, and re-posting. At S&P Global Bangalore, I tracked this lifecycle manually across hundreds of thousands of parcels for 2.5 years. This project productizes that workflow into an automated monitoring system.",
+    description: "The system ingests publicly available Alberta Crown land posting data from the Alberta Energy Regulator, stores it in a SQL database tracking lease status across all lifecycle stages, and generates automated alerts when leases approach expiry or undergo status changes. A dashboard visualizes lease activity by township/range, operator, and current status, with historical analysis showing average time-to-lease and expiry rates by region.",
+    image: "land",
+    tools: ["Python", "SQL (PostgreSQL)", "Streamlit", "Scheduled ETL Scripts"],
+    connectsTo: "S&P Global Bangalore (ETS, SPIN II, Crown land lifecycle, SQL, ETL)",
+    status: "In Development",
+  },
+  {
+    title: "Alberta Well Data Dashboard",
+    tagline: "Interactive exploration of Alberta's public well data",
+    narrative: "The Alberta Energy Regulator publishes well data publicly, but it's raw, scattered across multiple files, and difficult to explore without specialized tools. This dashboard makes that data accessible and visual for anyone in the Canadian energy sector.",
+    description: "The system ingests public AER well data including well headers, status codes, spud dates, target formations, and operators. After cleaning and structuring with Python and SQL, the data feeds an interactive map showing wells by location, color-coded by status (active, suspended, abandoned). Users can filter by operator, formation, date range, and well type. Summary statistics show wells drilled per year, top operators by activity, and formation-level drilling trends over time.",
+    image: "well",
+    tools: ["Python", "SQL", "Streamlit/React", "Leaflet/Mapbox", "pandas", "plotly"],
+    connectsTo: "S&P Global Bangalore (Alberta land data, SQL, Accumap) + M.Eng coursework",
+    status: "In Development",
+  },
+  {
+    title: "EOR Recovery Efficiency Comparison via Reservoir Simulation",
+    tagline: "Head-to-head simulation of five EOR methods on the same reservoir model",
+    narrative: "Which enhanced oil recovery method delivers the best recovery factor for a given reservoir? Engineers often rely on screening criteria and published case studies, but those don't account for specific reservoir conditions. This project answers the question directly by simulating multiple EOR scenarios on the same reservoir model and comparing their performance head-to-head.",
+    description: "The project builds a base reservoir model in CMG (IMEX for black oil and waterflood scenarios, STARS for thermal and chemical methods) representing a typical Alberta-type reservoir. Five recovery scenarios are simulated on the identical model: primary depletion as a baseline, conventional waterflooding, CO₂ miscible flooding, polymer flooding, and SAGD thermal recovery. Python post-processing reads CMG output files and generates comparison plots across key metrics: recovery factor percentage, time to production plateau, pressure response, water cut evolution, and cumulative oil production. An interactive Streamlit dashboard presents side-by-side performance curves.",
+    image: "eor",
+    tools: ["CMG IMEX", "CMG STARS", "Python", "pandas", "matplotlib", "plotly", "Streamlit"],
+    connectsTo: "CMG IMEX academic project + M.Eng coursework (EOR, SAGD, Advanced Reservoir Engineering)",
+    status: "In Development",
   },
 ];
 
