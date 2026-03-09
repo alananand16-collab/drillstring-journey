@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import heroImg from "@/assets/hero-oil-rig.jpg";
+import portrait from "@/assets/alan-portrait.jpg";
 import { useRef } from "react";
 
 export default function HeroSection() {
