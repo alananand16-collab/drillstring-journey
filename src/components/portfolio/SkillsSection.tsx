@@ -95,7 +95,7 @@ export default function SkillsSection() {
               fontFamily: FONT_DISPLAY,
               fontWeight: 300,
               fontSize: "15px",
-              color: "rgba(255,255,255,0.38)",
+              color: "hsl(215,15%,58%)",
             }}
           >
             Perforating through formation barriers — tools and technologies that power the workflow.
