@@ -37,24 +37,21 @@ export default function ExperienceCard({ experience: exp, index: i, onSelect }: 
       }
     >
       <div className="flex">
-        {/* Left accent bar */}
-        <div className="hidden shrink-0 sm:block w-1 bg-gradient-to-b from-experience-accent-warm to-experience-accent-warm/15 opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
-
-        <div className="flex-1 p-7 md:p-8">
-          {/* Top row: Logo + Company + Dates */}
-          <div className="mb-5 flex items-center gap-5">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-experience-border/60 bg-experience-surface/45 shadow-sm">
-              {logoSrc ? (
-                <img src={logoSrc} alt={exp.company} className="h-full w-full object-cover" loading="lazy" />
-              ) : (
-                <span
-                  className="text-experience-accent-cool"
-                  style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: "15px" }}
-                >
-                  {exp.logo}
-                </span>
-              )}
-            </div>
+        {/* Left logo column */}
+        <div className="hidden sm:flex shrink-0 w-20 items-start justify-center pt-7 pl-2">
+          <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-lg border border-experience-border/50 bg-experience-surface/50 shadow-md ring-1 ring-experience-accent-warm/10">
+            {logoSrc ? (
+              <img src={logoSrc} alt={exp.company} className="h-full w-full object-cover" loading="lazy" />
+            ) : (
+              <span
+                className="text-experience-accent-cool"
+                style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: "14px" }}
+              >
+                {exp.logo}
+              </span>
+            )}
+          </div>
+        </div>
 
             <div className="min-w-0 flex-1">
               <h3
