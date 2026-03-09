@@ -131,7 +131,7 @@ export default function ExperienceSection() {
                             fontFamily: FONT_DISPLAY,
                             fontWeight: 600,
                             fontSize: "16px",
-                            color: "white",
+                            color: "hsl(210,25%,92%)",
                           }}
                         >
                           {exp.role}
