@@ -66,7 +66,7 @@ export default function ProjectsSection() {
               fontFamily: FONT_DISPLAY,
               fontWeight: 700,
               fontSize: "clamp(2rem, 4vw, 2.75rem)",
-              color: "white",
+              color: "hsl(210,30%,95%)",
               letterSpacing: "-0.02em",
             }}
           >
@@ -78,7 +78,7 @@ export default function ProjectsSection() {
               fontFamily: FONT_DISPLAY,
               fontWeight: 300,
               fontSize: "15px",
-              color: "rgba(255,255,255,0.38)",
+              color: "hsl(215,15%,58%)",
             }}
           >
             High-value engineering and data automation work extracted from the formation.

@@ -59,7 +59,7 @@ export default function ExperienceSection() {
               fontFamily: FONT_DISPLAY,
               fontWeight: 700,
               fontSize: "clamp(2rem, 4vw, 2.75rem)",
-              color: "white",
+              color: "hsl(210,30%,95%)",
               letterSpacing: "-0.02em",
             }}
           >
@@ -71,7 +71,7 @@ export default function ExperienceSection() {
               fontFamily: FONT_DISPLAY,
               fontWeight: 300,
               fontSize: "15px",
-              color: "rgba(255,255,255,0.38)",
+              color: "hsl(215,15%,58%)",
               lineHeight: 1.7,
             }}
           >
@@ -131,7 +131,7 @@ export default function ExperienceSection() {
                             fontFamily: FONT_DISPLAY,
                             fontWeight: 600,
                             fontSize: "16px",
-                            color: "white",
+                            color: "hsl(210,25%,92%)",
                           }}
                         >
                           {exp.role}
@@ -155,7 +155,7 @@ export default function ExperienceSection() {
                             fontFamily: FONT_DISPLAY,
                             fontWeight: 400,
                             fontSize: "13px",
-                            color: "rgba(255,255,255,0.32)",
+                            color: "hsl(215,12%,52%)",
                           }}
                         >
                           {exp.location}
@@ -182,7 +182,7 @@ export default function ExperienceSection() {
                         fontFamily: FONT_DISPLAY,
                         fontWeight: 300,
                         fontSize: "14px",
-                        color: "rgba(255,255,255,0.4)",
+                        color: "hsl(215,12%,55%)",
                         lineHeight: 1.7,
                       }}
                     >

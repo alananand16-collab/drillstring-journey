@@ -130,7 +130,7 @@ export default function HeroSection() {
               fontSize: "clamp(3.5rem, 8vw, 6.5rem)",
               lineHeight: 0.92,
               letterSpacing: "-0.03em",
-              color: "white",
+              color: "hsl(210,30%,95%)",
             }}
           >
             Alan
@@ -146,8 +146,8 @@ export default function HeroSection() {
             style={{
               fontFamily: FONT_DISPLAY,
               fontWeight: 300,
-              fontSize: "clamp(1rem, 2vw, 1.25rem)",
-              color: "rgba(255,255,255,0.55)",
+              fontSize: "clamp(1.05rem, 2.2vw, 1.35rem)",
+              color: "hsl(210,25%,72%)",
               letterSpacing: "0.02em",
             }}
           >
@@ -163,7 +163,7 @@ export default function HeroSection() {
               fontFamily: FONT_DISPLAY,
               fontWeight: 300,
               fontSize: "15px",
-              color: "rgba(255,255,255,0.35)",
+              color: "hsl(215,15%,58%)",
               lineHeight: 1.8,
             }}
           >

@@ -40,7 +40,7 @@ export default function EducationSection() {
               fontFamily: FONT_DISPLAY,
               fontWeight: 700,
               fontSize: "clamp(2rem, 4vw, 2.75rem)",
-              color: "white",
+              color: "hsl(210,30%,95%)",
               letterSpacing: "-0.02em",
             }}
           >
@@ -52,7 +52,7 @@ export default function EducationSection() {
               fontFamily: FONT_DISPLAY,
               fontWeight: 300,
               fontSize: "15px",
-              color: "rgba(255,255,255,0.38)",
+              color: "hsl(215,15%,58%)",
             }}
           >
             Foundation formation — the geological base that supports every layer above.
@@ -103,7 +103,7 @@ export default function EducationSection() {
                       fontFamily: FONT_DISPLAY,
                       fontWeight: 600,
                       fontSize: "16px",
-                      color: "white",
+                      color: "hsl(210,25%,92%)",
                     }}
                   >
                     {edu.degree}
@@ -114,7 +114,7 @@ export default function EducationSection() {
                       fontFamily: FONT_DISPLAY,
                       fontWeight: 400,
                       fontSize: "13px",
-                      color: "rgba(255,255,255,0.32)",
+                      color: "hsl(215,12%,55%)",
                     }}
                   >
                     {edu.school}
@@ -138,7 +138,7 @@ export default function EducationSection() {
                     fontFamily: FONT_DISPLAY,
                     fontWeight: 300,
                     fontSize: "14px",
-                    color: "rgba(255,255,255,0.38)",
+                    color: "hsl(215,12%,55%)",
                     lineHeight: 1.7,
                   }}
                 >

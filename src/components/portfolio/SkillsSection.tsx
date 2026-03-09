@@ -83,7 +83,7 @@ export default function SkillsSection() {
               fontFamily: FONT_DISPLAY,
               fontWeight: 700,
               fontSize: "clamp(2rem, 4vw, 2.75rem)",
-              color: "white",
+              color: "hsl(210,30%,95%)",
               letterSpacing: "-0.02em",
             }}
           >
@@ -95,7 +95,7 @@ export default function SkillsSection() {
               fontFamily: FONT_DISPLAY,
               fontWeight: 300,
               fontSize: "15px",
-              color: "rgba(255,255,255,0.38)",
+              color: "hsl(215,15%,58%)",
             }}
           >
             Perforating through formation barriers — tools and technologies that power the workflow.
@@ -148,7 +148,7 @@ export default function SkillsSection() {
                     fontFamily: FONT_DISPLAY,
                     fontWeight: 600,
                     fontSize: "14px",
-                    color: "rgba(255,255,255,0.65)",
+                    color: "hsl(210,20%,78%)",
                   }}
                 >
                   {cat.name}
@@ -161,7 +161,7 @@ export default function SkillsSection() {
                         fontFamily: FONT_DISPLAY,
                         fontWeight: 300,
                         fontSize: "12px",
-                        color: "rgba(255,255,255,0.28)",
+                        color: "hsl(215,12%,50%)",
                       }}
                     >
                       {s}
