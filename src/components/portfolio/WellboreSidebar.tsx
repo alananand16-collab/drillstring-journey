@@ -624,7 +624,7 @@ export default function WellboreSidebar() {
         </motion.div>
 
         {/* ── ANNULUS MUD RETURNS ── */}
-        <AnnulusReturns containerH={720} />
+        <AnnulusReturns containerH={viewportH} />
 
         {/* ── BHA + BIT assembly (travels from top to bottom) ── */}
         <motion.div
