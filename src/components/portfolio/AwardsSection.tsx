@@ -173,7 +173,7 @@ export default function AwardsSection() {
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
             transition={{ type: "spring", stiffness: 100, delay: 0.15 }}
-            className="mb-6 rounded-3xl p-8 md:p-10 transition-all duration-400 group"
+            className="shimmer-card mb-6 rounded-3xl p-8 md:p-10 transition-all duration-400 group"
             style={{
               background: "linear-gradient(145deg, rgba(220,170,30,0.12), rgba(160,120,15,0.05), rgba(100,70,5,0.03))",
               backdropFilter: "blur(16px)",
