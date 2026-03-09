@@ -34,12 +34,12 @@ export default function DepthIndicator() {
         {/* Depth readout */}
         <div className="mb-4 text-center">
           <span
-            className="block text-[11px] font-bold tabular-nums font-mono"
-            style={{ color: "hsl(var(--brand))", animation: "text-glow 3s ease-in-out infinite" }}
+            className="block text-sm font-bold tabular-nums"
+            style={{ color: "hsl(var(--brand))", animation: "text-glow 3s ease-in-out infinite", fontFamily: "'Inter', system-ui, sans-serif" }}
           >
             {depth}
           </span>
-          <span className="text-[7px] tracking-[0.2em] text-white/25 uppercase">ft MD</span>
+          <span className="text-[9px] tracking-[0.2em] text-white/30 uppercase" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>ft MD</span>
         </div>
 
         {/* Vertical track */}
@@ -79,9 +79,9 @@ export default function DepthIndicator() {
                 {/* Icon dot */}
                 <div
                   style={{
-                    width: "14px",
+                    width: "16px",
                     textAlign: "center",
-                    fontSize: "8px",
+                    fontSize: "10px",
                     color: isActive ? f.color : "rgba(255,255,255,0.25)",
                     flexShrink: 0,
                     transition: "color 0.4s",
@@ -115,12 +115,12 @@ export default function DepthIndicator() {
         {/* Current zone label at bottom */}
         <div className="mt-4 px-1 text-center">
           <div
-            className="text-[7px] font-bold tracking-[0.15em] uppercase font-mono leading-tight"
-            style={{ color: formations[activeIdx].color }}
+            className="text-[9px] font-bold tracking-[0.12em] uppercase leading-tight"
+            style={{ color: formations[activeIdx].color, fontFamily: "'Inter', system-ui, sans-serif" }}
           >
             {formations[activeIdx].icon} {formations[activeIdx].label}
           </div>
-          <div className="text-[6px] text-white/20 mt-1 font-mono">
+          <div className="text-[8px] text-white/25 mt-1" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
             {formations[activeIdx].depth.toLocaleString()}′
           </div>
         </div>
@@ -136,18 +136,18 @@ export default function DepthIndicator() {
         }}
       >
         <span
-          className="text-xs font-bold font-mono"
-          style={{ color: "hsl(var(--brand))" }}
+          className="text-sm font-bold"
+          style={{ color: "hsl(var(--brand))", fontFamily: "'Inter', system-ui, sans-serif" }}
         >
           {depth}ft
         </span>
-        <div className="flex-1 h-1 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
+        <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
           <div
             className="h-full rounded-full transition-all duration-150"
             style={{ width: `${scrollProgress * 100}%`, background: "hsl(var(--brand))" }}
           />
         </div>
-        <span className="text-[10px] font-mono" style={{ color: formations[activeIdx].color }}>
+        <span className="text-xs font-semibold" style={{ color: formations[activeIdx].color, fontFamily: "'Inter', system-ui, sans-serif" }}>
           {formations[activeIdx].label}
         </span>
       </div>
