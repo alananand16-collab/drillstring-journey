@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import heroImg from "@/assets/hero-oil-rig.jpg";
+import portrait from "@/assets/alan-portrait.jpg";
 import { useRef } from "react";
 
 export default function HeroSection() {
@@ -109,25 +110,44 @@ export default function HeroSection() {
           <span>Drill Zone</span>
         </motion.div>
 
-        {/* Avatar with glowing pulse */}
+        {/* Portrait with glowing pulse */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="mb-8 flex h-28 w-28 items-center justify-center rounded-full border-2"
-          style={{
-            borderColor: "hsl(var(--brand))",
-            animation: "glow-pulse 3s ease-in-out infinite",
-            background: "rgba(0,0,0,0.5)",
-            backdropFilter: "blur(8px)",
-          }}
+          className="mb-8 relative"
+          style={{ animation: "glow-pulse 3s ease-in-out infinite" }}
         >
-          <span
-            className="text-3xl font-bold"
-            style={{ color: "hsl(var(--brand))", animation: "text-glow 3s ease-in-out infinite" }}
+          {/* Outer glow ring */}
+          <div
+            className="absolute -inset-2 rounded-full opacity-40 blur-md"
+            style={{ background: "hsl(var(--brand))" }}
+          />
+          {/* Secondary soft glow */}
+          <div
+            className="absolute -inset-4 rounded-full opacity-15 blur-xl"
+            style={{ background: "hsl(var(--brand))" }}
+          />
+          <div
+            className="relative h-36 w-36 md:h-44 md:w-44 rounded-full border-2 overflow-hidden"
+            style={{
+              borderColor: "hsl(var(--brand))",
+              boxShadow: "0 0 30px hsla(var(--brand) / 0.3), 0 0 60px hsla(var(--brand) / 0.1)",
+            }}
           >
-            AA
-          </span>
+            <img
+              src={portrait}
+              alt="Alan Anand"
+              className="h-full w-full object-cover object-top scale-110"
+            />
+            {/* Subtle vignette inside */}
+            <div
+              className="absolute inset-0 rounded-full"
+              style={{
+                background: "radial-gradient(circle, transparent 55%, rgba(5,8,17,0.4) 100%)",
+              }}
+            />
+          </div>
         </motion.div>
 
         <motion.h1
