@@ -132,7 +132,7 @@ export default function WellboreJourney() {
         }} />
 
         {/* ─── Rotating PDC Drill Bit ─── */}
-        <motion.div style={{ rotate: rotation, position: "relative", flexShrink: 0 }}>
+        <motion.div style={{ rotateY: rotation, position: "relative", flexShrink: 0, perspective: 200 }}>
           <svg
             viewBox="-50 -50 100 100"
             width="100"
