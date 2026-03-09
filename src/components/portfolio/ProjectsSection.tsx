@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import reservoirImg from "@/assets/project-reservoir.jpg";
 import geomechImg from "@/assets/project-geomech.jpg";
+import SectionBackground from "./SectionBackground";
 
 const imageMap: Record<string, string> = {
   reservoir: reservoirImg,
@@ -13,28 +14,15 @@ const imageMap: Record<string, string> = {
 export default function ProjectsSection() {
   return (
     <section id="projects" className="relative px-4 py-24 lg:py-32 overflow-hidden">
-      {/* Shale fracture lines — tighter strata */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {[12, 25, 38, 52, 65, 78, 90].map((y, i) => (
-          <div
-            key={i}
-            className="absolute w-full"
-            style={{
-              top: `${y}%`,
-              height: "1px",
-              background: `rgba(60,45,18,${0.05 + (i % 2) * 0.03})`,
-              transform: `skewY(${(i % 3) - 1}deg)`,
-            }}
-          />
-        ))}
-        {/* Amber glow rising from below — approaching reservoir */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "radial-gradient(ellipse 80% 50% at 50% 110%, rgba(120,80,10,0.09) 0%, transparent 70%)",
-          }}
-        />
-      </div>
+      <SectionBackground imagePath="/images/sandstone-canyon.avif" overlayOpacity={[0.65, 0.75]} />
+
+      {/* Amber glow rising from below — approaching reservoir */}
+      <div
+        className="absolute inset-0 pointer-events-none z-[3]"
+        style={{
+          background: "radial-gradient(ellipse 80% 50% at 50% 110%, rgba(120,80,10,0.09) 0%, transparent 70%)",
+        }}
+      />
 
       <div className="relative z-10 mx-auto max-w-4xl lg:ml-24 lg:mr-auto lg:max-w-5xl">
         <motion.div
@@ -112,11 +100,6 @@ export default function ProjectsSection() {
           ))}
         </div>
       </div>
-
-      <div
-        className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none z-[4]"
-        style={{ background: "linear-gradient(to bottom, transparent, rgba(14,10,4,0.6) 70%, rgba(16,11,4,0.9) 100%)" }}
-      />
     </section>
   );
 }

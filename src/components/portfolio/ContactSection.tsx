@@ -1,12 +1,15 @@
 import { motion } from "framer-motion";
 import { contactInfo } from "@/data/portfolioData";
 import { Mail, Linkedin, Download } from "lucide-react";
+import SectionBackground from "./SectionBackground";
 
 export default function ContactSection() {
   return (
     <section id="contact" className="relative px-4 py-24 lg:py-32">
+      <SectionBackground imagePath="/images/deep-earth-glow.avif" overlayOpacity={[0.65, 0.60]} />
+
       {/* Bottom hole — deep warm geothermal glow */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none z-[3]">
         <div
           style={{
             position: "absolute",

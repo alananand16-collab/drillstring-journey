@@ -1,23 +1,14 @@
 import { motion } from "framer-motion";
 import { education } from "@/data/portfolioData";
+import SectionBackground from "./SectionBackground";
 
 export default function EducationSection() {
   return (
     <section id="education" className="relative px-4 py-24 lg:py-32">
-      {/* Completion zone — steel-grey casing feel */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Vertical pipe casing lines */}
-        {[20, 35, 50, 65, 80].map((x, i) => (
-          <div
-            key={i}
-            className="absolute top-0 bottom-0"
-            style={{
-              left: `${x}%`,
-              width: "1px",
-              background: `rgba(80,90,100,${0.02 + (i % 2) * 0.01})`,
-            }}
-          />
-        ))}
+      <SectionBackground imagePath="/images/industrial.avif" overlayOpacity={[0.70, 0.78]} />
+
+      {/* Completion zone — steel-grey ambient */}
+      <div className="absolute inset-0 pointer-events-none z-[3]">
         <div
           style={{
             position: "absolute",
@@ -94,11 +85,6 @@ export default function EducationSection() {
           ))}
         </div>
       </div>
-
-      <div
-        className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none z-[4]"
-        style={{ background: "linear-gradient(to bottom, transparent, rgba(6,8,12,0.6) 70%, rgba(5,7,10,0.95) 100%)" }}
-      />
     </section>
   );
 }

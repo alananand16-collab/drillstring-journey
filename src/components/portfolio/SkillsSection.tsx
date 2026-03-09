@@ -4,6 +4,7 @@ import {
   Terminal, Database, Workflow, FlaskConical, Settings,
   Layers, BarChart3, Activity,
 } from "lucide-react";
+import SectionBackground from "./SectionBackground";
 
 const iconMap: Record<string, React.ReactNode> = {
   terminal: <Terminal className="h-5 w-5" />,
@@ -19,8 +20,10 @@ const iconMap: Record<string, React.ReactNode> = {
 export default function SkillsSection() {
   return (
     <section id="skills" className="relative px-4 py-24 lg:py-32">
+      <SectionBackground imagePath="/images/deep-rock.avif" overlayOpacity={[0.65, 0.72]} />
+
       {/* Reservoir zone — warm amber porosity glow from below */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none z-[3]">
         <div
           style={{
             position: "absolute",
@@ -105,11 +108,6 @@ export default function SkillsSection() {
           ))}
         </div>
       </div>
-
-      <div
-        className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none z-[4]"
-        style={{ background: "linear-gradient(to bottom, transparent, rgba(18,12,2,0.6) 70%, rgba(22,14,2,0.9) 100%)" }}
-      />
     </section>
   );
 }

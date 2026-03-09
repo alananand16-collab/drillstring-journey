@@ -1,12 +1,15 @@
 import { motion } from "framer-motion";
 import { awards } from "@/data/portfolioData";
 import { Trophy } from "lucide-react";
+import SectionBackground from "./SectionBackground";
 
 export default function AwardsSection() {
   return (
     <section id="awards" className="relative px-4 py-24 lg:py-32 overflow-hidden">
+      <SectionBackground imagePath="/images/oil-strike.avif" overlayOpacity={[0.60, 0.70]} />
+
       {/* PAY ZONE — golden ambient light bleeding through */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none z-[3]">
         <div
           style={{
             position: "absolute",
@@ -24,7 +27,7 @@ export default function AwardsSection() {
       </div>
 
       {/* Oil gush columns — dramatic rising dark liquid */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-[3]">
         {Array.from({ length: 10 }).map((_, i) => (
           <div
             key={i}
@@ -58,7 +61,7 @@ export default function AwardsSection() {
             }}
           />
         ))}
-        {/* Gold light rays emanating outward */}
+        {/* Gold light rays */}
         {Array.from({ length: 5 }).map((_, i) => (
           <div
             key={`ray-${i}`}
@@ -145,11 +148,6 @@ export default function AwardsSection() {
           ))}
         </div>
       </div>
-
-      <div
-        className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none z-[4]"
-        style={{ background: "linear-gradient(to bottom, transparent, rgba(10,10,12,0.6) 70%, rgba(10,11,14,0.9) 100%)" }}
-      />
     </section>
   );
 }
