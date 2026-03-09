@@ -26,20 +26,20 @@ export default function DepthIndicator() {
       <div
         className="fixed left-0 top-0 z-50 hidden h-full lg:flex flex-col items-center py-20"
         style={{
-          width: "80px",
+          width: "104px",
           background: "linear-gradient(180deg, rgba(5,8,12,0.96) 0%, rgba(5,8,12,0.98) 100%)",
           borderRight: "1px solid rgba(255,255,255,0.04)",
         }}
       >
         {/* Depth readout */}
-        <div className="mb-4 text-center">
+        <div className="mb-5 text-center">
           <span
-            className="block text-base font-bold tabular-nums"
+            className="block text-xl font-bold tabular-nums"
             style={{ color: "hsl(var(--brand))", animation: "text-glow 3s ease-in-out infinite", fontFamily: "'Inter', system-ui, sans-serif" }}
           >
             {depth}
           </span>
-          <span className="text-[10px] tracking-[0.18em] text-white/35 uppercase" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>ft MD</span>
+          <span className="text-[12px] tracking-[0.2em] text-white/40 uppercase" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>ft MD</span>
         </div>
 
         {/* Vertical track */}
