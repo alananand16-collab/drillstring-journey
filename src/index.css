@@ -33,6 +33,18 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* ===== PETROLEUM COLOR PALETTE ===== */
+    --oil-amber: 35 92% 55%;
+    --oil-gold: 42 88% 52%;
+    --oil-brown: 25 55% 35%;
+    --water-blue: 205 80% 60%;
+    --water-deep: 210 70% 48%;
+    --gas-red: 5 78% 55%;
+    --formation-teal: 175 60% 48%;
+    --steel-grey: 215 12% 45%;
+    --drill-dark: 220 20% 12%;
+    --perf-orange: 28 92% 58%;
   }
 
   .dark {
