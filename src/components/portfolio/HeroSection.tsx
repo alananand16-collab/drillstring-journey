@@ -96,12 +96,12 @@ export default function HeroSection() {
       </div>
 
       {/* Content — split layout */}
-      <motion.div
-        style={{ y: contentY, opacity: contentOpacity }}
-        className="relative z-10 flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20 px-6 md:px-12 lg:px-20 mt-16 lg:mt-0 w-full max-w-7xl mx-auto"
-      >
-        {/* Left: Text content */}
-        <div className="flex flex-col items-center lg:items-start text-center lg:text-left flex-1">
+      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20 px-6 md:px-12 lg:px-20 mt-16 lg:mt-0 w-full max-w-7xl mx-auto">
+        {/* Left: Text content — parallaxes normally */}
+        <motion.div
+          style={{ y: contentY, opacity: contentOpacity }}
+          className="flex flex-col items-center lg:items-start text-center lg:text-left flex-1"
+        >
           {/* Depth info line */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -250,13 +250,14 @@ export default function HeroSection() {
               <ChevronDown className="h-4 w-4 animate-bounce opacity-30 -mt-2 text-white/30" style={{ animationDuration: "1.4s", animationDelay: "0.18s" }} />
             </div>
           </motion.button>
-        </div>
+        </motion.div>
 
-        {/* Right: Large portrait */}
+        {/* Right: Large portrait — independent scroll transform, stays visible longer */}
         <motion.div
           initial={{ opacity: 0, x: 40, scale: 0.95 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
           transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+          style={{ y: portraitY, opacity: portraitOpacity, scale: portraitScale }}
           className="relative flex-shrink-0"
         >
           <div
@@ -298,7 +299,7 @@ export default function HeroSection() {
             />
           </div>
         </motion.div>
-      </motion.div>
+      </div>
 
       {/* Bottom blend */}
       <div className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none z-[4]"
