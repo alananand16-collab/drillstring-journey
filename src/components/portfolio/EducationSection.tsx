@@ -103,7 +103,7 @@ export default function EducationSection() {
                       fontFamily: FONT_DISPLAY,
                       fontWeight: 600,
                       fontSize: "16px",
-                      color: "white",
+                      color: "hsl(210,25%,92%)",
                     }}
                   >
                     {edu.degree}
