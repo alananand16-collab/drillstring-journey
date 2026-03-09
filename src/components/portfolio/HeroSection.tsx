@@ -130,7 +130,7 @@ export default function HeroSection() {
               fontSize: "clamp(3.5rem, 8vw, 6.5rem)",
               lineHeight: 0.92,
               letterSpacing: "-0.03em",
-              color: "white",
+              color: "hsl(210,30%,95%)",
             }}
           >
             Alan
