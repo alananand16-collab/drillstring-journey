@@ -155,7 +155,7 @@ export default function ExperienceSection() {
                             fontFamily: FONT_DISPLAY,
                             fontWeight: 400,
                             fontSize: "13px",
-                            color: "rgba(255,255,255,0.32)",
+                            color: "hsl(215,12%,52%)",
                           }}
                         >
                           {exp.location}
