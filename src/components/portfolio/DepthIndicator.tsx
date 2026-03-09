@@ -129,7 +129,7 @@ export default function DepthIndicator() {
 
       {/* ── Mobile top bar ── */}
       <div
-        className="fixed top-14 left-0 right-0 z-40 flex items-center gap-3 px-4 py-2 lg:hidden"
+        className="fixed top-14 left-0 right-0 z-40 flex items-center gap-3 px-4 py-2.5 lg:hidden"
         style={{
           background: "rgba(5,8,12,0.92)",
           backdropFilter: "blur(12px)",
@@ -137,18 +137,18 @@ export default function DepthIndicator() {
         }}
       >
         <span
-          className="text-sm font-bold"
+          className="text-base font-bold"
           style={{ color: "hsl(var(--brand))", fontFamily: "'Inter', system-ui, sans-serif" }}
         >
           {depth}ft
         </span>
-        <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
+        <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
           <div
             className="h-full rounded-full transition-all duration-150"
             style={{ width: `${scrollProgress * 100}%`, background: "hsl(var(--brand))" }}
           />
         </div>
-        <span className="text-xs font-semibold" style={{ color: formations[activeIdx].color, fontFamily: "'Inter', system-ui, sans-serif" }}>
+        <span className="text-sm font-bold" style={{ color: formations[activeIdx].color, fontFamily: "'Inter', system-ui, sans-serif" }}>
           {formations[activeIdx].label}
         </span>
       </div>
