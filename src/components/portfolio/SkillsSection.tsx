@@ -83,7 +83,7 @@ export default function SkillsSection() {
               fontFamily: FONT_DISPLAY,
               fontWeight: 700,
               fontSize: "clamp(2rem, 4vw, 2.75rem)",
-              color: "white",
+              color: "hsl(210,30%,95%)",
               letterSpacing: "-0.02em",
             }}
           >
