@@ -48,6 +48,18 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         brand: "hsl(var(--brand))",
+        experience: {
+          surface: "hsl(var(--experience-surface))",
+          "surface-2": "hsl(var(--experience-surface-2))",
+          border: "hsl(var(--experience-border))",
+          text: "hsl(var(--experience-text))",
+          muted: "hsl(var(--experience-muted))",
+          "muted-2": "hsl(var(--experience-muted-2))",
+          "accent-warm": "hsl(var(--experience-accent-warm))",
+          "accent-cool": "hsl(var(--experience-accent-cool))",
+          chip: "hsl(var(--experience-chip))",
+          "chip-border": "hsl(var(--experience-chip-border))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
