@@ -35,7 +35,7 @@ export default function DepthIndicator() {
         <div className="mb-5 text-center">
           <span
             className="block text-xl font-bold tabular-nums"
-            style={{ color: "hsl(var(--brand))", animation: "text-glow 3s ease-in-out infinite", fontFamily: "'Inter', system-ui, sans-serif" }}
+            style={{ color: "hsl(var(--brand))", animation: "text-glow 3s ease-in-out infinite", fontFamily: "'JetBrains Mono', monospace" }}
           >
             {depth}
           </span>
