@@ -138,7 +138,7 @@ export default function EducationSection() {
                     fontFamily: FONT_DISPLAY,
                     fontWeight: 300,
                     fontSize: "14px",
-                    color: "rgba(255,255,255,0.38)",
+                    color: "hsl(215,12%,55%)",
                     lineHeight: 1.7,
                   }}
                 >

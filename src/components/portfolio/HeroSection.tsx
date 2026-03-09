@@ -163,7 +163,7 @@ export default function HeroSection() {
               fontFamily: FONT_DISPLAY,
               fontWeight: 300,
               fontSize: "15px",
-              color: "rgba(255,255,255,0.35)",
+              color: "hsl(215,15%,58%)",
               lineHeight: 1.8,
             }}
           >

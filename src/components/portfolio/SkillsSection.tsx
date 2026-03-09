@@ -161,7 +161,7 @@ export default function SkillsSection() {
                         fontFamily: FONT_DISPLAY,
                         fontWeight: 300,
                         fontSize: "12px",
-                        color: "rgba(255,255,255,0.28)",
+                        color: "hsl(215,12%,50%)",
                       }}
                     >
                       {s}
