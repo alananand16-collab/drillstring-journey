@@ -79,9 +79,9 @@ export default function DepthIndicator() {
                 {/* Icon dot */}
                 <div
                   style={{
-                    width: "14px",
+                    width: "16px",
                     textAlign: "center",
-                    fontSize: "8px",
+                    fontSize: "10px",
                     color: isActive ? f.color : "rgba(255,255,255,0.25)",
                     flexShrink: 0,
                     transition: "color 0.4s",
