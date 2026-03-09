@@ -136,18 +136,18 @@ export default function DepthIndicator() {
         }}
       >
         <span
-          className="text-xs font-bold font-mono"
-          style={{ color: "hsl(var(--brand))" }}
+          className="text-sm font-bold"
+          style={{ color: "hsl(var(--brand))", fontFamily: "'Inter', system-ui, sans-serif" }}
         >
           {depth}ft
         </span>
-        <div className="flex-1 h-1 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
+        <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
           <div
             className="h-full rounded-full transition-all duration-150"
             style={{ width: `${scrollProgress * 100}%`, background: "hsl(var(--brand))" }}
           />
         </div>
-        <span className="text-[10px] font-mono" style={{ color: formations[activeIdx].color }}>
+        <span className="text-xs font-semibold" style={{ color: formations[activeIdx].color, fontFamily: "'Inter', system-ui, sans-serif" }}>
           {formations[activeIdx].label}
         </span>
       </div>
