@@ -1,19 +1,33 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import heroImg from "@/assets/hero-oil-rig.jpg";
+import { useRef } from "react";
 
 export default function HeroSection() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+
+  // Parallax: image moves up slower than scroll, fades out
+  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const imgOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
   const scrollToExperience = () => {
     document.getElementById("experience")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <section
+      ref={ref}
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* Background image */}
-      <div className="absolute inset-0">
+      {/* Parallax background image — sinks away as you scroll */}
+      <motion.div
+        className="absolute inset-0"
+        style={{ y: imgY, opacity: imgOpacity }}
+      >
         <img
           src={heroImg}
           alt="Oil rig at night"
@@ -23,49 +37,83 @@ export default function HeroSection() {
           className="absolute inset-0"
           style={{
             background: `
-              linear-gradient(180deg, rgba(5,8,15,0.4) 0%, rgba(5,8,15,0.6) 40%, rgba(5,8,15,0.85) 75%, rgba(5,8,15,1) 100%),
-              radial-gradient(ellipse at 50% 30%, transparent 30%, rgba(5,8,15,0.7) 100%)
+              linear-gradient(180deg,
+                rgba(5,8,17,0.35) 0%,
+                rgba(5,8,17,0.55) 40%,
+                rgba(5,8,17,0.82) 75%,
+                rgba(5,8,17,1) 100%
+              ),
+              radial-gradient(ellipse at 50% 25%, transparent 25%, rgba(5,8,17,0.6) 100%)
             `,
           }}
         />
-      </div>
+        {/* Cool blue moonlight ambient */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "radial-gradient(ellipse 70% 45% at 50% -5%, rgba(0,60,200,0.10) 0%, transparent 70%)",
+          }}
+        />
+      </motion.div>
 
-      {/* Floating particles */}
+      {/* Surface dust/spark particles */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {Array.from({ length: 20 }).map((_, i) => (
+        {Array.from({ length: 24 }).map((_, i) => (
           <div
             key={i}
             className="absolute rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
-              top: `${20 + Math.random() * 60}%`,
-              width: `${2 + Math.random() * 3}px`,
-              height: `${2 + Math.random() * 3}px`,
-              background: `rgba(${200 + Math.random() * 55}, ${180 + Math.random() * 40}, ${100 + Math.random() * 50}, ${0.3 + Math.random() * 0.4})`,
-              animation: `float-particle ${5 + Math.random() * 8}s ${Math.random() * 5}s infinite ease-in-out`,
+              top: `${15 + Math.random() * 65}%`,
+              width: `${1.5 + Math.random() * 2.5}px`,
+              height: `${1.5 + Math.random() * 2.5}px`,
+              background: `rgba(${200 + Math.random() * 55}, ${175 + Math.random() * 40}, ${90 + Math.random() * 50}, ${0.25 + Math.random() * 0.35})`,
+              animation: `float-particle ${6 + Math.random() * 9}s ${Math.random() * 6}s infinite ease-in-out`,
+            }}
+          />
+        ))}
+        {/* Sparks */}
+        {Array.from({ length: 8 }).map((_, i) => (
+          <div
+            key={`spark-${i}`}
+            className="absolute"
+            style={{
+              left: `${20 + Math.random() * 60}%`,
+              top: `${30 + Math.random() * 40}%`,
+              width: "1px",
+              height: `${4 + Math.random() * 6}px`,
+              background: `rgba(255,200,80,${0.3 + Math.random() * 0.4})`,
+              borderRadius: "1px",
+              animation: `float-particle ${3 + Math.random() * 4}s ${Math.random() * 4}s infinite ease-in-out`,
             }}
           />
         ))}
       </div>
 
-      {/* Content */}
+      {/* Content — also parallaxes but slower */}
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}
+        style={{ y: contentY, opacity: contentOpacity }}
         className="relative z-10 flex flex-col items-center text-center px-4 mt-16"
       >
         {/* Depth info line */}
-        <div className="mb-6 flex items-center gap-3 text-[10px] tracking-[0.2em] uppercase text-white/30">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mb-6 flex items-center gap-3 text-[10px] tracking-[0.2em] uppercase text-white/30"
+        >
           <span>0 FT</span>
           <span className="h-px w-8 bg-white/20" />
           <span>Surface Level</span>
           <span className="h-px w-8 bg-white/20" />
           <span>Drill Zone</span>
-        </div>
+        </motion.div>
 
-        {/* Avatar */}
-        <div
+        {/* Avatar with glowing pulse */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
           className="mb-8 flex h-28 w-28 items-center justify-center rounded-full border-2"
           style={{
             borderColor: "hsl(var(--brand))",
@@ -80,28 +128,48 @@ export default function HeroSection() {
           >
             AA
           </span>
-        </div>
+        </motion.div>
 
-        <h1 className="mb-3 text-5xl font-bold text-white md:text-7xl lg:text-8xl tracking-tight leading-[0.95]">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.4 }}
+          className="mb-3 text-5xl font-bold text-white md:text-7xl lg:text-8xl tracking-tight leading-[0.95]"
+        >
           Alan
           <br />
           Anand
-        </h1>
+        </motion.h1>
 
-        <p className="mb-4 text-base text-white/60 md:text-lg font-light">
-          Digital Subsurface & Data Architect
-        </p>
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.55 }}
+          className="mb-4 text-base text-white/60 md:text-lg font-light"
+        >
+          Digital Subsurface &amp; Data Architect
+        </motion.p>
 
-        <p className="mb-8 max-w-lg text-sm text-white/40 leading-relaxed">
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.65 }}
+          className="mb-8 max-w-lg text-sm text-white/40 leading-relaxed"
+        >
           M.Eng Petroleum Engineering candidate bridging subsurface geoscience
           with{" "}
           <span style={{ color: "hsl(var(--brand))" }}>Python automation</span>,{" "}
           <span style={{ color: "hsl(var(--brand))" }}>SQL architectures</span>, and{" "}
           <span style={{ color: "hsl(var(--brand))" }}>AI workflows</span>.
-        </p>
+        </motion.p>
 
         {/* Stats */}
-        <div className="mb-10 flex gap-6 md:gap-10">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.75 }}
+          className="mb-10 flex gap-6 md:gap-10"
+        >
           {[
             { value: "4+", label: "YRS EXP" },
             { value: "200+", label: "AI MODELS" },
@@ -119,25 +187,36 @@ export default function HeroSection() {
               </div>
             </div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* CTA */}
+        {/* CTA button */}
         <motion.button
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.9 }}
           onClick={scrollToExperience}
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.98 }}
-          className="group flex flex-col items-center gap-2 text-white/50 hover:text-white/70 transition-colors"
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.97 }}
+          className="group flex flex-col items-center gap-2"
+          style={{ color: "rgba(255,255,255,0.45)" }}
         >
-          <span className="text-[10px] font-medium tracking-[0.3em] uppercase">Begin Drilling</span>
-          <div className="flex flex-col items-center">
-            <ChevronDown className="h-4 w-4 animate-bounce" style={{ animationDuration: "1.5s" }} />
-            <ChevronDown className="h-4 w-4 animate-bounce opacity-40 -mt-2" style={{ animationDuration: "1.5s", animationDelay: "0.15s" }} />
+          <span
+            className="rounded-full border px-5 py-2 text-[10px] font-medium tracking-[0.3em] uppercase transition-all duration-300 group-hover:border-white/30 group-hover:text-white/70"
+            style={{ borderColor: "rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.02)", backdropFilter: "blur(8px)" }}
+          >
+            Begin Descent
+          </span>
+          <div className="flex flex-col items-center mt-1">
+            <ChevronDown className="h-4 w-4 animate-bounce" style={{ animationDuration: "1.4s" }} />
+            <ChevronDown className="h-4 w-4 animate-bounce opacity-35 -mt-2" style={{ animationDuration: "1.4s", animationDelay: "0.18s" }} />
           </div>
         </motion.button>
       </motion.div>
 
-      {/* Bottom gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-b from-transparent to-[#080a0f] z-[4] pointer-events-none" />
+      {/* Bottom blend — merges into geological journey below */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none z-[4]"
+        style={{ background: "linear-gradient(to bottom, transparent, rgba(8,10,15,0.7) 60%, rgba(8,11,16,1) 100%)" }}
+      />
     </section>
   );
 }
