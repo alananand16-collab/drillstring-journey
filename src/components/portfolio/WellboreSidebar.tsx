@@ -725,7 +725,10 @@ function DepthCounter({ depthNum, activeFormIdx }: { depthNum: any; activeFormId
 
 function MotionNumber({ motionVal }: { motionVal: any }) {
   const [display, setDisplay] = React.useState("0");
-  motionVal.on("change", (v: number) => setDisplay(Math.round(v).toLocaleString()));
+  React.useEffect(() => {
+    const unsub = motionVal.on("change", (v: number) => setDisplay(Math.round(v).toLocaleString()));
+    return unsub;
+  }, [motionVal]);
   return <span>{display}</span>;
 }
 
