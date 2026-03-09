@@ -92,49 +92,51 @@ export default function ExperienceSection() {
                 onClick={() => setSelectedExp(exp)}
                 className="group cursor-pointer rounded-2xl p-7 md:p-8 transition-all duration-300"
                 style={{
-                  background: "rgba(255,255,255,0.025)",
+                  background: "linear-gradient(145deg, rgba(15,20,35,0.7), rgba(10,14,28,0.5))",
                   backdropFilter: "blur(14px)",
-                  border: "1px solid rgba(255,255,255,0.06)",
-                  boxShadow: "0 4px 28px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(100,140,200,0.08)",
+                  boxShadow: "0 4px 28px rgba(0,0,0,0.3), inset 0 1px 0 rgba(100,160,255,0.04)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "hsl(var(--brand) / 0.25)";
-                  e.currentTarget.style.background = "rgba(255,255,255,0.04)";
-                  e.currentTarget.style.boxShadow = "0 0 40px rgba(0,100,200,0.07), inset 0 1px 0 rgba(255,255,255,0.06)";
+                  e.currentTarget.style.borderColor = "rgba(80,150,255,0.2)";
+                  e.currentTarget.style.background = "linear-gradient(145deg, rgba(18,25,45,0.8), rgba(12,18,35,0.6))";
+                  e.currentTarget.style.boxShadow = "0 8px 40px rgba(0,60,180,0.08), inset 0 1px 0 rgba(100,160,255,0.06)";
+                  e.currentTarget.style.transform = "translateY(-2px)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
-                  e.currentTarget.style.background = "rgba(255,255,255,0.025)";
-                  e.currentTarget.style.boxShadow = "0 4px 28px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)";
+                  e.currentTarget.style.borderColor = "rgba(100,140,200,0.08)";
+                  e.currentTarget.style.background = "linear-gradient(145deg, rgba(15,20,35,0.7), rgba(10,14,28,0.5))";
+                  e.currentTarget.style.boxShadow = "0 4px 28px rgba(0,0,0,0.3), inset 0 1px 0 rgba(100,160,255,0.04)";
+                  e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
                 <div className="flex items-start gap-5 md:gap-6">
-                  {/* Company logo — much larger */}
+                  {/* Company logo */}
                   <div
                     className="flex shrink-0 items-center justify-center rounded-2xl overflow-hidden"
                     style={{
                       width: "64px",
                       height: "64px",
-                      background: "rgba(255,255,255,0.05)",
-                      border: "1px solid rgba(255,255,255,0.1)",
-                      boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
+                      background: "rgba(255,255,255,0.06)",
+                      border: "1px solid rgba(100,160,255,0.1)",
+                      boxShadow: "0 4px 16px rgba(0,0,0,0.25), 0 0 12px rgba(60,120,220,0.05)",
                     }}
                   >
                     {logoSrc ? (
                       <img src={logoSrc} alt={exp.company} className="h-full w-full object-cover" />
                     ) : (
-                      <span style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: "16px", color: "hsl(var(--brand))" }}>{exp.logo}</span>
+                      <span style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: "16px", color: "hsl(210,80%,65%)" }}>{exp.logo}</span>
                     )}
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    {/* Company name — prominent */}
+                    {/* Company name */}
                     <p
                       style={{
                         fontFamily: FONT_DISPLAY,
                         fontWeight: 700,
                         fontSize: "18px",
-                        color: "hsl(210,30%,95%)",
+                        color: "hsl(210,40%,92%)",
                         letterSpacing: "-0.01em",
                       }}
                     >
@@ -148,7 +150,7 @@ export default function ExperienceSection() {
                             fontFamily: FONT_DISPLAY,
                             fontWeight: 500,
                             fontSize: "15px",
-                            color: "hsl(var(--brand))",
+                            color: "hsl(210,70%,68%)",
                           }}
                         >
                           {exp.role}
@@ -159,7 +161,7 @@ export default function ExperienceSection() {
                                 fontFamily: FONT_DISPLAY,
                                 fontWeight: 400,
                                 fontSize: "13px",
-                                color: "hsl(215,15%,55%)",
+                                color: "hsl(210,25%,55%)",
                               }}
                             >
                               · {exp.type}
@@ -172,7 +174,7 @@ export default function ExperienceSection() {
                             fontFamily: FONT_DISPLAY,
                             fontWeight: 400,
                             fontSize: "13px",
-                            color: "hsl(215,12%,50%)",
+                            color: "hsl(210,15%,50%)",
                           }}
                         >
                           {exp.location}
@@ -184,7 +186,7 @@ export default function ExperienceSection() {
                           style={{
                             fontFamily: FONT_MONO,
                             fontSize: "12px",
-                            color: "hsl(215,10%,42%)",
+                            color: "hsl(210,15%,45%)",
                           }}
                         >
                           {exp.startDate} — {exp.endDate}
@@ -199,7 +201,7 @@ export default function ExperienceSection() {
                         fontFamily: FONT_DISPLAY,
                         fontWeight: 300,
                         fontSize: "14px",
-                        color: "hsl(215,12%,55%)",
+                        color: "hsl(210,12%,58%)",
                         lineHeight: 1.7,
                       }}
                     >
@@ -208,8 +210,8 @@ export default function ExperienceSection() {
 
                     {exp.impact && (
                       <p className="mt-3" style={{ fontSize: "14px", fontFamily: FONT_DISPLAY }}>
-                        <span style={{ color: "hsl(215,10%,42%)", fontWeight: 400 }}>★ Impact: </span>
-                        <span style={{ color: "hsl(var(--brand))", fontWeight: 600 }}>{exp.impact}</span>
+                        <span style={{ color: "hsl(210,15%,45%)", fontWeight: 400 }}>★ Impact: </span>
+                        <span style={{ color: "hsl(210,70%,68%)", fontWeight: 600 }}>{exp.impact}</span>
                       </p>
                     )}
                   </div>
