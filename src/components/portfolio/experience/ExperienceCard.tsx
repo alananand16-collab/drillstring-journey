@@ -53,6 +53,18 @@ export default function ExperienceCard({ experience: exp, index: i, onSelect }: 
           </div>
         </div>
 
+        <div className="flex-1 p-7 md:p-8">
+          {/* Top row: Company + Arrow */}
+          <div className="mb-5 flex items-start justify-between gap-4">
+            {/* Mobile-only inline logo */}
+            <div className="flex sm:hidden h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-experience-border/50 bg-experience-surface/50 mr-3">
+              {logoSrc ? (
+                <img src={logoSrc} alt={exp.company} className="h-full w-full object-cover" loading="lazy" />
+              ) : (
+                <span className="text-experience-accent-cool" style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: "13px" }}>{exp.logo}</span>
+              )}
+            </div>
+
             <div className="min-w-0 flex-1">
               <h3
                 className="text-experience-text"
@@ -120,9 +132,7 @@ export default function ExperienceCard({ experience: exp, index: i, onSelect }: 
           {/* Impact */}
           {exp.impact && (
             <div className="mt-4 flex items-center gap-2 rounded-lg border border-experience-chip-border/25 bg-experience-chip/10 px-4 py-2.5">
-              <span className="text-experience-accent-warm" style={{ fontSize: "14px" }}>
-                ⚡
-              </span>
+              <span className="text-experience-accent-warm" style={{ fontSize: "14px" }}>⚡</span>
               <span
                 className="text-experience-accent-warm"
                 style={{ fontFamily: FONT_DISPLAY, fontWeight: 560, fontSize: "13px" }}
