@@ -45,6 +45,19 @@
     --steel-grey: 215 12% 45%;
     --drill-dark: 220 20% 12%;
     --perf-orange: 28 92% 58%;
+
+    /* ===== EXPERIENCE THEME TOKENS (semantic) ===== */
+    --experience-surface: 222 28% 8%;
+    --experience-surface-2: 222 34% 6%;
+    --experience-border: 215 16% 24%;
+    --experience-text: 210 30% 96%;
+    --experience-muted: 215 14% 62%;
+    --experience-muted-2: 215 12% 48%;
+    --experience-accent-warm: var(--oil-amber);
+    --experience-accent-cool: var(--brand);
+    --experience-chip: var(--oil-amber);
+    --experience-chip-border: var(--oil-gold);
+
   }
 
   .dark {
