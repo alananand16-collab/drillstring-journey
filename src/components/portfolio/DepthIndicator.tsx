@@ -148,7 +148,7 @@ export default function DepthIndicator() {
             style={{ width: `${scrollProgress * 100}%`, background: "hsl(var(--brand))" }}
           />
         </div>
-        <span className="text-sm font-bold" style={{ color: formations[activeIdx].color, fontFamily: "'Inter', system-ui, sans-serif" }}>
+        <span className="text-sm font-bold" style={{ color: formations[activeIdx].color, fontFamily: "'JetBrains Mono', monospace" }}>
           {formations[activeIdx].label}
         </span>
       </div>
