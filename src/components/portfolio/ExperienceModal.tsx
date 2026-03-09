@@ -44,7 +44,13 @@ export default function ExperienceModal({ experience, open, onOpenChange }: Prop
             </div>
           </DialogHeader>
 
-          <div className="mt-6 space-y-3">
+          {experience.preview && (
+            <p className="mt-5 text-sm italic text-white/50 leading-relaxed border-l-2 pl-4" style={{ borderColor: "hsl(var(--brand) / 0.3)" }}>
+              {experience.preview}
+            </p>
+          )}
+
+          <div className="mt-5 space-y-3">
             {experience.bullets.map((bullet, i) => (
               <div key={i} className="flex gap-2">
                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: "hsl(var(--brand) / 0.5)" }} />
