@@ -114,14 +114,14 @@ export default function DepthIndicator() {
         </div>
 
         {/* Current zone label at bottom */}
-        <div className="mt-4 px-1 text-center">
+        <div className="mt-5 px-1 text-center">
           <div
-            className="text-[11px] font-bold tracking-[0.08em] uppercase leading-tight"
+            className="text-[13px] font-bold tracking-[0.1em] uppercase leading-tight"
             style={{ color: formations[activeIdx].color, fontFamily: "'Inter', system-ui, sans-serif" }}
           >
             {formations[activeIdx].icon} {formations[activeIdx].label}
           </div>
-          <div className="text-[9px] text-white/30 mt-1" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
+          <div className="text-[11px] text-white/35 mt-1" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
             {formations[activeIdx].depth.toLocaleString()}′
           </div>
         </div>
