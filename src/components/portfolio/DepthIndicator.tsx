@@ -85,7 +85,7 @@ export default function DepthIndicator() {
                     transition: "color 0.4s",
                     letterSpacing: "0.08em",
                     marginTop: "3px",
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontFamily: "'JetBrains Mono', monospace",
                     textAlign: "center",
                     lineHeight: 1.25,
                   }}
