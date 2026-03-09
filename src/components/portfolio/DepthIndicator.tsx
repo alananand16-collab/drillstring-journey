@@ -61,35 +61,36 @@ export default function DepthIndicator() {
             return (
               <div
                 key={f.label}
-                className="absolute flex items-center"
-                style={{ top: `${f.pct}%`, left: 0, right: 0 }}
+                className="absolute flex flex-col items-center"
+                style={{ top: `${f.pct}%`, left: 0, right: 0, transform: "translateY(-50%)" }}
               >
-                {/* Left tick */}
+                {/* Icon */}
                 <div
                   style={{
-                    width: "12px",
-                    height: "1px",
-                    background: isActive ? f.color : "rgba(255,255,255,0.12)",
-                    flexShrink: 0,
-                    marginLeft: "6px",
-                    transition: "background 0.4s",
-                  }}
-                />
-
-                {/* Icon dot */}
-                <div
-                  style={{
-                    width: "16px",
-                    textAlign: "center",
-                    fontSize: "10px",
+                    fontSize: "12px",
                     color: isActive ? f.color : "rgba(255,255,255,0.25)",
-                    flexShrink: 0,
                     transition: "color 0.4s",
                     lineHeight: 1,
                     fontWeight: "bold",
                   }}
                 >
                   {f.icon}
+                </div>
+                {/* Formation name */}
+                <div
+                  style={{
+                    fontSize: "9px",
+                    fontWeight: isActive ? 700 : 500,
+                    color: isActive ? f.color : "rgba(255,255,255,0.22)",
+                    transition: "color 0.4s",
+                    letterSpacing: "0.06em",
+                    marginTop: "2px",
+                    fontFamily: "'Inter', system-ui, sans-serif",
+                    textAlign: "center",
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {f.label}
                 </div>
               </div>
             );
