@@ -465,37 +465,41 @@ export default function WellboreSidebar() {
   /* Smooth spring for cinematic feel */
   const smooth = useSpring(scrollYProgress, { stiffness: 60, damping: 18 });
 
+  /* Measure viewport height so we can animate using pure numbers (no calc()/mixed units → no snapping) */
+  const [viewportH, setViewportH] = React.useState(() =>
+    typeof window !== "undefined" ? window.innerHeight : 800
+  );
+
+  React.useEffect(() => {
+    const update = () => setViewportH(window.innerHeight);
+    update();
+    window.addEventListener("resize", update, { passive: true } as any);
+    return () => window.removeEventListener("resize", update as any);
+  }, []);
+
   /* ── Layout constants ── */
-  const DERRICK_H   = 100;  // px
-  const DERRICK_TOP = 8;    // px from top
-  const DERRICK_BOTTOM = DERRICK_TOP + DERRICK_H; // 108px — where pipe exits derrick floor
-  
+  const DERRICK_H = 100; // px
+  const DERRICK_TOP = 8; // px from top
+  const DERRICK_BOTTOM = DERRICK_TOP + DERRICK_H; // where pipe exits derrick floor
+
   /* Bottom margin to keep BHA visible */
   const BOTTOM_MARGIN = 24;
 
   /*
-   * BHA bottom position travels: 
-   * - At scroll=0: BHA bottom is at DERRICK_BOTTOM (just peeking out of derrick)
-   * - At scroll=1: BHA bottom is at (100vh - BOTTOM_MARGIN) (fully at page bottom)
-   * 
-   * We position BHA by its TOP, so:
-   * - At scroll=0: bhaTop = DERRICK_BOTTOM - BHA_H_PX (BHA sits inside/just below derrick)
-   * - At scroll=1: bhaTop = 100vh - BOTTOM_MARGIN - BHA_H_PX
+   * Animate BHA TOP in pure pixels:
+   * - Start: BHA bottom sits slightly below derrick floor (bit “peeks out”)
+   * - End:   BHA reaches near bottom of viewport but stays visible
    */
-  const START_TOP = DERRICK_BOTTOM - BHA_H_PX + 40; // BHA starts just below derrick with bit visible
-  
-  const bhaTop = useTransform(smooth, [0, 1],
-    [`${START_TOP}px`, `calc(100vh - ${BHA_H_PX + BOTTOM_MARGIN}px)`]
+  const startTop = DERRICK_BOTTOM + 12 - BHA_H_PX;
+  const endTop = Math.max(
+    DERRICK_BOTTOM + 24,
+    viewportH - (BHA_H_PX + BOTTOM_MARGIN)
   );
 
-  /*
-   * Pipe grows from derrick floor down to BHA top
-   * At scroll=0: minimal pipe (BHA is right at derrick)
-   * At scroll=1: pipe spans from DERRICK_BOTTOM to bhaTop
-   */
-  const pipeHeight = useTransform(smooth, [0, 1],
-    [`${40}px`, `calc(100vh - ${BHA_H_PX + BOTTOM_MARGIN + DERRICK_BOTTOM}px)`]
-  );
+  const bhaTop = useTransform(smooth, [0, 1], [startTop, endTop]);
+
+  /* Pipe height = distance from derrick floor down to BHA top (clamped) */
+  const pipeHeight = useTransform(bhaTop, (t) => Math.max(36, t - DERRICK_BOTTOM));
 
   /* Mud flow downward animation */
   const mudY = useTransform(scrollYProgress, [0, 1], [0, 600]);
@@ -507,13 +511,14 @@ export default function WellboreSidebar() {
   const activeFormIdx = useTransform(smooth, (p) => {
     const pct = p * 100;
     let best = 0;
-    FORMATIONS.forEach((f, i) => { if (pct >= f.pct) best = i; });
+    FORMATIONS.forEach((f, i) => {
+      if (pct >= f.pct) best = i;
+    });
     return best;
   });
 
   /* Mobile progress bar */
   const progressWidth = useTransform(smooth, [0, 1], ["0%", "100%"]);
-
   return (
     <>
       {/* ═══════════════════════════════════════
