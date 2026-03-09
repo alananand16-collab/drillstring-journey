@@ -1,6 +1,5 @@
 /**
- * DepthIndicator — Updated with 6 major formation markers per spec.
- * Shows formation names, icons, and highlights current zone.
+ * DepthIndicator — Premium telemetry sidebar with formation markers.
  */
 import { useScrollDepth } from "@/hooks/useScrollDepth";
 
@@ -14,9 +13,8 @@ const formations = [
 ];
 
 export default function DepthIndicator() {
-  const { depth, scrollProgress, formationName } = useScrollDepth();
+  const { depth, scrollProgress } = useScrollDepth();
 
-  // Find active formation based on scroll
   const activeIdx = formations.reduce((best, f, i) =>
     scrollProgress * 100 >= f.pct ? i : best, 0);
 
@@ -24,22 +22,40 @@ export default function DepthIndicator() {
     <>
       {/* ── Desktop left sidebar ── */}
       <div
-        className="fixed left-0 top-0 z-50 hidden h-full lg:flex flex-col items-center py-20"
+        className="fixed left-0 top-0 z-50 hidden h-full lg:flex flex-col items-center py-16"
         style={{
-          width: "104px",
-          background: "linear-gradient(180deg, rgba(5,8,12,0.96) 0%, rgba(5,8,12,0.98) 100%)",
-          borderRight: "1px solid rgba(255,255,255,0.04)",
+          width: "130px",
+          background: "linear-gradient(180deg, rgba(5,8,12,0.97) 0%, rgba(5,8,12,0.99) 100%)",
+          borderRight: "1px solid rgba(255,255,255,0.06)",
+          boxShadow: "4px 0 24px rgba(0,0,0,0.4)",
         }}
       >
-        {/* Depth readout */}
-        <div className="mb-5 text-center">
+        {/* Depth readout — hero element */}
+        <div
+          className="mb-6 text-center px-3 py-4 rounded-xl"
+          style={{
+            background: "rgba(255,255,255,0.03)",
+            border: "1px solid rgba(255,255,255,0.06)",
+            backdropFilter: "blur(10px)",
+            width: "110px",
+          }}
+        >
           <span
-            className="block text-xl font-bold tabular-nums"
-            style={{ color: "hsl(var(--brand))", animation: "text-glow 3s ease-in-out infinite", fontFamily: "'JetBrains Mono', monospace" }}
+            className="block text-2xl font-extrabold tabular-nums tracking-tight"
+            style={{
+              color: "hsl(var(--brand))",
+              animation: "text-glow 3s ease-in-out infinite",
+              fontFamily: "'JetBrains Mono', monospace",
+            }}
           >
             {depth}
           </span>
-          <span className="text-[12px] tracking-[0.2em] text-white/40 uppercase" style={{ fontFamily: "'JetBrains Mono', monospace" }}>ft MD</span>
+          <span
+            className="text-[13px] tracking-[0.25em] text-white/45 uppercase mt-1 block font-semibold"
+            style={{ fontFamily: "'JetBrains Mono', monospace" }}
+          >
+            ft MD
+          </span>
         </div>
 
         {/* Vertical track */}
@@ -50,8 +66,8 @@ export default function DepthIndicator() {
             style={{
               left: "50%",
               transform: "translateX(-50%)",
-              width: "1px",
-              background: "rgba(255,255,255,0.06)",
+              width: "2px",
+              background: "linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.04) 100%)",
             }}
           />
 
@@ -62,16 +78,35 @@ export default function DepthIndicator() {
               <div
                 key={f.label}
                 className="absolute flex flex-col items-center"
-                style={{ top: `${f.pct}%`, left: 0, right: 0, transform: "translateY(-50%)" }}
+                style={{
+                  top: `${f.pct}%`,
+                  left: 0,
+                  right: 0,
+                  transform: "translateY(-50%)",
+                  transition: "all 0.4s ease",
+                }}
               >
+                {/* Horizontal tick mark */}
+                <div
+                  style={{
+                    width: isActive ? "28px" : "18px",
+                    height: "2px",
+                    background: isActive ? f.color : "rgba(255,255,255,0.12)",
+                    borderRadius: "1px",
+                    transition: "all 0.4s ease",
+                    marginBottom: "5px",
+                    boxShadow: isActive ? `0 0 8px ${f.color}40` : "none",
+                  }}
+                />
                 {/* Icon */}
                 <div
                   style={{
-                    fontSize: "15px",
-                    color: isActive ? f.color : "rgba(255,255,255,0.25)",
-                    transition: "color 0.4s",
+                    fontSize: "20px",
+                    color: isActive ? f.color : "rgba(255,255,255,0.2)",
+                    transition: "all 0.4s ease",
                     lineHeight: 1,
                     fontWeight: "bold",
+                    textShadow: isActive ? `0 0 10px ${f.color}60` : "none",
                   }}
                 >
                   {f.icon}
@@ -79,15 +114,16 @@ export default function DepthIndicator() {
                 {/* Formation name */}
                 <div
                   style={{
-                    fontSize: "11px",
-                    fontWeight: isActive ? 700 : 600,
-                    color: isActive ? f.color : "rgba(255,255,255,0.22)",
-                    transition: "color 0.4s",
-                    letterSpacing: "0.08em",
-                    marginTop: "3px",
+                    fontSize: "13px",
+                    fontWeight: isActive ? 800 : 600,
+                    color: isActive ? f.color : "rgba(255,255,255,0.2)",
+                    transition: "all 0.4s ease",
+                    letterSpacing: "0.1em",
+                    marginTop: "4px",
                     fontFamily: "'JetBrains Mono', monospace",
                     textAlign: "center",
-                    lineHeight: 1.25,
+                    lineHeight: 1.3,
+                    textShadow: isActive ? `0 0 12px ${f.color}40` : "none",
                   }}
                 >
                   {f.label}
@@ -96,32 +132,47 @@ export default function DepthIndicator() {
             );
           })}
 
-          {/* Current position dot — travels the track */}
+          {/* Current position dot */}
           <div
-            className="absolute transition-all duration-150"
+            className="absolute transition-all duration-200"
             style={{
               left: "50%",
               transform: "translateX(-50%)",
-              top: `calc(${scrollProgress * 100}% - 5px)`,
-              width: "10px",
-              height: "10px",
+              top: `calc(${scrollProgress * 100}% - 7px)`,
+              width: "14px",
+              height: "14px",
               borderRadius: "50%",
               background: "hsl(var(--brand))",
-              boxShadow: "0 0 8px 2px hsl(var(--brand) / 0.6), 0 0 16px 5px hsl(var(--brand) / 0.2)",
+              boxShadow: "0 0 10px 3px hsl(var(--brand) / 0.6), 0 0 24px 8px hsl(var(--brand) / 0.2)",
+              border: "2px solid rgba(255,255,255,0.3)",
               zIndex: 2,
             }}
           />
         </div>
 
         {/* Current zone label at bottom */}
-        <div className="mt-5 px-1 text-center">
+        <div
+          className="mt-6 px-3 py-3 text-center rounded-xl"
+          style={{
+            background: "rgba(255,255,255,0.03)",
+            border: "1px solid rgba(255,255,255,0.06)",
+            width: "110px",
+          }}
+        >
           <div
-            className="text-[13px] font-bold tracking-[0.1em] uppercase leading-tight"
-            style={{ color: formations[activeIdx].color, fontFamily: "'JetBrains Mono', monospace" }}
+            className="text-[15px] font-extrabold tracking-[0.12em] uppercase leading-tight"
+            style={{
+              color: formations[activeIdx].color,
+              fontFamily: "'JetBrains Mono', monospace",
+              textShadow: `0 0 12px ${formations[activeIdx].color}50`,
+            }}
           >
             {formations[activeIdx].icon} {formations[activeIdx].label}
           </div>
-          <div className="text-[11px] text-white/35 mt-1" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+          <div
+            className="text-[13px] text-white/40 mt-1.5 font-semibold"
+            style={{ fontFamily: "'JetBrains Mono', monospace" }}
+          >
             {formations[activeIdx].depth.toLocaleString()}′
           </div>
         </div>
@@ -129,26 +180,38 @@ export default function DepthIndicator() {
 
       {/* ── Mobile top bar ── */}
       <div
-        className="fixed top-14 left-0 right-0 z-40 flex items-center gap-3 px-4 py-2.5 lg:hidden"
+        className="fixed top-14 left-0 right-0 z-40 flex items-center gap-4 px-5 py-3 lg:hidden"
         style={{
-          background: "rgba(5,8,12,0.92)",
-          backdropFilter: "blur(12px)",
-          borderBottom: "1px solid rgba(255,255,255,0.04)",
+          background: "rgba(5,8,12,0.94)",
+          backdropFilter: "blur(16px)",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
+          boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
         }}
       >
         <span
-          className="text-base font-bold"
+          className="text-lg font-extrabold tabular-nums"
           style={{ color: "hsl(var(--brand))", fontFamily: "'JetBrains Mono', monospace" }}
         >
           {depth}ft
         </span>
-        <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
+        <div className="flex-1 h-2.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.08)" }}>
           <div
-            className="h-full rounded-full transition-all duration-150"
-            style={{ width: `${scrollProgress * 100}%`, background: "hsl(var(--brand))" }}
+            className="h-full rounded-full transition-all duration-200"
+            style={{
+              width: `${scrollProgress * 100}%`,
+              background: "linear-gradient(90deg, hsl(var(--brand)), hsl(var(--brand) / 0.7))",
+              boxShadow: "0 0 8px hsl(var(--brand) / 0.4)",
+            }}
           />
         </div>
-        <span className="text-sm font-bold" style={{ color: formations[activeIdx].color, fontFamily: "'JetBrains Mono', monospace" }}>
+        <span
+          className="text-base font-bold tracking-wide"
+          style={{
+            color: formations[activeIdx].color,
+            fontFamily: "'JetBrains Mono', monospace",
+            textShadow: `0 0 8px ${formations[activeIdx].color}40`,
+          }}
+        >
           {formations[activeIdx].label}
         </span>
       </div>
