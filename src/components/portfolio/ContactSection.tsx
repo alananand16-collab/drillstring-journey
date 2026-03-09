@@ -3,28 +3,18 @@ import { contactInfo } from "@/data/portfolioData";
 import { Mail, Linkedin, Download } from "lucide-react";
 import SectionBackground from "./SectionBackground";
 
+const FONT_DISPLAY = "'Outfit', sans-serif";
+const FONT_MONO = "'JetBrains Mono', monospace";
+
 export default function ContactSection() {
   return (
-    <section id="contact" className="relative px-4 py-24 lg:py-32">
+    <section id="contact" className="relative px-4 py-28 lg:py-36">
       <SectionBackground imagePath="/images/deep-earth-glow.avif" overlayOpacity={[0.65, 0.60]} />
 
-      {/* Bottom hole — deep warm geothermal glow */}
+      {/* Bottom hole glow */}
       <div className="absolute inset-0 pointer-events-none z-[3]">
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "radial-gradient(ellipse 80% 60% at 50% 100%, rgba(100,50,5,0.12) 0%, transparent 65%)",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "radial-gradient(ellipse 50% 30% at 50% 120%, rgba(60,20,0,0.15) 0%, transparent 70%)",
-          }}
-        />
-        {/* Rising heat shimmer particles */}
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 50% 100%, rgba(100,50,5,0.12) 0%, transparent 65%)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 50% 30% at 50% 120%, rgba(60,20,0,0.15) 0%, transparent 70%)" }} />
         {Array.from({ length: 12 }).map((_, i) => (
           <div
             key={i}
@@ -41,7 +31,7 @@ export default function ContactSection() {
         ))}
       </div>
 
-      {/* Dark gradient behind text for readability over particles */}
+      {/* Readability overlay */}
       <div
         className="absolute inset-0 z-[5] pointer-events-none"
         style={{
@@ -55,13 +45,42 @@ export default function ContactSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <div className="mb-3 flex items-center justify-center gap-3 text-[10px] tracking-[0.2em] uppercase text-white/25">
+          <div
+            className="mb-4 flex items-center justify-center gap-3"
+            style={{
+              fontFamily: FONT_MONO,
+              fontSize: "11px",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.2)",
+            }}
+          >
             <span style={{ color: "hsl(var(--brand))" }}>14,000 FT</span>
-            <span className="h-px w-6 bg-white/10" />
+            <span className="h-px w-8 bg-white/10" />
             <span>Bottom Hole</span>
           </div>
-          <h2 className="text-3xl font-bold text-white md:text-4xl mb-3">Let's Connect</h2>
-          <p className="text-sm text-white/40 max-w-md mx-auto mb-10">
+          <h2
+            className="mb-4"
+            style={{
+              fontFamily: FONT_DISPLAY,
+              fontWeight: 700,
+              fontSize: "clamp(2rem, 4vw, 2.75rem)",
+              color: "white",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Let's Connect
+          </h2>
+          <p
+            className="max-w-md mx-auto mb-12"
+            style={{
+              fontFamily: FONT_DISPLAY,
+              fontWeight: 300,
+              fontSize: "15px",
+              color: "rgba(255,255,255,0.38)",
+              lineHeight: 1.7,
+            }}
+          >
             Total depth reached. Open to opportunities in data engineering, subsurface analytics, and AI-driven energy solutions.
           </p>
         </motion.div>
@@ -71,16 +90,19 @@ export default function ContactSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="flex flex-wrap items-center justify-center gap-3"
+          className="flex flex-wrap items-center justify-center gap-4"
         >
           <a
             href={`mailto:${contactInfo.email}`}
-            className="flex items-center gap-2 rounded-lg px-5 py-2.5 text-xs font-medium transition-all duration-300"
+            className="flex items-center gap-2.5 rounded-xl px-6 py-3 transition-all duration-300"
             style={{
+              fontFamily: FONT_DISPLAY,
+              fontWeight: 400,
+              fontSize: "14px",
               background: "rgba(255,255,255,0.03)",
-              backdropFilter: "blur(10px)",
+              backdropFilter: "blur(12px)",
               border: "1px solid rgba(255,255,255,0.08)",
-              color: "rgba(255,255,255,0.6)",
+              color: "rgba(255,255,255,0.55)",
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.borderColor = "hsl(var(--brand) / 0.3)";
@@ -88,10 +110,10 @@ export default function ContactSection() {
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
-              e.currentTarget.style.color = "rgba(255,255,255,0.6)";
+              e.currentTarget.style.color = "rgba(255,255,255,0.55)";
             }}
           >
-            <Mail className="h-3.5 w-3.5" />
+            <Mail className="h-4 w-4" />
             {contactInfo.email}
           </a>
 
@@ -99,12 +121,15 @@ export default function ContactSection() {
             href={contactInfo.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 rounded-lg px-5 py-2.5 text-xs font-medium transition-all duration-300"
+            className="flex items-center gap-2.5 rounded-xl px-6 py-3 transition-all duration-300"
             style={{
+              fontFamily: FONT_DISPLAY,
+              fontWeight: 400,
+              fontSize: "14px",
               background: "rgba(255,255,255,0.03)",
-              backdropFilter: "blur(10px)",
+              backdropFilter: "blur(12px)",
               border: "1px solid rgba(255,255,255,0.08)",
-              color: "rgba(255,255,255,0.6)",
+              color: "rgba(255,255,255,0.55)",
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.borderColor = "hsl(var(--brand) / 0.3)";
@@ -112,40 +137,51 @@ export default function ContactSection() {
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
-              e.currentTarget.style.color = "rgba(255,255,255,0.6)";
+              e.currentTarget.style.color = "rgba(255,255,255,0.55)";
             }}
           >
-            <Linkedin className="h-3.5 w-3.5" />
+            <Linkedin className="h-4 w-4" />
             LinkedIn
           </a>
 
-          {/* Download Resume — prominent "bail out" at bottom */}
           <a
             href="/resume.pdf"
             download
-            className="flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300"
+            className="flex items-center gap-2.5 rounded-xl px-7 py-3.5 transition-all duration-300"
             style={{
-              background: "hsl(var(--brand) / 0.2)",
-              backdropFilter: "blur(10px)",
-              border: "1px solid hsl(var(--brand) / 0.4)",
+              fontFamily: FONT_DISPLAY,
+              fontWeight: 600,
+              fontSize: "15px",
+              background: "hsl(var(--brand) / 0.18)",
+              backdropFilter: "blur(12px)",
+              border: "1px solid hsl(var(--brand) / 0.35)",
               color: "hsl(var(--brand))",
-              boxShadow: "0 0 20px hsl(var(--brand) / 0.1)",
+              boxShadow: "0 0 24px hsl(var(--brand) / 0.1)",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "hsl(var(--brand) / 0.35)";
-              e.currentTarget.style.boxShadow = "0 0 30px hsl(var(--brand) / 0.2)";
+              e.currentTarget.style.background = "hsl(var(--brand) / 0.3)";
+              e.currentTarget.style.boxShadow = "0 0 36px hsl(var(--brand) / 0.2)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = "hsl(var(--brand) / 0.2)";
-              e.currentTarget.style.boxShadow = "0 0 20px hsl(var(--brand) / 0.1)";
+              e.currentTarget.style.background = "hsl(var(--brand) / 0.18)";
+              e.currentTarget.style.boxShadow = "0 0 24px hsl(var(--brand) / 0.1)";
             }}
           >
-            <Download className="h-4 w-4" />
-            Download Resume (PDF)
+            <Download className="h-4.5 w-4.5" />
+            Download Resume
           </a>
         </motion.div>
 
-        <div className="mt-16 text-[10px] text-white/15">
+        <div
+          className="mt-20"
+          style={{
+            fontFamily: FONT_DISPLAY,
+            fontWeight: 300,
+            fontSize: "11px",
+            color: "rgba(255,255,255,0.12)",
+            letterSpacing: "0.15em",
+          }}
+        >
           © 2026 Alan Anand. All rights reserved.
         </div>
       </div>

@@ -25,59 +25,77 @@ export default function Navbar() {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-[60] transition-all duration-300"
+      className="fixed top-0 left-0 right-0 z-[60] transition-all duration-500"
       style={{
-        background: scrolled ? "rgba(8,10,15,0.92)" : "transparent",
-        backdropFilter: scrolled ? "blur(16px)" : "none",
+        background: scrolled ? "rgba(8,10,18,0.92)" : "transparent",
+        backdropFilter: scrolled ? "blur(20px)" : "none",
         borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "none",
       }}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <a href="#hero" onClick={(e) => handleClick(e, "#hero")} className="flex items-center gap-2">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-5">
+        <a href="#hero" onClick={(e) => handleClick(e, "#hero")} className="flex items-center gap-3">
           <div
-            className="flex h-8 w-8 items-center justify-center rounded-md font-bold text-sm"
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-sm"
             style={{
               background: "hsl(var(--brand))",
               color: "white",
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 700,
+              letterSpacing: "-0.02em",
             }}
           >
             AA
           </div>
-          <span className="text-sm font-medium text-white/50 hidden sm:inline">ALAN ANAND</span>
+          <span
+            className="hidden sm:inline text-sm tracking-[0.2em] uppercase"
+            style={{
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 500,
+              color: "rgba(255,255,255,0.45)",
+            }}
+          >
+            Alan Anand
+          </span>
         </a>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={(e) => handleClick(e, link.href)}
-              className="text-xs font-medium tracking-[0.15em] uppercase text-white/50 transition-colors hover:text-white"
+              className="text-[13px] tracking-[0.18em] uppercase transition-colors hover:text-white"
+              style={{
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: 400,
+                color: "rgba(255,255,255,0.4)",
+              }}
             >
               {link.label}
             </a>
           ))}
 
-          {/* Download Resume — always visible "bail out" button */}
           <a
             href="/resume.pdf"
             download
-            className="flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[10px] font-semibold tracking-[0.15em] uppercase transition-all duration-300"
+            className="flex items-center gap-2 rounded-full px-5 py-2 text-[11px] tracking-[0.18em] uppercase transition-all duration-300"
             style={{
-              background: "hsl(var(--brand) / 0.15)",
-              border: "1px solid hsl(var(--brand) / 0.3)",
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 600,
+              background: "hsl(var(--brand) / 0.12)",
+              border: "1px solid hsl(var(--brand) / 0.25)",
               color: "hsl(var(--brand))",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "hsl(var(--brand) / 0.3)";
-              e.currentTarget.style.borderColor = "hsl(var(--brand) / 0.5)";
+              e.currentTarget.style.background = "hsl(var(--brand) / 0.25)";
+              e.currentTarget.style.borderColor = "hsl(var(--brand) / 0.45)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = "hsl(var(--brand) / 0.15)";
-              e.currentTarget.style.borderColor = "hsl(var(--brand) / 0.3)";
+              e.currentTarget.style.background = "hsl(var(--brand) / 0.12)";
+              e.currentTarget.style.borderColor = "hsl(var(--brand) / 0.25)";
             }}
           >
-            <Download className="h-3 w-3" />
+            <Download className="h-3.5 w-3.5" />
             Resume
           </a>
         </div>
@@ -86,14 +104,16 @@ export default function Navbar() {
         <a
           href="/resume.pdf"
           download
-          className="flex md:hidden items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] font-semibold tracking-[0.1em] uppercase"
+          className="flex md:hidden items-center gap-1.5 rounded-full px-4 py-2 text-[11px] tracking-[0.12em] uppercase"
           style={{
-            background: "hsl(var(--brand) / 0.15)",
-            border: "1px solid hsl(var(--brand) / 0.3)",
+            fontFamily: "'Outfit', sans-serif",
+            fontWeight: 600,
+            background: "hsl(var(--brand) / 0.12)",
+            border: "1px solid hsl(var(--brand) / 0.25)",
             color: "hsl(var(--brand))",
           }}
         >
-          <Download className="h-3 w-3" />
+          <Download className="h-3.5 w-3.5" />
           Resume
         </a>
       </div>
