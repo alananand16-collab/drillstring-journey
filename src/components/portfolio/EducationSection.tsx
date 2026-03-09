@@ -3,13 +3,30 @@ import { education } from "@/data/portfolioData";
 
 export default function EducationSection() {
   return (
-    <section
-      id="education"
-      className="grain-overlay relative px-4 py-24 lg:py-32"
-      style={{
-        background: "linear-gradient(180deg, #0a0c10 0%, #0c0e14 50%, #080a0f 100%)",
-      }}
-    >
+    <section id="education" className="relative px-4 py-24 lg:py-32">
+      {/* Completion zone — steel-grey casing feel */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Vertical pipe casing lines */}
+        {[20, 35, 50, 65, 80].map((x, i) => (
+          <div
+            key={i}
+            className="absolute top-0 bottom-0"
+            style={{
+              left: `${x}%`,
+              width: "1px",
+              background: `rgba(80,90,100,${0.02 + (i % 2) * 0.01})`,
+            }}
+          />
+        ))}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "radial-gradient(ellipse 70% 40% at 30% 50%, rgba(20,30,45,0.06) 0%, transparent 70%)",
+          }}
+        />
+      </div>
+
       <div className="relative z-10 mx-auto max-w-4xl lg:ml-24 lg:mr-auto lg:max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -18,7 +35,7 @@ export default function EducationSection() {
           className="mb-10"
         >
           <div className="mb-3 flex items-center gap-3 text-[10px] tracking-[0.2em] uppercase text-white/25">
-            <span style={{ color: "hsl(var(--brand))" }}>10,000</span>
+            <span style={{ color: "hsl(var(--brand))" }}>10,000 FT</span>
             <span className="h-px w-6 bg-white/10" />
             <span>Completion Zone</span>
           </div>
@@ -38,14 +55,18 @@ export default function EducationSection() {
               transition={{ delay: i * 0.15 }}
               className="rounded-xl p-5 transition-all duration-300"
               style={{
-                background: "rgba(255,255,255,0.02)",
-                border: "1px solid rgba(255,255,255,0.05)",
+                background: "rgba(255,255,255,0.025)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255,255,255,0.055)",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "hsl(var(--brand) / 0.2)";
+                e.currentTarget.style.boxShadow = "0 0 24px rgba(0,100,200,0.06)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.05)";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.055)";
+                e.currentTarget.style.boxShadow = "0 4px 20px rgba(0,0,0,0.3)";
               }}
             >
               <div className="flex items-start gap-3 mb-3">
@@ -74,7 +95,10 @@ export default function EducationSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#080a0f] z-[4] pointer-events-none" />
+      <div
+        className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none z-[4]"
+        style={{ background: "linear-gradient(to bottom, transparent, rgba(6,8,12,0.6) 70%, rgba(5,7,10,0.95) 100%)" }}
+      />
     </section>
   );
 }

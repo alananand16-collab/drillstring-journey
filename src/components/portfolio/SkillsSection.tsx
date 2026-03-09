@@ -18,13 +18,33 @@ const iconMap: Record<string, React.ReactNode> = {
 
 export default function SkillsSection() {
   return (
-    <section
-      id="skills"
-      className="grain-overlay relative px-4 py-24 lg:py-32"
-      style={{
-        background: "linear-gradient(180deg, #10121a 0%, #12141e 50%, #0e1018 100%)",
-      }}
-    >
+    <section id="skills" className="relative px-4 py-24 lg:py-32">
+      {/* Reservoir zone — warm amber porosity glow from below */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "radial-gradient(ellipse 90% 50% at 50% 100%, rgba(140,90,10,0.10) 0%, transparent 65%)",
+          }}
+        />
+        {/* Porosity dots — tiny pinpoints of light */}
+        {Array.from({ length: 40 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: "1.5px",
+              height: "1.5px",
+              background: `rgba(200,150,40,${0.15 + Math.random() * 0.2})`,
+              animation: `float-particle ${8 + Math.random() * 12}s ${Math.random() * 8}s infinite ease-in-out`,
+            }}
+          />
+        ))}
+      </div>
+
       <div className="relative z-10 mx-auto max-w-4xl lg:ml-24 lg:mr-auto lg:max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -33,13 +53,13 @@ export default function SkillsSection() {
           className="mb-10"
         >
           <div className="mb-3 flex items-center gap-3 text-[10px] tracking-[0.2em] uppercase text-white/25">
-            <span style={{ color: "hsl(var(--brand))" }}>5,000</span>
+            <span style={{ color: "hsl(var(--brand))" }}>5,000 FT</span>
             <span className="h-px w-6 bg-white/10" />
-            <span>Perforation Zone</span>
+            <span>Reservoir Zone</span>
           </div>
           <h2 className="text-3xl font-bold text-white md:text-4xl">Technical Arsenal</h2>
           <p className="mt-2 text-sm text-white/40 max-w-lg">
-            Perforating through formation barriers — tools and technologies that I wield like a downhole.
+            Perforating through formation barriers — tools and technologies that power the workflow.
           </p>
         </motion.div>
 
@@ -53,24 +73,25 @@ export default function SkillsSection() {
               transition={{ delay: i * 0.08 }}
               className="group rounded-xl p-4 text-center transition-all duration-300"
               style={{
-                background: "rgba(255,255,255,0.02)",
-                border: "1px solid rgba(255,255,255,0.05)",
+                background: "rgba(255,255,255,0.025)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255,255,255,0.055)",
+                boxShadow: "0 4px 16px rgba(0,0,0,0.25)",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "hsl(var(--brand) / 0.3)";
-                e.currentTarget.style.boxShadow = "0 0 25px rgba(0,100,200,0.08), inset 0 0 20px rgba(0,100,200,0.03)";
+                e.currentTarget.style.boxShadow = "0 0 28px rgba(0,100,200,0.10), inset 0 0 20px rgba(0,100,200,0.04)";
+                e.currentTarget.style.background = "rgba(255,255,255,0.04)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.05)";
-                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.055)";
+                e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.25)";
+                e.currentTarget.style.background = "rgba(255,255,255,0.025)";
               }}
             >
               <div
                 className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg transition-all duration-300"
-                style={{
-                  background: "rgba(255,255,255,0.03)",
-                  color: "hsl(var(--brand))",
-                }}
+                style={{ background: "rgba(255,255,255,0.03)", color: "hsl(var(--brand))" }}
               >
                 {iconMap[cat.icon] || <Terminal className="h-5 w-5" />}
               </div>
@@ -85,7 +106,10 @@ export default function SkillsSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#100e14] z-[4] pointer-events-none" />
+      <div
+        className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none z-[4]"
+        style={{ background: "linear-gradient(to bottom, transparent, rgba(18,12,2,0.6) 70%, rgba(22,14,2,0.9) 100%)" }}
+      />
     </section>
   );
 }
