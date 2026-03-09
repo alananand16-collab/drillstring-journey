@@ -35,11 +35,11 @@ export default function DepthIndicator() {
         <div className="mb-5 text-center">
           <span
             className="block text-xl font-bold tabular-nums"
-            style={{ color: "hsl(var(--brand))", animation: "text-glow 3s ease-in-out infinite", fontFamily: "'Inter', system-ui, sans-serif" }}
+            style={{ color: "hsl(var(--brand))", animation: "text-glow 3s ease-in-out infinite", fontFamily: "'JetBrains Mono', monospace" }}
           >
             {depth}
           </span>
-          <span className="text-[12px] tracking-[0.2em] text-white/40 uppercase" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>ft MD</span>
+          <span className="text-[12px] tracking-[0.2em] text-white/40 uppercase" style={{ fontFamily: "'JetBrains Mono', monospace" }}>ft MD</span>
         </div>
 
         {/* Vertical track */}
@@ -85,7 +85,7 @@ export default function DepthIndicator() {
                     transition: "color 0.4s",
                     letterSpacing: "0.08em",
                     marginTop: "3px",
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontFamily: "'JetBrains Mono', monospace",
                     textAlign: "center",
                     lineHeight: 1.25,
                   }}
@@ -117,11 +117,11 @@ export default function DepthIndicator() {
         <div className="mt-5 px-1 text-center">
           <div
             className="text-[13px] font-bold tracking-[0.1em] uppercase leading-tight"
-            style={{ color: formations[activeIdx].color, fontFamily: "'Inter', system-ui, sans-serif" }}
+            style={{ color: formations[activeIdx].color, fontFamily: "'JetBrains Mono', monospace" }}
           >
             {formations[activeIdx].icon} {formations[activeIdx].label}
           </div>
-          <div className="text-[11px] text-white/35 mt-1" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
+          <div className="text-[11px] text-white/35 mt-1" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
             {formations[activeIdx].depth.toLocaleString()}′
           </div>
         </div>
@@ -138,7 +138,7 @@ export default function DepthIndicator() {
       >
         <span
           className="text-base font-bold"
-          style={{ color: "hsl(var(--brand))", fontFamily: "'Inter', system-ui, sans-serif" }}
+          style={{ color: "hsl(var(--brand))", fontFamily: "'JetBrains Mono', monospace" }}
         >
           {depth}ft
         </span>
@@ -148,7 +148,7 @@ export default function DepthIndicator() {
             style={{ width: `${scrollProgress * 100}%`, background: "hsl(var(--brand))" }}
           />
         </div>
-        <span className="text-sm font-bold" style={{ color: formations[activeIdx].color, fontFamily: "'Inter', system-ui, sans-serif" }}>
+        <span className="text-sm font-bold" style={{ color: formations[activeIdx].color, fontFamily: "'JetBrains Mono', monospace" }}>
           {formations[activeIdx].label}
         </span>
       </div>

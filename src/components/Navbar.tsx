@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Download } from "lucide-react";
 
 const navLinks = [
   { label: "Experience", href: "#experience" },
@@ -56,7 +57,45 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+
+          {/* Download Resume — always visible "bail out" button */}
+          <a
+            href="/resume.pdf"
+            download
+            className="flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[10px] font-semibold tracking-[0.15em] uppercase transition-all duration-300"
+            style={{
+              background: "hsl(var(--brand) / 0.15)",
+              border: "1px solid hsl(var(--brand) / 0.3)",
+              color: "hsl(var(--brand))",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "hsl(var(--brand) / 0.3)";
+              e.currentTarget.style.borderColor = "hsl(var(--brand) / 0.5)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "hsl(var(--brand) / 0.15)";
+              e.currentTarget.style.borderColor = "hsl(var(--brand) / 0.3)";
+            }}
+          >
+            <Download className="h-3 w-3" />
+            Resume
+          </a>
         </div>
+
+        {/* Mobile resume button */}
+        <a
+          href="/resume.pdf"
+          download
+          className="flex md:hidden items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] font-semibold tracking-[0.1em] uppercase"
+          style={{
+            background: "hsl(var(--brand) / 0.15)",
+            border: "1px solid hsl(var(--brand) / 0.3)",
+            color: "hsl(var(--brand))",
+          }}
+        >
+          <Download className="h-3 w-3" />
+          Resume
+        </a>
       </div>
     </nav>
   );

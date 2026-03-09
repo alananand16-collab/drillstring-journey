@@ -41,6 +41,14 @@ export default function ContactSection() {
         ))}
       </div>
 
+      {/* Dark gradient behind text for readability over particles */}
+      <div
+        className="absolute inset-0 z-[5] pointer-events-none"
+        style={{
+          background: "linear-gradient(180deg, rgba(5,8,14,0.5) 0%, rgba(5,8,14,0.65) 40%, rgba(5,8,14,0.7) 100%)",
+        }}
+      />
+
       <div className="relative z-10 mx-auto max-w-4xl lg:ml-24 lg:mr-auto lg:max-w-5xl text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -111,20 +119,30 @@ export default function ContactSection() {
             LinkedIn
           </a>
 
-          <button
-            className="flex items-center gap-2 rounded-lg px-5 py-2.5 text-xs font-medium transition-all duration-300"
+          {/* Download Resume — prominent "bail out" at bottom */}
+          <a
+            href="/resume.pdf"
+            download
+            className="flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300"
             style={{
-              background: "hsl(var(--brand) / 0.15)",
+              background: "hsl(var(--brand) / 0.2)",
               backdropFilter: "blur(10px)",
-              border: "1px solid hsl(var(--brand) / 0.3)",
+              border: "1px solid hsl(var(--brand) / 0.4)",
               color: "hsl(var(--brand))",
+              boxShadow: "0 0 20px hsl(var(--brand) / 0.1)",
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = "hsl(var(--brand) / 0.25)"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = "hsl(var(--brand) / 0.15)"; }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "hsl(var(--brand) / 0.35)";
+              e.currentTarget.style.boxShadow = "0 0 30px hsl(var(--brand) / 0.2)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "hsl(var(--brand) / 0.2)";
+              e.currentTarget.style.boxShadow = "0 0 20px hsl(var(--brand) / 0.1)";
+            }}
           >
-            <Download className="h-3.5 w-3.5" />
-            Download Resume
-          </button>
+            <Download className="h-4 w-4" />
+            Download Resume (PDF)
+          </a>
         </motion.div>
 
         <div className="mt-16 text-[10px] text-white/15">

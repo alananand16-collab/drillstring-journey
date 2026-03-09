@@ -42,7 +42,8 @@ const Index = () => {
       <WellboreSidebar />
 
       {/* ── MAIN CONTENT ── */}
-      <main className="relative z-10 lg:ml-24">
+      {/* Desktop: ml-24 for sidebar. Mobile: ml-7 to clear the drill string */}
+      <main className="relative z-10 ml-7 lg:ml-24">
 
         {/* HERO */}
         <HeroSection />

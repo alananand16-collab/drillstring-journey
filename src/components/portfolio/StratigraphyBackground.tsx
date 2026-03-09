@@ -1,18 +1,20 @@
 /**
- * StratigraphyBackground — Full-page geological cross-section.
+ * StratigraphyBackground — Full-page geological cross-section with parallax.
  * 11 distinct earth-tone layers with CSS textures, formation labels,
  * pore-space overlays for water and oil zones.
  */
 import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 interface Layer {
   name: string;
-  startPct: number; // 0-100 % of total page height
+  startPct: number;
   endPct: number;
-  bg: string;           // CSS background color
-  texture: string;      // CSS background-image pattern
+  bg: string;
+  texture: string;
   labelColor: string;
   borderColor: string;
+  parallaxSpeed: number; // 0 = no parallax, negative = slower scroll
 }
 
 const LAYERS: Layer[] = [
@@ -25,6 +27,7 @@ const LAYERS: Layer[] = [
               repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,0.01) 60px, rgba(255,255,255,0.01) 61px)`,
     labelColor: "hsl(25,40%,55%)",
     borderColor: "rgba(180,120,60,0.2)",
+    parallaxSpeed: -0.05,
   },
   {
     name: "GLACIAL TILL",
@@ -36,6 +39,7 @@ const LAYERS: Layer[] = [
               repeating-linear-gradient(175deg, transparent, transparent 25px, rgba(255,255,255,0.015) 25px, rgba(255,255,255,0.015) 26px)`,
     labelColor: "hsl(220,20%,50%)",
     borderColor: "rgba(100,120,160,0.15)",
+    parallaxSpeed: -0.08,
   },
   {
     name: "SHALE CAP",
@@ -46,6 +50,7 @@ const LAYERS: Layer[] = [
               repeating-linear-gradient(1deg, transparent, transparent 14px, rgba(255,255,255,0.015) 14px, rgba(255,255,255,0.015) 15px)`,
     labelColor: "hsl(215,12%,50%)",
     borderColor: "rgba(80,100,140,0.2)",
+    parallaxSpeed: -0.1,
   },
   {
     name: "SANDSTONE",
@@ -59,6 +64,7 @@ const LAYERS: Layer[] = [
               radial-gradient(circle 1.5px at 80% 80%, rgba(200,160,80,0.05) 0%, transparent 100%)`,
     labelColor: "hsl(32,55%,55%)",
     borderColor: "rgba(200,150,60,0.18)",
+    parallaxSpeed: -0.12,
   },
   {
     name: "WATER-BEARING SAND",
@@ -69,6 +75,7 @@ const LAYERS: Layer[] = [
               repeating-linear-gradient(0deg, transparent, transparent 10px, rgba(60,120,200,0.025) 10px, rgba(60,120,200,0.025) 11px)`,
     labelColor: "hsl(205,70%,60%)",
     borderColor: "rgba(60,140,220,0.2)",
+    parallaxSpeed: -0.14,
   },
   {
     name: "LIMESTONE",
@@ -79,6 +86,7 @@ const LAYERS: Layer[] = [
               repeating-linear-gradient(88deg, transparent, transparent 40px, rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 41px)`,
     labelColor: "hsl(30,20%,50%)",
     borderColor: "rgba(160,140,100,0.15)",
+    parallaxSpeed: -0.16,
   },
   {
     name: "OIL-BEARING SANDSTONE",
@@ -93,6 +101,7 @@ const LAYERS: Layer[] = [
               radial-gradient(ellipse 80% 50% at 50% 60%, rgba(120,60,10,0.06) 0%, transparent 100%)`,
     labelColor: "hsl(35,85%,55%)",
     borderColor: "rgba(180,100,20,0.25)",
+    parallaxSpeed: -0.18,
   },
   {
     name: "TIGHT SHALE",
@@ -103,6 +112,7 @@ const LAYERS: Layer[] = [
               repeating-linear-gradient(-1deg, transparent, transparent 9px, rgba(255,255,255,0.015) 9px, rgba(255,255,255,0.015) 10px)`,
     labelColor: "hsl(220,12%,45%)",
     borderColor: "rgba(80,90,120,0.2)",
+    parallaxSpeed: -0.2,
   },
   {
     name: "PERFORATED ZONE",
@@ -116,6 +126,7 @@ const LAYERS: Layer[] = [
               radial-gradient(circle 4px at 90% 60%, rgba(255,120,30,0.1) 0%, transparent 100%)`,
     labelColor: "hsl(28,92%,58%)",
     borderColor: "rgba(255,120,30,0.25)",
+    parallaxSpeed: -0.22,
   },
   {
     name: "RESERVOIR ROCK",
@@ -128,6 +139,7 @@ const LAYERS: Layer[] = [
               repeating-linear-gradient(0deg, transparent, transparent 16px, rgba(0,180,140,0.02) 16px, rgba(0,180,140,0.02) 17px)`,
     labelColor: "hsl(175,60%,48%)",
     borderColor: "rgba(0,180,140,0.2)",
+    parallaxSpeed: -0.24,
   },
   {
     name: "BASEMENT ROCK",
@@ -139,10 +151,11 @@ const LAYERS: Layer[] = [
               radial-gradient(ellipse 80% 80% at 50% 100%, rgba(255,80,20,0.05) 0%, transparent 100%)`,
     labelColor: "hsl(220,12%,35%)",
     borderColor: "rgba(60,60,80,0.2)",
+    parallaxSpeed: -0.26,
   },
 ];
 
-/* Water pore spaces — 40 small circles with water-blue borders */
+/* Water pore spaces */
 const waterPores = Array.from({ length: 40 }, (_, i) => ({
   id: i,
   left: 5 + Math.random() * 88,
@@ -151,7 +164,7 @@ const waterPores = Array.from({ length: 40 }, (_, i) => ({
   delay: Math.random() * 3,
 }));
 
-/* Oil pore spaces — 50 filled amber/brown circles */
+/* Oil pore spaces */
 const oilPores = Array.from({ length: 50 }, (_, i) => ({
   id: i,
   left: 5 + Math.random() * 88,
@@ -160,6 +173,136 @@ const oilPores = Array.from({ length: 50 }, (_, i) => ({
   delay: Math.random() * 4,
   dark: Math.random() > 0.5,
 }));
+
+function ParallaxLayer({ layer, idx }: { layer: Layer; idx: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 1], [0, layer.parallaxSpeed * 200]);
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: `${layer.startPct}%`,
+        height: `${layer.endPct - layer.startPct}%`,
+        background: layer.bg,
+        backgroundImage: layer.texture,
+        backgroundSize: idx === 3 || idx === 6 ? "200px 200px" : "auto",
+        y,
+        willChange: "transform",
+      }}
+    >
+      {/* Top boundary line */}
+      {idx > 0 && (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: "2px",
+            background: `linear-gradient(90deg, transparent 0%, ${layer.borderColor} 20%, ${layer.borderColor} 80%, transparent 100%)`,
+          }}
+        />
+      )}
+
+      {/* Gradient blend at bottom */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "80px",
+          background: `linear-gradient(to bottom, transparent, ${LAYERS[Math.min(idx + 1, LAYERS.length - 1)].bg}aa)`,
+        }}
+      />
+
+      {/* Formation label — right side */}
+      <div
+        style={{
+          position: "absolute",
+          right: "8px",
+          top: "12px",
+          fontSize: "8px",
+          fontFamily: "'JetBrains Mono', monospace",
+          fontWeight: "700",
+          letterSpacing: "0.18em",
+          color: layer.labelColor,
+          opacity: 0.55,
+          textTransform: "uppercase",
+          writingMode: "horizontal-tb",
+          maxWidth: "120px",
+          lineHeight: 1.3,
+        }}
+      >
+        {layer.name}
+      </div>
+
+      {/* Water pore overlay — layer 4 */}
+      {idx === 4 && (
+        <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+          {waterPores.map((p) => (
+            <div
+              key={p.id}
+              style={{
+                position: "absolute",
+                left: `${p.left}%`,
+                top: `${p.top}%`,
+                width: `${p.r * 2}px`,
+                height: `${p.r * 2}px`,
+                borderRadius: "50%",
+                border: `1px solid hsl(205,80%,60%,0.35)`,
+                background: "hsl(205,80%,60%,0.06)",
+                animation: `rise-bubble ${3 + p.delay}s ${p.delay}s ease-in-out infinite`,
+              }}
+            />
+          ))}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "radial-gradient(ellipse 80% 60% at 50% 80%, hsl(205,80%,60%,0.07) 0%, transparent 100%)",
+            }}
+          />
+        </div>
+      )}
+
+      {/* Oil pore overlay — layer 6 */}
+      {idx === 6 && (
+        <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+          {oilPores.map((p) => (
+            <div
+              key={p.id}
+              style={{
+                position: "absolute",
+                left: `${p.left}%`,
+                top: `${p.top}%`,
+                width: `${p.r * 2}px`,
+                height: `${p.r * 2}px`,
+                borderRadius: "50%",
+                background: p.dark
+                  ? "hsl(25,55%,35%,0.5)"
+                  : "hsl(35,92%,55%,0.25)",
+                animation: `float-particle-slow ${5 + p.delay}s ${p.delay}s ease-in-out infinite`,
+              }}
+            />
+          ))}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "radial-gradient(ellipse 70% 50% at 50% 70%, hsl(35,92%,55%,0.07) 0%, transparent 100%)",
+            }}
+          />
+        </div>
+      )}
+    </motion.div>
+  );
+}
 
 export default function StratigraphyBackground() {
   const pageRef = useRef<HTMLDivElement>(null);
@@ -171,127 +314,7 @@ export default function StratigraphyBackground() {
       style={{ zIndex: 0 }}
     >
       {LAYERS.map((layer, idx) => (
-        <div
-          key={layer.name}
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            top: `${layer.startPct}%`,
-            height: `${layer.endPct - layer.startPct}%`,
-            background: layer.bg,
-            backgroundImage: layer.texture,
-            backgroundSize: idx === 3 || idx === 6 ? "200px 200px" : "auto",
-          }}
-        >
-          {/* Top boundary line */}
-          {idx > 0 && (
-            <div
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                height: "2px",
-                background: `linear-gradient(90deg, transparent 0%, ${layer.borderColor} 20%, ${layer.borderColor} 80%, transparent 100%)`,
-              }}
-            />
-          )}
-
-          {/* Gradient blend at bottom */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: "80px",
-              background: `linear-gradient(to bottom, transparent, ${LAYERS[Math.min(idx + 1, LAYERS.length - 1)].bg}aa)`,
-            }}
-          />
-
-          {/* Formation label — right side */}
-          <div
-            style={{
-              position: "absolute",
-              right: "8px",
-              top: "12px",
-              fontSize: "8px",
-              fontFamily: "monospace",
-              fontWeight: "700",
-              letterSpacing: "0.18em",
-              color: layer.labelColor,
-              opacity: 0.55,
-              textTransform: "uppercase",
-              writingMode: "horizontal-tb",
-              maxWidth: "120px",
-              lineHeight: 1.3,
-            }}
-          >
-            {layer.name}
-          </div>
-
-          {/* Water pore overlay — layer 4 (water-bearing sand) */}
-          {idx === 4 && (
-            <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
-              {waterPores.map((p) => (
-                <div
-                  key={p.id}
-                  style={{
-                    position: "absolute",
-                    left: `${p.left}%`,
-                    top: `${p.top}%`,
-                    width: `${p.r * 2}px`,
-                    height: `${p.r * 2}px`,
-                    borderRadius: "50%",
-                    border: `1px solid hsl(205,80%,60%,0.35)`,
-                    background: "hsl(205,80%,60%,0.06)",
-                    animation: `rise-bubble ${3 + p.delay}s ${p.delay}s ease-in-out infinite`,
-                  }}
-                />
-              ))}
-              {/* Saturation gradient overlay */}
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "radial-gradient(ellipse 80% 60% at 50% 80%, hsl(205,80%,60%,0.07) 0%, transparent 100%)",
-                }}
-              />
-            </div>
-          )}
-
-          {/* Oil pore overlay — layer 6 (oil-bearing sandstone) */}
-          {idx === 6 && (
-            <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
-              {oilPores.map((p) => (
-                <div
-                  key={p.id}
-                  style={{
-                    position: "absolute",
-                    left: `${p.left}%`,
-                    top: `${p.top}%`,
-                    width: `${p.r * 2}px`,
-                    height: `${p.r * 2}px`,
-                    borderRadius: "50%",
-                    background: p.dark
-                      ? "hsl(25,55%,35%,0.5)"
-                      : "hsl(35,92%,55%,0.25)",
-                    animation: `float-particle-slow ${5 + p.delay}s ${p.delay}s ease-in-out infinite`,
-                  }}
-                />
-              ))}
-              {/* Oil glow */}
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "radial-gradient(ellipse 70% 50% at 50% 70%, hsl(35,92%,55%,0.07) 0%, transparent 100%)",
-                }}
-              />
-            </div>
-          )}
-        </div>
+        <ParallaxLayer key={layer.name} layer={layer} idx={idx} />
       ))}
 
       {/* Global wavy strata bedding lines across full page */}
