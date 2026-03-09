@@ -146,8 +146,8 @@ export default function HeroSection() {
             style={{
               fontFamily: FONT_DISPLAY,
               fontWeight: 300,
-              fontSize: "clamp(1rem, 2vw, 1.25rem)",
-              color: "rgba(255,255,255,0.55)",
+              fontSize: "clamp(1.05rem, 2.2vw, 1.35rem)",
+              color: "hsl(210,25%,72%)",
               letterSpacing: "0.02em",
             }}
           >
