@@ -4,11 +4,13 @@ import heroImg from "@/assets/hero-oil-rig.jpg";
 import portrait from "@/assets/alan-portrait.jpg";
 import { useRef } from "react";
 
+const FONT_DISPLAY = "'Outfit', sans-serif";
+const FONT_MONO = "'JetBrains Mono', monospace";
+
 export default function HeroSection() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
 
-  // Parallax: image moves up slower than scroll, fades out
   const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const imgOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
@@ -24,7 +26,7 @@ export default function HeroSection() {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* Parallax background image — sinks away as you scroll */}
+      {/* Parallax background image */}
       <motion.div
         className="absolute inset-0"
         style={{ y: imgY, opacity: imgOpacity }}
@@ -48,7 +50,6 @@ export default function HeroSection() {
             `,
           }}
         />
-        {/* Cool blue moonlight ambient */}
         <div
           className="absolute inset-0"
           style={{
@@ -73,7 +74,6 @@ export default function HeroSection() {
             }}
           />
         ))}
-        {/* Sparks */}
         {Array.from({ length: 8 }).map((_, i) => (
           <div
             key={`spark-${i}`}
@@ -91,10 +91,10 @@ export default function HeroSection() {
         ))}
       </div>
 
-      {/* Content — split layout: text left, portrait right */}
+      {/* Content — split layout */}
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
-        className="relative z-10 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 px-6 md:px-12 lg:px-20 mt-16 lg:mt-0 w-full max-w-7xl mx-auto"
+        className="relative z-10 flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20 px-6 md:px-12 lg:px-20 mt-16 lg:mt-0 w-full max-w-7xl mx-auto"
       >
         {/* Left: Text content */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left flex-1">
@@ -103,12 +103,19 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-6 flex items-center gap-3 text-[10px] tracking-[0.2em] uppercase text-white/30"
+            className="mb-8 flex items-center gap-3"
+            style={{
+              fontFamily: FONT_MONO,
+              fontSize: "11px",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.25)",
+            }}
           >
             <span>0 FT</span>
-            <span className="h-px w-8 bg-white/20" />
+            <span className="h-px w-10 bg-white/15" />
             <span>Surface Level</span>
-            <span className="h-px w-8 bg-white/20" />
+            <span className="h-px w-10 bg-white/15" />
             <span>Drill Zone</span>
           </motion.div>
 
@@ -116,7 +123,15 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.3 }}
-            className="mb-3 text-5xl font-bold text-white md:text-7xl lg:text-8xl tracking-tight leading-[0.95]"
+            className="mb-4"
+            style={{
+              fontFamily: FONT_DISPLAY,
+              fontWeight: 700,
+              fontSize: "clamp(3.5rem, 8vw, 6.5rem)",
+              lineHeight: 0.92,
+              letterSpacing: "-0.03em",
+              color: "white",
+            }}
           >
             Alan
             <br />
@@ -127,7 +142,14 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.45 }}
-            className="mb-4 text-base text-white/60 md:text-lg font-light"
+            className="mb-5"
+            style={{
+              fontFamily: FONT_DISPLAY,
+              fontWeight: 300,
+              fontSize: "clamp(1rem, 2vw, 1.25rem)",
+              color: "rgba(255,255,255,0.55)",
+              letterSpacing: "0.02em",
+            }}
           >
             Digital Subsurface &amp; Data Architect
           </motion.p>
@@ -136,13 +158,20 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.55 }}
-            className="mb-8 max-w-lg text-sm text-white/40 leading-relaxed"
+            className="mb-10 max-w-lg leading-relaxed"
+            style={{
+              fontFamily: FONT_DISPLAY,
+              fontWeight: 300,
+              fontSize: "15px",
+              color: "rgba(255,255,255,0.35)",
+              lineHeight: 1.8,
+            }}
           >
             M.Eng Petroleum Engineering candidate bridging subsurface geoscience
             with{" "}
-            <span style={{ color: "hsl(var(--brand))" }}>Python automation</span>,{" "}
-            <span style={{ color: "hsl(var(--brand))" }}>SQL architectures</span>, and{" "}
-            <span style={{ color: "hsl(var(--brand))" }}>AI workflows</span>.
+            <span style={{ color: "hsl(var(--brand))", fontWeight: 500 }}>Python automation</span>,{" "}
+            <span style={{ color: "hsl(var(--brand))", fontWeight: 500 }}>SQL architectures</span>, and{" "}
+            <span style={{ color: "hsl(var(--brand))", fontWeight: 500 }}>AI workflows</span>.
           </motion.p>
 
           {/* Stats */}
@@ -150,7 +179,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.65 }}
-            className="mb-10 flex gap-6 md:gap-10"
+            className="mb-12 flex gap-8 md:gap-12"
           >
             {[
               { value: "4+", label: "YRS EXP" },
@@ -159,12 +188,27 @@ export default function HeroSection() {
             ].map((stat) => (
               <div key={stat.label} className="text-center lg:text-left">
                 <div
-                  className="text-2xl md:text-3xl font-bold"
-                  style={{ color: "hsl(var(--brand))" }}
+                  style={{
+                    fontFamily: FONT_DISPLAY,
+                    fontWeight: 800,
+                    fontSize: "clamp(1.75rem, 3vw, 2.25rem)",
+                    color: "hsl(var(--brand))",
+                    letterSpacing: "-0.02em",
+                  }}
                 >
                   {stat.value}
                 </div>
-                <div className="text-[9px] tracking-[0.15em] text-white/30 uppercase mt-1">
+                <div
+                  style={{
+                    fontFamily: FONT_DISPLAY,
+                    fontWeight: 500,
+                    fontSize: "10px",
+                    letterSpacing: "0.2em",
+                    color: "rgba(255,255,255,0.25)",
+                    textTransform: "uppercase",
+                    marginTop: "4px",
+                  }}
+                >
                   {stat.label}
                 </div>
               </div>
@@ -180,17 +224,26 @@ export default function HeroSection() {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
             className="group flex flex-col items-center lg:items-start gap-2"
-            style={{ color: "rgba(255,255,255,0.45)" }}
           >
             <span
-              className="rounded-full border px-5 py-2 text-[10px] font-medium tracking-[0.3em] uppercase transition-all duration-300 group-hover:border-white/30 group-hover:text-white/70"
-              style={{ borderColor: "rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.02)", backdropFilter: "blur(8px)" }}
+              className="rounded-full border px-7 py-2.5 transition-all duration-300 group-hover:border-white/25 group-hover:text-white/70"
+              style={{
+                fontFamily: FONT_DISPLAY,
+                fontWeight: 500,
+                fontSize: "12px",
+                letterSpacing: "0.25em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.4)",
+                borderColor: "rgba(255,255,255,0.1)",
+                background: "rgba(255,255,255,0.02)",
+                backdropFilter: "blur(8px)",
+              }}
             >
               Begin Descent
             </span>
             <div className="flex flex-col items-center mt-1">
-              <ChevronDown className="h-4 w-4 animate-bounce" style={{ animationDuration: "1.4s" }} />
-              <ChevronDown className="h-4 w-4 animate-bounce opacity-35 -mt-2" style={{ animationDuration: "1.4s", animationDelay: "0.18s" }} />
+              <ChevronDown className="h-4 w-4 animate-bounce text-white/30" style={{ animationDuration: "1.4s" }} />
+              <ChevronDown className="h-4 w-4 animate-bounce opacity-30 -mt-2 text-white/30" style={{ animationDuration: "1.4s", animationDelay: "0.18s" }} />
             </div>
           </motion.button>
         </div>
@@ -202,7 +255,6 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
           className="relative flex-shrink-0"
         >
-          {/* Ambient glow behind portrait */}
           <div
             className="absolute -inset-8 rounded-3xl opacity-20 blur-3xl"
             style={{ background: "hsl(var(--brand))" }}
@@ -212,12 +264,11 @@ export default function HeroSection() {
             style={{ background: "linear-gradient(135deg, hsl(var(--brand)), transparent)" }}
           />
 
-          {/* Portrait container — ~25vh on all screens */}
           <div
-            className="relative w-[260px] h-[340px] md:w-[300px] md:h-[400px] lg:w-[340px] lg:h-[440px] rounded-2xl overflow-hidden border"
+            className="relative w-[260px] h-[340px] md:w-[300px] md:h-[400px] lg:w-[360px] lg:h-[470px] rounded-2xl overflow-hidden border"
             style={{
-              borderColor: "hsla(var(--brand) / 0.3)",
-              boxShadow: "0 0 40px hsla(var(--brand) / 0.15), 0 20px 60px rgba(0,0,0,0.5)",
+              borderColor: "hsla(var(--brand) / 0.25)",
+              boxShadow: "0 0 50px hsla(var(--brand) / 0.12), 0 25px 70px rgba(0,0,0,0.5)",
             }}
           >
             <img
@@ -225,21 +276,18 @@ export default function HeroSection() {
               alt="Alan Anand"
               className="h-full w-full object-cover object-top"
             />
-            {/* Bottom fade into dark */}
             <div
               className="absolute inset-0"
               style={{
                 background: `linear-gradient(180deg, transparent 50%, rgba(5,8,17,0.6) 85%, rgba(5,8,17,0.9) 100%)`,
               }}
             />
-            {/* Side vignette */}
             <div
               className="absolute inset-0"
               style={{
                 background: "radial-gradient(ellipse at center, transparent 40%, rgba(5,8,17,0.4) 100%)",
               }}
             />
-            {/* Brand accent line at bottom */}
             <div
               className="absolute bottom-0 left-0 right-0 h-[2px]"
               style={{ background: "linear-gradient(90deg, transparent, hsl(var(--brand)), transparent)" }}
@@ -248,7 +296,7 @@ export default function HeroSection() {
         </motion.div>
       </motion.div>
 
-      {/* Bottom blend — merges into geological journey below */}
+      {/* Bottom blend */}
       <div className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none z-[4]"
         style={{ background: "linear-gradient(to bottom, transparent, rgba(8,10,15,0.7) 60%, rgba(8,11,16,1) 100%)" }}
       />
