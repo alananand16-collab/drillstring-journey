@@ -54,8 +54,8 @@ export default function WellboreJourney() {
 
   return (
     <div
-      className="fixed left-0 top-0 z-40 hidden lg:block pointer-events-none"
-      style={{ width: "56px", height: "100vh" }}
+      className="fixed top-0 z-40 hidden lg:block pointer-events-none"
+      style={{ left: "58px", width: "56px", height: "100vh" }}
     >
       {/* ── Surface Derrick ── */}
       <div
