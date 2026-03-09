@@ -15,6 +15,10 @@ export default function HeroSection() {
   const imgOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  // Portrait stays visible longer and slides up less aggressively
+  const portraitY = useTransform(scrollYProgress, [0, 1], ["0%", "8%"]);
+  const portraitOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
+  const portraitScale = useTransform(scrollYProgress, [0, 0.6], [1, 0.96]);
 
   const scrollToExperience = () => {
     document.getElementById("experience")?.scrollIntoView({ behavior: "smooth" });
