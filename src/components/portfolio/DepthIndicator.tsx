@@ -121,7 +121,7 @@ export default function DepthIndicator() {
           >
             {formations[activeIdx].icon} {formations[activeIdx].label}
           </div>
-          <div className="text-[11px] text-white/35 mt-1" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
+          <div className="text-[11px] text-white/35 mt-1" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
             {formations[activeIdx].depth.toLocaleString()}′
           </div>
         </div>
