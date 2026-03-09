@@ -285,50 +285,6 @@ function BHAStack() {
 }
 
 /* ══════════════════════════════════════
-   DRILL PIPE (grows downward with scroll)
-══════════════════════════════════════ */
-function DrillPipe({ heightPx, mudY }: { heightPx: any; mudY: any }) {
-  return (
-    <motion.div style={{
-      position: "absolute",
-      left: "50%",
-      x: "-50%",
-      top: 0,
-      width: "9px",
-      height: heightPx,
-      overflow: "hidden",
-      flexShrink: 0,
-    }}>
-      {/* Steel body */}
-      <div style={{
-        position: "absolute", inset: 0,
-        background: `linear-gradient(90deg, ${C.pipe(12)} 0%, ${C.pipe(34)} 22%, ${C.pipe(50)} 50%, ${C.pipe(34)} 78%, ${C.pipe(12)} 100%)`,
-      }} />
-      {/* Mud flow streaks downward */}
-      <motion.div style={{
-        position: "absolute", inset: 0,
-        backgroundImage: `repeating-linear-gradient(180deg, transparent 0px, transparent 4px, ${C.mud(38,0.16)} 4px, ${C.mud(38,0.16)} 6px)`,
-        backgroundSize: "9px 12px",
-        y: mudY,
-      }} />
-      {/* Tool joints */}
-      {Array.from({length:16},(_,i) => (
-        <div key={i} style={{
-          position: "absolute",
-          left: "-2.5px", right: "-2.5px",
-          top: `${(i+1)*6}%`,
-          height: "7px",
-          background: `linear-gradient(90deg, ${C.pipe(9)} 0%, ${C.pipe(28)} 26%, ${C.pipe(44)} 50%, ${C.pipe(28)} 74%, ${C.pipe(9)} 100%)`,
-          borderTop: `1px solid ${C.pipe(54)}`,
-          borderBottom: `1px solid ${C.pipe(13)}`,
-          borderRadius: "1px",
-        }} />
-      ))}
-    </motion.div>
-  );
-}
-
-/* ══════════════════════════════════════
    ANNULUS MUD RETURNS (rising particles)
 ══════════════════════════════════════ */
 function AnnulusReturns({ containerH }: { containerH: number }) {
@@ -343,6 +299,7 @@ function AnnulusReturns({ containerH }: { containerH: number }) {
             height: `${d.size * 2.5}px`,
             borderRadius: "50%",
             background: C.mud(38, 0.5),
+            willChange: "transform",
           }}
           animate={{
             top: [`${containerH * 0.9}px`, `${containerH * 0.5}px`, `${containerH * 0.1}px`, "0px"],
@@ -368,6 +325,7 @@ function CuttingsCloud() {
           borderRadius: "30%",
           background: c.color,
           left: "0px", top: "-6px",
+          willChange: "transform",
         }}
           animate={{
             x: [0, c.xEnd * 0.4, c.xEnd * 0.8, c.xEnd],
@@ -397,6 +355,7 @@ function BitGlow() {
       borderRadius: "50%",
       background: "radial-gradient(ellipse at 50% 100%, hsla(35,100%,55%,0.65) 0%, hsla(28,90%,45%,0.2) 45%, transparent 72%)",
       filter: "blur(4px)",
+      willChange: "transform, opacity",
     }}
       animate={{ opacity: [0.45, 1, 0.5, 0.9, 0.45], scaleX: [0.8, 1.35, 0.88, 1.25, 0.8] }}
       transition={{ duration: 0.36, repeat: Infinity }}
@@ -485,11 +444,6 @@ export default function WellboreSidebar() {
   /* Bottom margin to keep BHA visible */
   const BOTTOM_MARGIN = 24;
 
-  /*
-   * Animate BHA TOP in pure pixels:
-   * - Start: BHA bottom sits slightly below derrick floor (bit “peeks out”)
-   * - End:   BHA reaches near bottom of viewport but stays visible
-   */
   const startTop = DERRICK_BOTTOM + 12 - BHA_H_PX;
   const endTop = Math.max(
     DERRICK_BOTTOM + 24,
@@ -519,6 +473,7 @@ export default function WellboreSidebar() {
 
   /* Mobile progress bar */
   const progressWidth = useTransform(smooth, [0, 1], ["0%", "100%"]);
+
   return (
     <>
       {/* ═══════════════════════════════════════
@@ -564,7 +519,7 @@ export default function WellboreSidebar() {
               paddingTop: "1px",
             }}>
               <div style={{ width: "5px", height: "1px", background: f.color, opacity: 0.55, flexShrink: 0 }} />
-              <div style={{ fontSize: "5.5px", fontFamily: "monospace", color: f.color, opacity: 0.6, letterSpacing: "0.07em", lineHeight: 1 }}>
+              <div style={{ fontSize: "5.5px", fontFamily: "'JetBrains Mono', monospace", color: f.color, opacity: 0.6, letterSpacing: "0.07em", lineHeight: 1 }}>
                 {f.icon} {f.label}
               </div>
             </div>
@@ -595,6 +550,7 @@ export default function WellboreSidebar() {
           height: pipeHeight,
           zIndex: 3,
           overflow: "hidden",
+          willChange: "transform",
         }}>
           {/* Steel body */}
           <div style={{
@@ -607,6 +563,7 @@ export default function WellboreSidebar() {
             backgroundImage: `repeating-linear-gradient(180deg, transparent 0px, transparent 4px, ${C.mud(38,0.16)} 4px, ${C.mud(38,0.16)} 6px)`,
             backgroundSize: "9px 12px",
             y: mudY,
+            willChange: "transform",
           }} />
           {/* Tool joints */}
           {Array.from({length:20},(_,i) => (
@@ -637,6 +594,7 @@ export default function WellboreSidebar() {
             flexDirection: "column",
             alignItems: "center",
             zIndex: 6,
+            willChange: "transform",
           }}
         >
           <motion.div
@@ -656,7 +614,7 @@ export default function WellboreSidebar() {
       </div>
 
       {/* ═══════════════════════════════════════
-          MOBILE TOP BAR
+          MOBILE — Left-aligned drill string + depth bar
       ═══════════════════════════════════════ */}
       <div
         className="fixed top-14 left-0 right-0 z-40 flex items-center gap-3 px-4 py-2 lg:hidden"
@@ -675,11 +633,75 @@ export default function WellboreSidebar() {
         </div>
         <ActiveFormLabel activeFormIdx={activeFormIdx} />
       </div>
+
+      {/* ── Mobile left-edge drill string (simplified) ── */}
+      <MobileDrillString smooth={smooth} />
     </>
   );
 }
 
-/* ── Helper display components (need to be outside to avoid hook ordering issues) ── */
+/* ══════════════════════════════════════
+   MOBILE DRILL STRING (far-left side)
+══════════════════════════════════════ */
+function MobileDrillString({ smooth }: { smooth: any }) {
+  const drillProgress = useTransform(smooth, [0, 1], ["0%", "100%"]);
+  const bitTop = useTransform(smooth, [0, 1], [60, typeof window !== "undefined" ? window.innerHeight - 40 : 760]);
+
+  return (
+    <div className="fixed left-0 top-0 z-30 lg:hidden pointer-events-none" style={{ width: "28px", height: "100vh" }}>
+      {/* Subtle background strip */}
+      <div style={{
+        position: "absolute", left: 0, top: 0, width: "28px", height: "100%",
+        background: "linear-gradient(180deg, rgba(5,8,14,0.85) 0%, rgba(5,8,14,0.6) 50%, rgba(5,8,14,0.85) 100%)",
+      }} />
+
+      {/* Track line */}
+      <div style={{
+        position: "absolute", left: "13px", top: "60px", bottom: "40px",
+        width: "2px",
+        background: "rgba(255,255,255,0.04)",
+      }} />
+
+      {/* Drilled portion */}
+      <motion.div style={{
+        position: "absolute", left: "13px", top: "60px",
+        width: "2px",
+        height: drillProgress,
+        maxHeight: "calc(100vh - 100px)",
+        background: "linear-gradient(180deg, hsl(215,12%,30%) 0%, hsl(var(--brand) / 0.4) 100%)",
+        willChange: "transform",
+      }} />
+
+      {/* Formation ticks */}
+      {FORMATIONS.map((f) => (
+        <div key={f.label} style={{
+          position: "absolute",
+          left: "8px",
+          top: `calc(60px + ${f.pct}% * (100vh - 100px) / 100)`,
+          width: "12px",
+          height: "1px",
+          background: f.color,
+          opacity: 0.35,
+        }} />
+      ))}
+
+      {/* Drill bit glow */}
+      <motion.div style={{
+        position: "absolute",
+        left: "9px",
+        top: bitTop,
+        width: "10px",
+        height: "10px",
+        borderRadius: "50%",
+        background: "hsl(var(--brand))",
+        boxShadow: "0 0 8px 2px hsl(var(--brand) / 0.5), 0 0 16px 5px hsl(var(--brand) / 0.15)",
+        willChange: "transform",
+      }} />
+    </div>
+  );
+}
+
+/* ── Helper display components ── */
 function DepthCounter({ depthNum, activeFormIdx }: { depthNum: any; activeFormIdx: any }) {
   return (
     <div style={{
@@ -692,21 +714,32 @@ function DepthCounter({ depthNum, activeFormIdx }: { depthNum: any; activeFormId
       alignItems: "center",
       zIndex: 8,
     }}>
-      {/* Big depth number */}
-      <motion.div style={{
-        fontSize: "15px",
-        fontFamily: "monospace",
-        fontWeight: "bold",
-        letterSpacing: "0.04em",
-        color: "hsl(var(--brand))",
-        textShadow: "0 0 12px hsl(var(--brand)/0.55), 0 0 24px hsl(var(--brand)/0.2)",
-        lineHeight: 1,
+      {/* Frosted glass telemetry box */}
+      <div style={{
+        padding: "8px 10px 6px",
+        borderRadius: "8px",
+        background: "rgba(5,8,14,0.75)",
+        backdropFilter: "blur(10px)",
+        border: "1px solid hsl(var(--brand) / 0.2)",
+        boxShadow: "0 0 12px hsl(var(--brand) / 0.1), inset 0 1px 0 rgba(255,255,255,0.03)",
+        textAlign: "center",
       }}>
-        <MotionNumber motionVal={depthNum} />
-      </motion.div>
-      <div style={{ fontSize: "7px", fontFamily: "monospace", color: "rgba(255,255,255,0.22)", letterSpacing: "0.18em", marginTop: "2px" }}>ft MD</div>
-      {/* Active formation name */}
-      <ActiveFormLabel activeFormIdx={activeFormIdx} style={{ marginTop: "5px" }} />
+        {/* Big depth number */}
+        <motion.div style={{
+          fontSize: "16px",
+          fontFamily: "'JetBrains Mono', monospace",
+          fontWeight: 700,
+          letterSpacing: "0.04em",
+          color: "hsl(var(--brand))",
+          textShadow: "0 0 12px hsl(var(--brand)/0.55), 0 0 24px hsl(var(--brand)/0.2)",
+          lineHeight: 1,
+        }}>
+          <MotionNumber motionVal={depthNum} />
+        </motion.div>
+        <div style={{ fontSize: "7px", fontFamily: "'JetBrains Mono', monospace", color: "rgba(255,255,255,0.22)", letterSpacing: "0.18em", marginTop: "2px" }}>ft MD</div>
+        {/* Active formation name */}
+        <ActiveFormLabel activeFormIdx={activeFormIdx} style={{ marginTop: "5px" }} />
+      </div>
     </div>
   );
 }
@@ -727,7 +760,7 @@ function DepthLabel({ depthNum }: { depthNum: any }) {
     return unsub;
   }, [depthNum]);
   return (
-    <span className="text-xs font-bold font-mono" style={{ color: "hsl(var(--brand))" }}>
+    <span style={{ fontSize: "13px", fontWeight: 700, fontFamily: "'JetBrains Mono', monospace", color: "hsl(var(--brand))" }}>
       {display}ft
     </span>
   );
@@ -741,9 +774,8 @@ function ActiveFormLabel({ activeFormIdx, style }: { activeFormIdx: any; style?:
   }, [activeFormIdx]);
   const f = FORMATIONS[idx] ?? FORMATIONS[0];
   return (
-    <div style={{ fontSize: "7px", fontFamily: "monospace", fontWeight: "bold", letterSpacing: "0.12em", color: f.color, lineHeight: 1, ...style }}>
+    <div style={{ fontSize: "8px", fontFamily: "'JetBrains Mono', monospace", fontWeight: "bold", letterSpacing: "0.12em", color: f.color, lineHeight: 1, ...style }}>
       {f.icon} {f.label}
     </div>
   );
 }
-
