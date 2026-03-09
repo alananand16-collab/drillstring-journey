@@ -5,8 +5,8 @@
  * Drill bit travels full viewport height (top → bottom) as user scrolls.
  * Formation color bands, casing shoes, mud returns, depth readout all in one place.
  */
+import React from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useRef } from "react";
 
 /* ── Formation zones (colors match index.css tokens) ── */
 const FORMATIONS = [
