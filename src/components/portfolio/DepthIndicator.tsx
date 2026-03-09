@@ -117,7 +117,7 @@ export default function DepthIndicator() {
         <div className="mt-5 px-1 text-center">
           <div
             className="text-[13px] font-bold tracking-[0.1em] uppercase leading-tight"
-            style={{ color: formations[activeIdx].color, fontFamily: "'Inter', system-ui, sans-serif" }}
+            style={{ color: formations[activeIdx].color, fontFamily: "'JetBrains Mono', monospace" }}
           >
             {formations[activeIdx].icon} {formations[activeIdx].label}
           </div>
