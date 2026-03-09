@@ -4,34 +4,22 @@ import { experiences } from "@/data/portfolioData";
 import ExperienceModal from "./ExperienceModal";
 import type { Experience } from "@/data/portfolioData";
 import { ArrowUpRight } from "lucide-react";
+import SectionBackground from "./SectionBackground";
 
 export default function ExperienceSection() {
   const [selectedExp, setSelectedExp] = useState<Experience | null>(null);
 
   return (
     <section id="experience" className="relative px-4 py-24 lg:py-32">
+      <SectionBackground imagePath="/images/charcoal-rock.avif" overlayOpacity={[0.68, 0.78]} />
+
       {/* Warm-left headlamp ambient for this zone */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none z-[3]"
         style={{
           background: "radial-gradient(ellipse 50% 60% at -10% 50%, rgba(80,60,20,0.06) 0%, transparent 70%)",
         }}
       />
-
-      {/* Strata emphasis lines for sedimentary zone */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {[15, 35, 55, 75].map((y, i) => (
-          <div
-            key={i}
-            className="absolute w-full"
-            style={{
-              top: `${y}%`,
-              height: "1px",
-              background: `rgba(80,60,25,${0.04 + i * 0.01})`,
-            }}
-          />
-        ))}
-      </div>
 
       <div className="relative z-10 mx-auto max-w-4xl lg:ml-24 lg:mr-auto lg:max-w-5xl">
         <motion.div
@@ -129,12 +117,6 @@ export default function ExperienceSection() {
       </div>
 
       <ExperienceModal experience={selectedExp} open={!!selectedExp} onOpenChange={(open) => !open && setSelectedExp(null)} />
-
-      {/* Gradient blend into next section */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none z-[4]"
-        style={{ background: "linear-gradient(to bottom, transparent, rgba(12,11,8,0.5) 70%, rgba(12,10,6,0.8) 100%)" }}
-      />
     </section>
   );
 }
