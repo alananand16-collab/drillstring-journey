@@ -34,12 +34,12 @@ export default function DepthIndicator() {
         {/* Depth readout */}
         <div className="mb-4 text-center">
           <span
-            className="block text-[11px] font-bold tabular-nums font-mono"
-            style={{ color: "hsl(var(--brand))", animation: "text-glow 3s ease-in-out infinite" }}
+            className="block text-sm font-bold tabular-nums"
+            style={{ color: "hsl(var(--brand))", animation: "text-glow 3s ease-in-out infinite", fontFamily: "'Inter', system-ui, sans-serif" }}
           >
             {depth}
           </span>
-          <span className="text-[7px] tracking-[0.2em] text-white/25 uppercase">ft MD</span>
+          <span className="text-[9px] tracking-[0.2em] text-white/30 uppercase" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>ft MD</span>
         </div>
 
         {/* Vertical track */}
