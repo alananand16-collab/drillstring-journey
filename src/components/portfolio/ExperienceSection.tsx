@@ -90,7 +90,7 @@ export default function ExperienceSection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.55, delay: i * 0.1 }}
                 onClick={() => setSelectedExp(exp)}
-                className="group cursor-pointer rounded-2xl p-6 md:p-7 transition-all duration-300"
+                className="group cursor-pointer rounded-2xl p-7 md:p-8 transition-all duration-300"
                 style={{
                   background: "rgba(255,255,255,0.025)",
                   backdropFilter: "blur(14px)",
@@ -108,30 +108,47 @@ export default function ExperienceSection() {
                   e.currentTarget.style.boxShadow = "0 4px 28px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)";
                 }}
               >
-                <div className="flex items-start gap-5">
+                <div className="flex items-start gap-5 md:gap-6">
+                  {/* Company logo — much larger */}
                   <div
-                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl overflow-hidden"
+                    className="flex shrink-0 items-center justify-center rounded-2xl overflow-hidden"
                     style={{
-                      background: "rgba(255,255,255,0.04)",
-                      border: "1px solid rgba(255,255,255,0.08)",
+                      width: "64px",
+                      height: "64px",
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1px solid rgba(255,255,255,0.1)",
+                      boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
                     }}
                   >
                     {logoSrc ? (
                       <img src={logoSrc} alt={exp.company} className="h-full w-full object-cover" />
                     ) : (
-                      <span style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: "13px", color: "hsl(var(--brand))" }}>{exp.logo}</span>
+                      <span style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: "16px", color: "hsl(var(--brand))" }}>{exp.logo}</span>
                     )}
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-2">
+                    {/* Company name — prominent */}
+                    <p
+                      style={{
+                        fontFamily: FONT_DISPLAY,
+                        fontWeight: 700,
+                        fontSize: "18px",
+                        color: "hsl(210,30%,95%)",
+                        letterSpacing: "-0.01em",
+                      }}
+                    >
+                      {exp.company}
+                    </p>
+
+                    <div className="flex items-center justify-between gap-2 mt-1.5">
                       <div>
                         <h3
                           style={{
                             fontFamily: FONT_DISPLAY,
-                            fontWeight: 600,
-                            fontSize: "16px",
-                            color: "hsl(210,25%,92%)",
+                            fontWeight: 500,
+                            fontSize: "15px",
+                            color: "hsl(var(--brand))",
                           }}
                         >
                           {exp.role}
@@ -140,9 +157,9 @@ export default function ExperienceSection() {
                               className="ml-2"
                               style={{
                                 fontFamily: FONT_DISPLAY,
-                                fontWeight: 500,
-                                fontSize: "12px",
-                                color: "hsl(var(--brand))",
+                                fontWeight: 400,
+                                fontSize: "13px",
+                                color: "hsl(215,15%,55%)",
                               }}
                             >
                               · {exp.type}
@@ -155,7 +172,7 @@ export default function ExperienceSection() {
                             fontFamily: FONT_DISPLAY,
                             fontWeight: 400,
                             fontSize: "13px",
-                            color: "hsl(215,12%,52%)",
+                            color: "hsl(215,12%,50%)",
                           }}
                         >
                           {exp.location}
@@ -166,8 +183,8 @@ export default function ExperienceSection() {
                           className="hidden sm:inline"
                           style={{
                             fontFamily: FONT_MONO,
-                            fontSize: "11px",
-                            color: "rgba(255,255,255,0.22)",
+                            fontSize: "12px",
+                            color: "hsl(215,10%,42%)",
                           }}
                         >
                           {exp.startDate} — {exp.endDate}
@@ -177,7 +194,7 @@ export default function ExperienceSection() {
                     </div>
 
                     <p
-                      className="mt-3 line-clamp-2"
+                      className="mt-4 line-clamp-2"
                       style={{
                         fontFamily: FONT_DISPLAY,
                         fontWeight: 300,
@@ -190,9 +207,9 @@ export default function ExperienceSection() {
                     </p>
 
                     {exp.impact && (
-                      <p className="mt-3" style={{ fontSize: "13px", fontFamily: FONT_DISPLAY }}>
-                        <span style={{ color: "rgba(255,255,255,0.2)", fontWeight: 400 }}>★ Impact: </span>
-                        <span style={{ color: "hsl(var(--brand))", fontWeight: 500 }}>{exp.impact}</span>
+                      <p className="mt-3" style={{ fontSize: "14px", fontFamily: FONT_DISPLAY }}>
+                        <span style={{ color: "hsl(215,10%,42%)", fontWeight: 400 }}>★ Impact: </span>
+                        <span style={{ color: "hsl(var(--brand))", fontWeight: 600 }}>{exp.impact}</span>
                       </p>
                     )}
                   </div>
