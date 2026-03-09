@@ -39,7 +39,7 @@ export default function DepthIndicator() {
           >
             {depth}
           </span>
-          <span className="text-[12px] tracking-[0.2em] text-white/40 uppercase" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>ft MD</span>
+          <span className="text-[12px] tracking-[0.2em] text-white/40 uppercase" style={{ fontFamily: "'JetBrains Mono', monospace" }}>ft MD</span>
         </div>
 
         {/* Vertical track */}
