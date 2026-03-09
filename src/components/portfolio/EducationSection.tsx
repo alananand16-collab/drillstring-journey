@@ -114,7 +114,7 @@ export default function EducationSection() {
                       fontFamily: FONT_DISPLAY,
                       fontWeight: 400,
                       fontSize: "13px",
-                      color: "rgba(255,255,255,0.32)",
+                      color: "hsl(215,12%,55%)",
                     }}
                   >
                     {edu.school}
