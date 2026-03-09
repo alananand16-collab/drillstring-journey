@@ -6,6 +6,16 @@ import type { Experience } from "@/data/portfolioData";
 import { ArrowUpRight } from "lucide-react";
 import SectionBackground from "./SectionBackground";
 
+import logoSPGlobal from "@/assets/logo-spglobal.jpg";
+import logoEnverus from "@/assets/logo-enverus.webp";
+import logoONGC from "@/assets/logo-ongc.png";
+
+const companyLogoMap: Record<string, string> = {
+  "S&P Global": logoSPGlobal,
+  Enverus: logoEnverus,
+  ONGC: logoONGC,
+};
+
 export default function ExperienceSection() {
   const [selectedExp, setSelectedExp] = useState<Experience | null>(null);
 
@@ -13,7 +23,6 @@ export default function ExperienceSection() {
     <section id="experience" className="relative px-4 py-24 lg:py-32">
       <SectionBackground imagePath="/images/charcoal-rock.avif" overlayOpacity={[0.68, 0.78]} />
 
-      {/* Warm-left headlamp ambient for this zone */}
       <div
         className="absolute inset-0 pointer-events-none z-[3]"
         style={{
@@ -40,79 +49,85 @@ export default function ExperienceSection() {
         </motion.div>
 
         <div className="mt-10 space-y-4">
-          {experiences.map((exp, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55, delay: i * 0.1 }}
-              onClick={() => setSelectedExp(exp)}
-              className="group cursor-pointer rounded-xl p-5 md:p-6 transition-all duration-300"
-              style={{
-                background: "rgba(255,255,255,0.025)",
-                backdropFilter: "blur(12px)",
-                border: "1px solid rgba(255,255,255,0.055)",
-                boxShadow: "0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "hsl(var(--brand) / 0.28)";
-                e.currentTarget.style.background = "rgba(255,255,255,0.04)";
-                e.currentTarget.style.boxShadow = "0 0 36px rgba(0,100,200,0.07), inset 0 1px 0 rgba(255,255,255,0.06)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.055)";
-                e.currentTarget.style.background = "rgba(255,255,255,0.025)";
-                e.currentTarget.style.boxShadow = "0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)";
-              }}
-            >
-              <div className="flex items-start gap-4">
-                <div
-                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-xs font-bold"
-                  style={{
-                    background: "rgba(255,255,255,0.04)",
-                    border: "1px solid rgba(255,255,255,0.07)",
-                    color: "hsl(var(--brand))",
-                  }}
-                >
-                  {exp.logo}
-                </div>
-
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <h3 className="text-sm font-semibold text-white">
-                        {exp.role}
-                        {exp.type && (
-                          <span className="ml-2 text-[10px] font-medium" style={{ color: "hsl(var(--brand))" }}>
-                            · {exp.type}
-                          </span>
-                        )}
-                      </h3>
-                      <p className="mt-0.5 text-xs text-white/35">{exp.location}</p>
-                    </div>
-                    <div className="flex items-center gap-2 shrink-0">
-                      <span className="text-[10px] font-mono text-white/25 hidden sm:inline">
-                        {exp.startDate} — {exp.endDate}
-                      </span>
-                      <ArrowUpRight className="h-3.5 w-3.5 text-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </div>
+          {experiences.map((exp, i) => {
+            const logoSrc = companyLogoMap[exp.company];
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, delay: i * 0.1 }}
+                onClick={() => setSelectedExp(exp)}
+                className="group cursor-pointer rounded-xl p-5 md:p-6 transition-all duration-300"
+                style={{
+                  background: "rgba(255,255,255,0.025)",
+                  backdropFilter: "blur(12px)",
+                  border: "1px solid rgba(255,255,255,0.055)",
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "hsl(var(--brand) / 0.28)";
+                  e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+                  e.currentTarget.style.boxShadow = "0 0 36px rgba(0,100,200,0.07), inset 0 1px 0 rgba(255,255,255,0.06)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.055)";
+                  e.currentTarget.style.background = "rgba(255,255,255,0.025)";
+                  e.currentTarget.style.boxShadow = "0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)";
+                }}
+              >
+                <div className="flex items-start gap-4">
+                  <div
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg overflow-hidden"
+                    style={{
+                      background: "rgba(255,255,255,0.04)",
+                      border: "1px solid rgba(255,255,255,0.07)",
+                    }}
+                  >
+                    {logoSrc ? (
+                      <img src={logoSrc} alt={exp.company} className="h-full w-full object-cover" />
+                    ) : (
+                      <span className="text-xs font-bold" style={{ color: "hsl(var(--brand))" }}>{exp.logo}</span>
+                    )}
                   </div>
 
-                  <p className="mt-2 text-xs text-white/45 leading-relaxed line-clamp-2">
-                    {exp.preview}
-                  </p>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <h3 className="text-sm font-semibold text-white">
+                          {exp.role}
+                          {exp.type && (
+                            <span className="ml-2 text-[10px] font-medium" style={{ color: "hsl(var(--brand))" }}>
+                              · {exp.type}
+                            </span>
+                          )}
+                        </h3>
+                        <p className="mt-0.5 text-xs text-white/35">{exp.location}</p>
+                      </div>
+                      <div className="flex items-center gap-2 shrink-0">
+                        <span className="text-[10px] font-mono text-white/25 hidden sm:inline">
+                          {exp.startDate} — {exp.endDate}
+                        </span>
+                        <ArrowUpRight className="h-3.5 w-3.5 text-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                    </div>
 
-                  {exp.impact && (
-                    <p className="mt-2 text-[11px]">
-                      <span className="text-white/25">★ Impact: </span>
-                      <span style={{ color: "hsl(var(--brand))" }}>{exp.impact}</span>
+                    <p className="mt-2 text-xs text-white/45 leading-relaxed line-clamp-2">
+                      {exp.preview}
                     </p>
-                  )}
+
+                    {exp.impact && (
+                      <p className="mt-2 text-[11px]">
+                        <span className="text-white/25">★ Impact: </span>
+                        <span style={{ color: "hsl(var(--brand))" }}>{exp.impact}</span>
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
 

@@ -3,6 +3,16 @@ import { Badge } from "@/components/ui/badge";
 import { Trophy } from "lucide-react";
 import type { Experience } from "@/data/portfolioData";
 
+import logoSPGlobal from "@/assets/logo-spglobal.jpg";
+import logoEnverus from "@/assets/logo-enverus.webp";
+import logoONGC from "@/assets/logo-ongc.png";
+
+const companyLogoMap: Record<string, string> = {
+  "S&P Global": logoSPGlobal,
+  Enverus: logoEnverus,
+  ONGC: logoONGC,
+};
+
 interface Props {
   experience: Experience | null;
   open: boolean;
@@ -11,6 +21,8 @@ interface Props {
 
 export default function ExperienceModal({ experience, open, onOpenChange }: Props) {
   if (!experience) return null;
+
+  const logoSrc = companyLogoMap[experience.company];
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -27,14 +39,17 @@ export default function ExperienceModal({ experience, open, onOpenChange }: Prop
           <DialogHeader>
             <div className="flex items-start gap-4">
               <div
-                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg text-sm font-bold"
+                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg overflow-hidden"
                 style={{
                   background: "rgba(255,255,255,0.04)",
                   border: "1px solid rgba(255,255,255,0.08)",
-                  color: "hsl(var(--brand))",
                 }}
               >
-                {experience.logo}
+                {logoSrc ? (
+                  <img src={logoSrc} alt={experience.company} className="h-full w-full object-cover" />
+                ) : (
+                  <span className="text-sm font-bold" style={{ color: "hsl(var(--brand))" }}>{experience.logo}</span>
+                )}
               </div>
               <div>
                 <DialogTitle className="text-lg font-bold text-white">{experience.role}</DialogTitle>
