@@ -462,33 +462,43 @@ const BHA_H_PX = 202;
 export default function WellboreSidebar() {
   const { scrollYProgress } = useScroll();
 
-  /* Smooth spring */
-  const smooth = useSpring(scrollYProgress, { stiffness: 55, damping: 20 });
+  /* Smooth spring for cinematic feel */
+  const smooth = useSpring(scrollYProgress, { stiffness: 60, damping: 18 });
 
   /* ── Layout constants ── */
   const DERRICK_H   = 100;  // px
   const DERRICK_TOP = 8;    // px from top
-  const TRAVEL_TOP  = DERRICK_TOP + DERRICK_H; // 108px — where pipe exits derrick floor
+  const DERRICK_BOTTOM = DERRICK_TOP + DERRICK_H; // 108px — where pipe exits derrick floor
+  
+  /* Bottom margin to keep BHA visible */
+  const BOTTOM_MARGIN = 24;
 
   /*
-   * BHA top travels: TRAVEL_TOP → (100vh - BHA_H_PX - 16px)
-   * This ensures the complete BHA + bit stays fully visible at all scroll positions.
+   * BHA bottom position travels: 
+   * - At scroll=0: BHA bottom is at DERRICK_BOTTOM (just peeking out of derrick)
+   * - At scroll=1: BHA bottom is at (100vh - BOTTOM_MARGIN) (fully at page bottom)
+   * 
+   * We position BHA by its TOP, so:
+   * - At scroll=0: bhaTop = DERRICK_BOTTOM - BHA_H_PX (BHA sits inside/just below derrick)
+   * - At scroll=1: bhaTop = 100vh - BOTTOM_MARGIN - BHA_H_PX
    */
+  const START_TOP = DERRICK_BOTTOM - BHA_H_PX + 40; // BHA starts just below derrick with bit visible
+  
   const bhaTop = useTransform(smooth, [0, 1],
-    [`${TRAVEL_TOP}px`, `calc(100vh - ${BHA_H_PX + 20}px)`]
+    [`${START_TOP}px`, `calc(100vh - ${BHA_H_PX + BOTTOM_MARGIN}px)`]
   );
 
   /*
-   * Pipe height = distance from derrick exit down to where BHA top currently is.
-   * At scroll=0: pipe height=0 (bit is right at derrick)
-   * At scroll=1: pipe height = 100vh - BHA_H_PX - 20px - TRAVEL_TOP
+   * Pipe grows from derrick floor down to BHA top
+   * At scroll=0: minimal pipe (BHA is right at derrick)
+   * At scroll=1: pipe spans from DERRICK_BOTTOM to bhaTop
    */
   const pipeHeight = useTransform(smooth, [0, 1],
-    [`0px`, `calc(100vh - ${BHA_H_PX + 20 + TRAVEL_TOP}px)`]
+    [`${40}px`, `calc(100vh - ${BHA_H_PX + BOTTOM_MARGIN + DERRICK_BOTTOM}px)`]
   );
 
-  /* Mud flow downward */
-  const mudY = useTransform(scrollYProgress, [0, 1], [0, 500]);
+  /* Mud flow downward animation */
+  const mudY = useTransform(scrollYProgress, [0, 1], [0, 600]);
 
   /* Depth number */
   const depthNum = useTransform(smooth, [0, 1], [0, MAX_DEPTH]);
@@ -571,21 +581,47 @@ export default function WellboreSidebar() {
         </div>
 
         {/* ── GROWING DRILL PIPE (from derrick exit down to BHA top) ── */}
-        <div style={{
+        <motion.div style={{
           position: "absolute",
           left: "50%",
-          transform: "translateX(-50%)",
-          top: `${TRAVEL_TOP}px`,
+          x: "-50%",
+          top: `${DERRICK_BOTTOM}px`,
           width: "9px",
+          height: pipeHeight,
           zIndex: 3,
+          overflow: "hidden",
         }}>
-          <DrillPipe heightPx={pipeHeight} mudY={mudY} />
-        </div>
+          {/* Steel body */}
+          <div style={{
+            position: "absolute", inset: 0,
+            background: `linear-gradient(90deg, ${C.pipe(12)} 0%, ${C.pipe(34)} 22%, ${C.pipe(50)} 50%, ${C.pipe(34)} 78%, ${C.pipe(12)} 100%)`,
+          }} />
+          {/* Mud flow streaks downward */}
+          <motion.div style={{
+            position: "absolute", inset: 0,
+            backgroundImage: `repeating-linear-gradient(180deg, transparent 0px, transparent 4px, ${C.mud(38,0.16)} 4px, ${C.mud(38,0.16)} 6px)`,
+            backgroundSize: "9px 12px",
+            y: mudY,
+          }} />
+          {/* Tool joints */}
+          {Array.from({length:20},(_,i) => (
+            <div key={i} style={{
+              position: "absolute",
+              left: "-2.5px", right: "-2.5px",
+              top: `${(i+1)*5}%`,
+              height: "7px",
+              background: `linear-gradient(90deg, ${C.pipe(9)} 0%, ${C.pipe(28)} 26%, ${C.pipe(44)} 50%, ${C.pipe(28)} 74%, ${C.pipe(9)} 100%)`,
+              borderTop: `1px solid ${C.pipe(54)}`,
+              borderBottom: `1px solid ${C.pipe(13)}`,
+              borderRadius: "1px",
+            }} />
+          ))}
+        </motion.div>
 
         {/* ── ANNULUS MUD RETURNS ── */}
         <AnnulusReturns containerH={720} />
 
-        {/* ── BHA + BIT assembly (travels the full viewport) ── */}
+        {/* ── BHA + BIT assembly (travels from top to bottom) ── */}
         <motion.div
           style={{
             position: "absolute",
@@ -600,8 +636,8 @@ export default function WellboreSidebar() {
         >
           <motion.div
             style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-            animate={{ x: [-0.4, 0.4, -0.3, 0.3, 0] }}
-            transition={{ duration: 0.11, repeat: Infinity, ease: "linear" }}
+            animate={{ x: [-0.5, 0.5, -0.4, 0.4, 0] }}
+            transition={{ duration: 0.09, repeat: Infinity, ease: "linear" }}
           >
             <BHAStack />
             <PDCBit />
