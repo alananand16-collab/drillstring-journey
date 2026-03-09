@@ -759,4 +759,3 @@ function ActiveFormLabel({ activeFormIdx, style }: { activeFormIdx: any; style?:
   );
 }
 
-import React from "react";
