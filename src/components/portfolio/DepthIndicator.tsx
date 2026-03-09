@@ -67,7 +67,7 @@ export default function DepthIndicator() {
                 {/* Icon */}
                 <div
                   style={{
-                    fontSize: "12px",
+                    fontSize: "15px",
                     color: isActive ? f.color : "rgba(255,255,255,0.25)",
                     transition: "color 0.4s",
                     lineHeight: 1,
@@ -79,15 +79,15 @@ export default function DepthIndicator() {
                 {/* Formation name */}
                 <div
                   style={{
-                    fontSize: "9px",
-                    fontWeight: isActive ? 700 : 500,
+                    fontSize: "11px",
+                    fontWeight: isActive ? 700 : 600,
                     color: isActive ? f.color : "rgba(255,255,255,0.22)",
                     transition: "color 0.4s",
-                    letterSpacing: "0.06em",
-                    marginTop: "2px",
+                    letterSpacing: "0.08em",
+                    marginTop: "3px",
                     fontFamily: "'Inter', system-ui, sans-serif",
                     textAlign: "center",
-                    lineHeight: 1.2,
+                    lineHeight: 1.25,
                   }}
                 >
                   {f.label}
