@@ -473,8 +473,8 @@ export default function WellboreSidebar() {
   React.useEffect(() => {
     const update = () => setViewportH(window.innerHeight);
     update();
-    window.addEventListener("resize", update, { passive: true } as any);
-    return () => window.removeEventListener("resize", update as any);
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
 
   /* ── Layout constants ── */
