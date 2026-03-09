@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import PageBackground from "@/components/portfolio/PageBackground";
 import DepthIndicator from "@/components/portfolio/DepthIndicator";
 import DrillString from "@/components/portfolio/DrillString";
 import HeroSection from "@/components/portfolio/HeroSection";
@@ -11,11 +12,17 @@ import ContactSection from "@/components/portfolio/ContactSection";
 
 const Index = () => {
   return (
-    <div className="relative bg-[#080a0f]">
+    // Relative so fixed children stack correctly; no background here — PageBackground owns it
+    <div className="relative" style={{ background: "transparent" }}>
+      {/* Seamless full-page geological background — fixed, z-0 */}
+      <PageBackground />
+
       <Navbar />
       <DepthIndicator />
       <DrillString />
-      <main className="lg:ml-16">
+
+      {/* All sections are transparent — PageBackground shows through */}
+      <main className="relative z-10 lg:ml-16">
         <HeroSection />
         <ExperienceSection />
         <ProjectsSection />
