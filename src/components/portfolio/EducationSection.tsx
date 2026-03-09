@@ -52,7 +52,7 @@ export default function EducationSection() {
               fontFamily: FONT_DISPLAY,
               fontWeight: 300,
               fontSize: "15px",
-              color: "rgba(255,255,255,0.38)",
+              color: "hsl(215,15%,58%)",
             }}
           >
             Foundation formation — the geological base that supports every layer above.
