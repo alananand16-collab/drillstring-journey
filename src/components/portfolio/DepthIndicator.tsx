@@ -138,7 +138,7 @@ export default function DepthIndicator() {
       >
         <span
           className="text-base font-bold"
-          style={{ color: "hsl(var(--brand))", fontFamily: "'Inter', system-ui, sans-serif" }}
+          style={{ color: "hsl(var(--brand))", fontFamily: "'JetBrains Mono', monospace" }}
         >
           {depth}ft
         </span>
