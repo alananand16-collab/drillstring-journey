@@ -26,7 +26,7 @@ export default function DepthIndicator() {
       <div
         className="fixed left-0 top-0 z-50 hidden h-full lg:flex flex-col items-center py-20"
         style={{
-          width: "56px",
+          width: "80px",
           background: "linear-gradient(180deg, rgba(5,8,12,0.96) 0%, rgba(5,8,12,0.98) 100%)",
           borderRight: "1px solid rgba(255,255,255,0.04)",
         }}
