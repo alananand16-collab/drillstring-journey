@@ -169,15 +169,15 @@ function PDCBit() {
 
       {/* Heat glow */}
       <motion.ellipse cx="0" cy="20" rx="18" ry="7" fill="url(#sbHeat)"
-        animate={{ opacity: [0.3, 1, 0.4, 0.85, 0.3], ry: [5, 9, 5.5, 9.5, 5] }}
-        transition={{ duration: 0.38, repeat: Infinity }}
+        animate={{ opacity: [0.4, 0.8, 0.45, 0.75, 0.4], ry: [6, 8, 6.5, 8.5, 6] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* White-hot centre flash */}
       <motion.ellipse cx="0" cy="21" rx="6" ry="2.8"
-        fill="hsl(45,100%,92%)" opacity="0.75"
-        animate={{ opacity: [0, 0.85, 0, 0.65, 0], rx: [2, 7, 3, 6.5, 2] }}
-        transition={{ duration: 0.28, repeat: Infinity }}
+        fill="hsl(45,100%,92%)" opacity="0.5"
+        animate={{ opacity: [0.2, 0.6, 0.2, 0.5, 0.2], rx: [3, 6, 3.5, 5.5, 3] }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* Spark streaks */}
