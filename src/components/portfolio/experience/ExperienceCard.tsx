@@ -57,11 +57,11 @@ export default function ExperienceCard({ experience: exp, index: i, onSelect }: 
           {/* Top row: Company + Arrow */}
           <div className="mb-5 flex items-start justify-between gap-4">
             {/* Mobile-only inline logo */}
-            <div className="flex sm:hidden h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-experience-border/50 bg-experience-surface/50 mr-3">
+            <div className="flex sm:hidden h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-experience-border/50 bg-experience-surface/50 mr-3">
               {logoSrc ? (
                 <img src={logoSrc} alt={exp.company} className="h-full w-full object-cover" loading="lazy" />
               ) : (
-                <span className="text-experience-accent-cool" style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: "13px" }}>{exp.logo}</span>
+                <span className="text-experience-accent-cool" style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: "15px" }}>{exp.logo}</span>
               )}
             </div>
 
