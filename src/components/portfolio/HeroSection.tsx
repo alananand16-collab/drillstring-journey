@@ -270,8 +270,10 @@ export default function HeroSection() {
           />
 
           <div
-            className="relative w-[260px] h-[340px] md:w-[300px] md:h-[400px] lg:w-[360px] lg:h-[470px] rounded-2xl overflow-hidden border"
+            className="relative w-[220px] sm:w-[260px] md:w-[300px] lg:w-[340px] xl:w-[360px] rounded-2xl overflow-hidden border"
             style={{
+              aspectRatio: "3 / 4",
+              maxHeight: "min(470px, 55vh)",
               borderColor: "hsla(var(--brand) / 0.25)",
               boxShadow: "0 0 50px hsla(var(--brand) / 0.12), 0 25px 70px rgba(0,0,0,0.5)",
             }}
