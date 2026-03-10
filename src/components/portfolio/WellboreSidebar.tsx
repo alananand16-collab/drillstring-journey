@@ -169,15 +169,15 @@ function PDCBit() {
 
       {/* Heat glow */}
       <motion.ellipse cx="0" cy="20" rx="18" ry="7" fill="url(#sbHeat)"
-        animate={{ opacity: [0.3, 1, 0.4, 0.85, 0.3], ry: [5, 9, 5.5, 9.5, 5] }}
-        transition={{ duration: 0.38, repeat: Infinity }}
+        animate={{ opacity: [0.4, 0.8, 0.45, 0.75, 0.4], ry: [6, 8, 6.5, 8.5, 6] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* White-hot centre flash */}
       <motion.ellipse cx="0" cy="21" rx="6" ry="2.8"
-        fill="hsl(45,100%,92%)" opacity="0.75"
-        animate={{ opacity: [0, 0.85, 0, 0.65, 0], rx: [2, 7, 3, 6.5, 2] }}
-        transition={{ duration: 0.28, repeat: Infinity }}
+        fill="hsl(45,100%,92%)" opacity="0.5"
+        animate={{ opacity: [0.2, 0.6, 0.2, 0.5, 0.2], rx: [3, 6, 3.5, 5.5, 3] }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* Spark streaks */}
@@ -357,8 +357,8 @@ function BitGlow() {
       filter: "blur(4px)",
       willChange: "transform, opacity",
     }}
-      animate={{ opacity: [0.45, 1, 0.5, 0.9, 0.45], scaleX: [0.8, 1.35, 0.88, 1.25, 0.8] }}
-      transition={{ duration: 0.36, repeat: Infinity }}
+      animate={{ opacity: [0.5, 0.85, 0.55, 0.8, 0.5], scaleX: [0.9, 1.15, 0.92, 1.1, 0.9] }}
+      transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
     />
   );
 }
@@ -422,7 +422,7 @@ export default function WellboreSidebar() {
   const { scrollYProgress } = useScroll();
 
   /* Smooth spring for cinematic feel — high damping eliminates jitter */
-  const smooth = useSpring(scrollYProgress, { stiffness: 40, damping: 30, mass: 1.2 });
+  const smooth = useSpring(scrollYProgress, { stiffness: 30, damping: 35, mass: 1.5 });
 
   /* Measure viewport height so we can animate using pure numbers (no calc()/mixed units → no snapping) */
   const [viewportH, setViewportH] = React.useState(() =>
@@ -599,8 +599,8 @@ export default function WellboreSidebar() {
         >
           <motion.div
             style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-            animate={{ x: [-0.2, 0.2, -0.15, 0.15, 0] }}
-            transition={{ duration: 0.25, repeat: Infinity, ease: "linear" }}
+            animate={{ rotateY: [0, 360] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
           >
             <BHAStack />
             <PDCBit />

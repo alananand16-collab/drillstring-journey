@@ -280,15 +280,15 @@ function PDCBit({ vibrating }: { vibrating: boolean }) {
 
       {/* ── CUTTING HEAT GLOW ── */}
       <motion.ellipse cx="0" cy="25" rx="24" ry="9" fill="url(#heatGlow)"
-        animate={{ opacity: [0.3, 1, 0.4, 0.8, 0.3], ry: [6, 11, 7, 12, 6] }}
-        transition={{ duration: 0.4, repeat: Infinity, ease: "linear" }}
+        animate={{ opacity: [0.3, 0.8, 0.4, 0.7, 0.3], ry: [7, 10, 8, 11, 7] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* ── WHITE-HOT CENTRE FLASH ── */}
       <motion.ellipse cx="0" cy="27" rx="8" ry="3.5"
-        fill="hsl(45,100%,90%)" opacity="0.7"
-        animate={{ opacity: [0, 0.8, 0, 0.6, 0], rx: [3, 9, 4, 8, 3] }}
-        transition={{ duration: 0.3, repeat: Infinity }}
+        fill="hsl(45,100%,90%)" opacity="0.5"
+        animate={{ opacity: [0.2, 0.6, 0.2, 0.5, 0.2], rx: [4, 8, 5, 7, 4] }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* ── SPARK STREAKS FROM BIT FACE ── */}
@@ -694,11 +694,11 @@ function BitGlow() {
       filter: "blur(5px)",
     }}
       animate={{
-        opacity: [0.45, 1, 0.55, 0.9, 0.45],
-        scaleX: [0.8, 1.3, 0.9, 1.2, 0.8],
-        scaleY: [1, 1.15, 0.9, 1.1, 1],
+        opacity: [0.5, 0.85, 0.55, 0.8, 0.5],
+        scaleX: [0.9, 1.15, 0.92, 1.1, 0.9],
+        scaleY: [1, 1.08, 0.95, 1.05, 1],
       }}
-      transition={{ duration: 0.38, repeat: Infinity }}
+      transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
     />
   );
 }
@@ -711,7 +711,7 @@ export default function WellboreJourney() {
 
   /* ── Bit position: always visible within BIT_MIN_VH → BIT_MAX_VH ── */
   const rawBitVh  = useTransform(scrollYProgress, [0, 1], [BIT_MIN_VH, BIT_MAX_VH]);
-  const bitVhSpring = useSpring(rawBitVh, { stiffness: 60, damping: 22 });
+  const bitVhSpring = useSpring(rawBitVh, { stiffness: 30, damping: 35, mass: 1.5 });
 
   /* The pipe HEIGHT = distance from derrick exit to bit top */
   const pipeHeightVh = useTransform(
@@ -724,9 +724,6 @@ export default function WellboreJourney() {
 
   /* Mud flow scrolling down inside pipe */
   const mudY = useTransform(scrollYProgress, [0, 1], [0, 600]);
-
-  /* BHA vibration intensity tied to scroll speed (simplified: always subtle) */
-  const vibAmp = 0.5;
 
   return (
     <div
@@ -765,11 +762,11 @@ export default function WellboreJourney() {
           alignItems: "center",
         }}
       >
-        {/* Whole BHA vibrates while drilling */}
+        {/* Smooth rotation — like an actual drill string rotating */}
         <motion.div
           style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-          animate={{ x: [-vibAmp, vibAmp, -vibAmp * 0.7, vibAmp * 0.7, 0] }}
-          transition={{ duration: 0.12, repeat: Infinity, ease: "linear" }}
+          animate={{ rotateY: [0, 360] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
         >
           {/* ① HWDP */}
           <HWDP h={46} />

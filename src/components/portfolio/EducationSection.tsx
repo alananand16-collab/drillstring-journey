@@ -85,13 +85,13 @@ export default function EducationSection() {
             >
               <div className="flex items-start gap-4 mb-4">
                 <div
-                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl"
                   style={{
                     background: "hsl(var(--brand) / 0.1)",
                     border: "1px solid hsl(var(--brand) / 0.15)",
                     fontFamily: FONT_DISPLAY,
                     fontWeight: 700,
-                    fontSize: "12px",
+                    fontSize: "15px",
                     color: "hsl(var(--brand))",
                   }}
                 >
