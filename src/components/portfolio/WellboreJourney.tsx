@@ -280,15 +280,15 @@ function PDCBit({ vibrating }: { vibrating: boolean }) {
 
       {/* ── CUTTING HEAT GLOW ── */}
       <motion.ellipse cx="0" cy="25" rx="24" ry="9" fill="url(#heatGlow)"
-        animate={{ opacity: [0.3, 1, 0.4, 0.8, 0.3], ry: [6, 11, 7, 12, 6] }}
-        transition={{ duration: 0.4, repeat: Infinity, ease: "linear" }}
+        animate={{ opacity: [0.3, 0.8, 0.4, 0.7, 0.3], ry: [7, 10, 8, 11, 7] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* ── WHITE-HOT CENTRE FLASH ── */}
       <motion.ellipse cx="0" cy="27" rx="8" ry="3.5"
-        fill="hsl(45,100%,90%)" opacity="0.7"
-        animate={{ opacity: [0, 0.8, 0, 0.6, 0], rx: [3, 9, 4, 8, 3] }}
-        transition={{ duration: 0.3, repeat: Infinity }}
+        fill="hsl(45,100%,90%)" opacity="0.5"
+        animate={{ opacity: [0.2, 0.6, 0.2, 0.5, 0.2], rx: [4, 8, 5, 7, 4] }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* ── SPARK STREAKS FROM BIT FACE ── */}

@@ -422,7 +422,7 @@ export default function WellboreSidebar() {
   const { scrollYProgress } = useScroll();
 
   /* Smooth spring for cinematic feel — high damping eliminates jitter */
-  const smooth = useSpring(scrollYProgress, { stiffness: 40, damping: 30, mass: 1.2 });
+  const smooth = useSpring(scrollYProgress, { stiffness: 30, damping: 35, mass: 1.5 });
 
   /* Measure viewport height so we can animate using pure numbers (no calc()/mixed units → no snapping) */
   const [viewportH, setViewportH] = React.useState(() =>
