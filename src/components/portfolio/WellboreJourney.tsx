@@ -725,9 +725,6 @@ export default function WellboreJourney() {
   /* Mud flow scrolling down inside pipe */
   const mudY = useTransform(scrollYProgress, [0, 1], [0, 600]);
 
-  /* BHA vibration intensity tied to scroll speed (simplified: always subtle) */
-  const vibAmp = 0.5;
-
   return (
     <div
       className="fixed top-0 z-40 hidden lg:block pointer-events-none"
