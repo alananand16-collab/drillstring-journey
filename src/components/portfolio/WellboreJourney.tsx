@@ -711,7 +711,7 @@ export default function WellboreJourney() {
 
   /* ── Bit position: always visible within BIT_MIN_VH → BIT_MAX_VH ── */
   const rawBitVh  = useTransform(scrollYProgress, [0, 1], [BIT_MIN_VH, BIT_MAX_VH]);
-  const bitVhSpring = useSpring(rawBitVh, { stiffness: 60, damping: 22 });
+  const bitVhSpring = useSpring(rawBitVh, { stiffness: 30, damping: 35, mass: 1.5 });
 
   /* The pipe HEIGHT = distance from derrick exit to bit top */
   const pipeHeightVh = useTransform(
