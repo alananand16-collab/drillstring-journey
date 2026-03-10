@@ -762,11 +762,11 @@ export default function WellboreJourney() {
           alignItems: "center",
         }}
       >
-        {/* Whole BHA vibrates while drilling */}
+        {/* Smooth rotation — like an actual drill string rotating */}
         <motion.div
           style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-          animate={{ x: [-vibAmp, vibAmp, -vibAmp * 0.7, vibAmp * 0.7, 0] }}
-          transition={{ duration: 0.12, repeat: Infinity, ease: "linear" }}
+          animate={{ rotateY: [0, 360] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
         >
           {/* ① HWDP */}
           <HWDP h={46} />
