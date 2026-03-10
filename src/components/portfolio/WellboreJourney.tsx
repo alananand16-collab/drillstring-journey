@@ -694,11 +694,11 @@ function BitGlow() {
       filter: "blur(5px)",
     }}
       animate={{
-        opacity: [0.45, 1, 0.55, 0.9, 0.45],
-        scaleX: [0.8, 1.3, 0.9, 1.2, 0.8],
-        scaleY: [1, 1.15, 0.9, 1.1, 1],
+        opacity: [0.5, 0.85, 0.55, 0.8, 0.5],
+        scaleX: [0.9, 1.15, 0.92, 1.1, 0.9],
+        scaleY: [1, 1.08, 0.95, 1.05, 1],
       }}
-      transition={{ duration: 0.38, repeat: Infinity }}
+      transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
     />
   );
 }

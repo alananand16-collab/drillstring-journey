@@ -357,8 +357,8 @@ function BitGlow() {
       filter: "blur(4px)",
       willChange: "transform, opacity",
     }}
-      animate={{ opacity: [0.45, 1, 0.5, 0.9, 0.45], scaleX: [0.8, 1.35, 0.88, 1.25, 0.8] }}
-      transition={{ duration: 0.36, repeat: Infinity }}
+      animate={{ opacity: [0.5, 0.85, 0.55, 0.8, 0.5], scaleX: [0.9, 1.15, 0.92, 1.1, 0.9] }}
+      transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
     />
   );
 }
