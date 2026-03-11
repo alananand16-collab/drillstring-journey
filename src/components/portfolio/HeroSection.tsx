@@ -187,7 +187,7 @@ export default function HeroSection() {
           >
             {[
               { value: "4+", label: "YRS EXP" },
-              { value: "4", label: "PROJECTS DELIVERED" },
+              { value: "5+", label: "PROJECTS DELIVERED" },
               { value: "30%", label: "EFFICIENCY ↑" },
             ].map((stat) => (
               <div key={stat.label} className="text-center lg:text-left">
