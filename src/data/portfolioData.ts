@@ -32,6 +32,7 @@ export interface Award {
 export interface Education {
   school: string;
   logo: string;
+  logoImage?: string;
   degree: string;
   dates: string;
   description?: string;
@@ -188,6 +189,7 @@ export const education: Education[] = [
   {
     school: "University of Calgary",
     logo: "UCalgary",
+    logoImage: "/images/logo-uofcalgary.png",
     degree: "M.Eng Petroleum Engineering",
     dates: "2024 – 2026",
     description: "Specializing in reservoir geomechanics, subsurface data analytics, and AI-driven drilling optimization.",
@@ -202,6 +204,7 @@ export const education: Education[] = [
   {
     school: "Presidency University",
     logo: "PU",
+    logoImage: "/images/logo-presidency.png",
     degree: "B.Tech Petroleum Engineering",
     dates: "2016 – 2020",
     description: "Comprehensive foundation in petroleum engineering, well logging, and production technology.",
