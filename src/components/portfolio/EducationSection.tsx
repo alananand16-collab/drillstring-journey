@@ -85,17 +85,29 @@ export default function EducationSection() {
             >
               <div className="flex items-start gap-4 mb-4">
                 <div
-                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl"
+                  className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-white p-2"
                   style={{
-                    background: "hsl(var(--brand) / 0.1)",
                     border: "1px solid hsl(var(--brand) / 0.15)",
-                    fontFamily: FONT_DISPLAY,
-                    fontWeight: 700,
-                    fontSize: "15px",
-                    color: "hsl(var(--brand))",
                   }}
                 >
-                  {edu.logo}
+                  {edu.logoImage ? (
+                    <img
+                      src={edu.logoImage}
+                      alt={edu.school}
+                      className="h-full w-full object-contain"
+                    />
+                  ) : (
+                    <span
+                      style={{
+                        fontFamily: FONT_DISPLAY,
+                        fontWeight: 700,
+                        fontSize: "15px",
+                        color: "hsl(var(--brand))",
+                      }}
+                    >
+                      {edu.logo}
+                    </span>
+                  )}
                 </div>
                 <div>
                   <h3
