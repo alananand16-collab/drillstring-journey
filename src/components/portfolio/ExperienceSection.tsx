@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { experiences } from "@/data/portfolioData";
 import type { Experience } from "@/data/portfolioData";
 
-import ExperienceModal from "./ExperienceModal";
+import ExperiencePanel from "./ExperiencePanel";
 import SectionBackground from "./SectionBackground";
 import ExperienceCard from "./experience/ExperienceCard";
 
