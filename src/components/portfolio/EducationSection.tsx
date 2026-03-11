@@ -1,11 +1,16 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { education } from "@/data/portfolioData";
+import type { Education } from "@/data/portfolioData";
 import SectionBackground from "./SectionBackground";
+import EducationPanel from "./EducationPanel";
 
 const FONT_DISPLAY = "'Outfit', sans-serif";
 const FONT_MONO = "'JetBrains Mono', monospace";
 
 export default function EducationSection() {
+  const [selectedEdu, setSelectedEdu] = useState<Education | null>(null);
+
   return (
     <section id="education" className="relative px-4 py-28 lg:py-36">
       <SectionBackground imagePath="/images/industrial.avif" overlayOpacity={[0.70, 0.78]} />
@@ -67,7 +72,8 @@ export default function EducationSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15 }}
-              className="rounded-2xl p-6 transition-all duration-300"
+              onClick={() => setSelectedEdu(edu)}
+              className="group cursor-pointer rounded-2xl p-6 transition-all duration-300"
               style={{
                 background: "rgba(255,255,255,0.025)",
                 backdropFilter: "blur(12px)",
@@ -77,10 +83,12 @@ export default function EducationSection() {
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "hsl(var(--brand) / 0.2)";
                 e.currentTarget.style.boxShadow = "0 0 28px rgba(0,100,200,0.06)";
+                e.currentTarget.style.transform = "translateY(-2px)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
                 e.currentTarget.style.boxShadow = "0 4px 24px rgba(0,0,0,0.3)";
+                e.currentTarget.style.transform = "translateY(0)";
               }}
             >
               <div className="flex items-start gap-4 mb-4">
@@ -109,7 +117,7 @@ export default function EducationSection() {
                     </span>
                   )}
                 </div>
-                <div>
+                <div className="flex-1">
                   <h3
                     style={{
                       fontFamily: FONT_DISPLAY,
@@ -142,10 +150,12 @@ export default function EducationSection() {
                     {edu.dates}
                   </p>
                 </div>
+                <span className="text-white/20 group-hover:text-white/50 transition-colors text-sm">→</span>
               </div>
 
               {edu.description && (
                 <p
+                  className="line-clamp-2"
                   style={{
                     fontFamily: FONT_DISPLAY,
                     fontWeight: 300,
@@ -157,10 +167,25 @@ export default function EducationSection() {
                   {edu.description}
                 </p>
               )}
+
+              {edu.coursework && (
+                <p
+                  className="mt-3"
+                  style={{
+                    fontFamily: FONT_MONO,
+                    fontSize: "11px",
+                    color: "rgba(255,255,255,0.2)",
+                  }}
+                >
+                  Click to view coursework & details →
+                </p>
+              )}
             </motion.div>
           ))}
         </div>
       </div>
+
+      <EducationPanel education={selectedEdu} open={!!selectedEdu} onClose={() => setSelectedEdu(null)} />
     </section>
   );
 }
