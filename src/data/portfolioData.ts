@@ -41,6 +41,8 @@ export interface Education {
   description?: string;
   coursework?: string[];
   extras?: string[];
+  campusImage?: string;
+  projectImages?: string[];
 }
 
 export interface SkillCategory {
