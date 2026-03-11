@@ -11,6 +11,9 @@ export interface Experience {
   tools: string[];
   impact?: string;
   awards?: string[];
+  screenshots?: string[];
+  githubUrl?: string;
+  certificateImage?: string;
 }
 
 export interface Project {
