@@ -11,6 +11,9 @@ export interface Experience {
   tools: string[];
   impact?: string;
   awards?: string[];
+  screenshots?: string[];
+  githubUrl?: string;
+  certificateImage?: string;
 }
 
 export interface Project {
@@ -38,6 +41,8 @@ export interface Education {
   description?: string;
   coursework?: string[];
   extras?: string[];
+  campusImage?: string;
+  projectImages?: string[];
 }
 
 export interface SkillCategory {

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { experiences } from "@/data/portfolioData";
 import type { Experience } from "@/data/portfolioData";
 
-import ExperienceModal from "./ExperienceModal";
+import ExperiencePanel from "./ExperiencePanel";
 import SectionBackground from "./SectionBackground";
 import ExperienceCard from "./experience/ExperienceCard";
 
@@ -74,7 +74,7 @@ export default function ExperienceSection() {
         </div>
       </div>
 
-      <ExperienceModal experience={selectedExp} open={!!selectedExp} onOpenChange={(open) => !open && setSelectedExp(null)} />
+      <ExperiencePanel experience={selectedExp} open={!!selectedExp} onClose={() => setSelectedExp(null)} />
     </section>
   );
 }
