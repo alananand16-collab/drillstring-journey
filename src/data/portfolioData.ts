@@ -32,6 +32,7 @@ export interface Award {
 export interface Education {
   school: string;
   logo: string;
+  logoImage?: string;
   degree: string;
   dates: string;
   description?: string;
