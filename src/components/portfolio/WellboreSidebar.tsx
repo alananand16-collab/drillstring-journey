@@ -600,7 +600,7 @@ export default function WellboreSidebar() {
           <motion.div
             style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
             animate={{ rotateY: [0, 360] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "linear" }}
           >
             <BHAStack />
             <PDCBit />
