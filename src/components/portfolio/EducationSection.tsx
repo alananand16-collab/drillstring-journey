@@ -19,7 +19,7 @@ export default function EducationSection() {
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 40% at 30% 50%, rgba(20,30,45,0.06) 0%, transparent 70%)" }} />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-4xl lg:ml-24 lg:mr-auto lg:max-w-5xl">
+      <div className="relative z-10 mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

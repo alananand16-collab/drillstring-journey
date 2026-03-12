@@ -40,7 +40,7 @@ export default function ProjectsSection() {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-4xl lg:ml-24 lg:mr-auto lg:max-w-6xl">
+      <div className="relative z-10 mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -26,7 +26,7 @@ export default function ExperienceSection() {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-4xl lg:ml-24 lg:mr-auto lg:max-w-5xl">
+      <div className="relative z-10 mx-auto max-w-5xl">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-14">
           <div
             className="mb-4 flex items-center gap-3 text-experience-muted"
