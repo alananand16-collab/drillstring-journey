@@ -54,7 +54,7 @@ export default function AwardsSection() {
         ))}
       </div>
 
-      <div className="relative z-10 mx-auto max-w-5xl lg:ml-24 lg:mr-auto lg:max-w-6xl">
+      <div className="relative z-10 mx-auto max-w-6xl">
         {/* ── HEADER — centered, commanding ── */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

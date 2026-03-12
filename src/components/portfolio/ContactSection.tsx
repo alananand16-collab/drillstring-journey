@@ -39,7 +39,7 @@ export default function ContactSection() {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-4xl lg:ml-24 lg:mr-auto lg:max-w-5xl text-center">
+      <div className="relative z-10 mx-auto max-w-5xl text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
