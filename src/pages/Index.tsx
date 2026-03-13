@@ -53,6 +53,14 @@ const Index = () => {
           <ExperienceSection />
         </div>
 
+        {/* EDUCATION — Reservoir */}
+        <div className="relative">
+          <div className="absolute inset-0 pointer-events-none z-0">
+            <ReservoirSimEffect />
+          </div>
+          <EducationSection />
+        </div>
+
         {/* PROJECTS — Sandstone / Water zone */}
         <div className="relative">
           <div className="absolute inset-0 pointer-events-none z-0">
@@ -75,14 +83,6 @@ const Index = () => {
             <PerforationEffect />
           </div>
           <AwardsSection />
-        </div>
-
-        {/* EDUCATION — Reservoir */}
-        <div className="relative">
-          <div className="absolute inset-0 pointer-events-none z-0">
-            <ReservoirSimEffect />
-          </div>
-          <EducationSection />
         </div>
 
         {/* CONTACT — Basement */}
