@@ -74,9 +74,9 @@ export default function SkillsSection() {
               color: "rgba(255,255,255,0.2)",
             }}
           >
-            <span style={{ color: "hsl(var(--brand))" }}>5,000 FT</span>
+            <span style={{ color: "hsl(var(--brand))" }}>9,200 FT</span>
             <span className="h-px w-8 bg-white/10" />
-            <span>Reservoir Zone</span>
+            <span>Oil Sand Zone</span>
           </div>
           <h2
             style={{
