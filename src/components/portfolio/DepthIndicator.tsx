@@ -5,11 +5,11 @@ import { useScrollDepth } from "@/hooks/useScrollDepth";
 
 const formations = [
   { depth: 0,      label: "SURFACE",      pct: 0,   icon: "▽", color: "hsl(215,20%,65%)",  glow: "rgba(140,160,190,0.3)" },
-  { depth: 2400,   label: "SHALE CAP",    pct: 20,  icon: "≡", color: "hsl(220,18%,52%)",  glow: "rgba(100,120,160,0.3)" },
-  { depth: 3800,   label: "WATER SAND",   pct: 42,  icon: "≋", color: "hsl(200,85%,58%)",  glow: "rgba(60,170,230,0.35)" },
-  { depth: 6800,   label: "OIL SAND",     pct: 60,  icon: "●", color: "hsl(38,95%,58%)",   glow: "rgba(230,170,40,0.35)" },
-  { depth: 10800,  label: "PERF ZONE",    pct: 77,  icon: "✶", color: "hsl(25,95%,60%)",   glow: "rgba(240,130,50,0.35)" },
-  { depth: 14000,  label: "RESERVOIR TD", pct: 90,  icon: "◆", color: "hsl(170,65%,50%)",  glow: "rgba(50,200,170,0.35)" },
+  { depth: 2400,   label: "SHALE CAP",    pct: 18,  icon: "≡", color: "hsl(220,18%,52%)",  glow: "rgba(100,120,160,0.3)" },
+  { depth: 3800,   label: "RESERVOIR",    pct: 32,  icon: "◆", color: "hsl(170,65%,50%)",  glow: "rgba(50,200,170,0.35)" },
+  { depth: 6800,   label: "WATER SAND",   pct: 48,  icon: "≋", color: "hsl(200,85%,58%)",  glow: "rgba(60,170,230,0.35)" },
+  { depth: 9200,   label: "OIL SAND",     pct: 63,  icon: "●", color: "hsl(38,95%,58%)",   glow: "rgba(230,170,40,0.35)" },
+  { depth: 12000,  label: "PERF ZONE",    pct: 78,  icon: "✶", color: "hsl(25,95%,60%)",   glow: "rgba(240,130,50,0.35)" },
 ];
 
 const FONT_MONO = "'JetBrains Mono', monospace";
