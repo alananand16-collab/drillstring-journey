@@ -73,9 +73,9 @@ export default function AwardsSection() {
               textTransform: "uppercase",
             }}
           >
-            <span style={{ color: "hsl(42,90%,58%)" }}>6,500 FT</span>
+            <span style={{ color: "hsl(42,90%,58%)" }}>12,000 FT</span>
             <span className="h-px w-12" style={{ background: "linear-gradient(90deg, transparent, hsl(42,70%,50%,0.4), transparent)" }} />
-            <span style={{ color: "hsl(42,50%,55%,0.6)" }}>Pay Zone Struck</span>
+            <span style={{ color: "hsl(42,50%,55%,0.6)" }}>Perf Zone</span>
           </div>
 
           {/* Decorative line above title */}

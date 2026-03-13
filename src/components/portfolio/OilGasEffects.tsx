@@ -51,7 +51,6 @@ export function PoreThroatNetwork() {
       }}
     >
       <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
-        {/* Grain matrix */}
         {grains.map((g) => (
           <circle
             key={g.id}
@@ -63,7 +62,6 @@ export function PoreThroatNetwork() {
             strokeWidth="0.3"
           />
         ))}
-        {/* Connecting channels */}
         {channels.map((c) => (
           <line
             key={c.id}
@@ -76,7 +74,6 @@ export function PoreThroatNetwork() {
             opacity="0.4"
           />
         ))}
-        {/* Pore spaces */}
         {pores.map((p) => (
           <motion.circle
             key={p.id}
@@ -90,7 +87,6 @@ export function PoreThroatNetwork() {
             transition={{ duration: 2 + p.delay, delay: p.delay, repeat: Infinity }}
           />
         ))}
-        {/* Migrating fluid particles */}
         {migrators.map((m) => (
           <motion.circle
             key={m.id}
@@ -113,21 +109,21 @@ export function PoreThroatNetwork() {
 }
 
 /* ─────────────────────────────────────────────
-   2. WATER ZONE EFFECT
+   2. WATER ZONE EFFECT — enhanced visibility
    ───────────────────────────────────────────── */
-const waterBubbles = Array.from({ length: 15 }, (_, i) => ({
+const waterBubbles = Array.from({ length: 28 }, (_, i) => ({
   id: i,
-  left: 5 + Math.random() * 90,
-  delay: Math.random() * 5,
-  size: 4 + Math.random() * 8,
+  left: 3 + Math.random() * 94,
+  delay: Math.random() * 6,
+  size: 5 + Math.random() * 14,
 }));
 
-const invasionFronts = [20, 38, 56, 72, 88];
+const invasionFronts = [12, 24, 36, 48, 60, 72, 84];
 
 export function WaterZoneEffect() {
   return (
     <div style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden" }}>
-      {/* Horizontal invasion fronts */}
+      {/* Horizontal invasion fronts — brighter */}
       {invasionFronts.map((top, i) => (
         <motion.div
           key={i}
@@ -136,15 +132,16 @@ export function WaterZoneEffect() {
             left: 0,
             right: 0,
             top: `${top}%`,
-            height: "1px",
-            background: "linear-gradient(90deg, transparent, hsl(205,80%,60%,0.3), transparent)",
+            height: "2px",
+            background: "linear-gradient(90deg, transparent 5%, hsl(205,80%,60%,0.5) 30%, hsl(205,90%,70%,0.6) 50%, hsl(205,80%,60%,0.5) 70%, transparent 95%)",
+            filter: "blur(0.5px)",
           }}
-          animate={{ opacity: [0.2, 0.7, 0.2], scaleX: [0.8, 1, 0.8] }}
-          transition={{ duration: 3 + i * 0.4, repeat: Infinity, delay: i * 0.6 }}
+          animate={{ opacity: [0.3, 0.9, 0.3], scaleX: [0.85, 1, 0.85] }}
+          transition={{ duration: 3 + i * 0.4, repeat: Infinity, delay: i * 0.5 }}
         />
       ))}
 
-      {/* Rising water bubbles */}
+      {/* Rising water bubbles — bigger, brighter */}
       {waterBubbles.map((b) => (
         <motion.div
           key={b.id}
@@ -155,12 +152,13 @@ export function WaterZoneEffect() {
             width: `${b.size}px`,
             height: `${b.size}px`,
             borderRadius: "50%",
-            border: "1px solid hsl(205,80%,60%,0.5)",
-            background: "hsl(205,80%,60%,0.1)",
+            border: "1.5px solid hsl(205,85%,65%,0.7)",
+            background: "radial-gradient(circle at 35% 35%, hsl(205,85%,75%,0.3), hsl(205,80%,60%,0.15))",
+            boxShadow: "0 0 8px hsl(205,85%,65%,0.3)",
           }}
-          animate={{ y: [0, -200], opacity: [0, 0.7, 0] }}
+          animate={{ y: [0, -350], opacity: [0, 0.85, 0] }}
           transition={{
-            duration: 4 + b.delay,
+            duration: 4 + b.delay * 0.5,
             delay: b.delay,
             repeat: Infinity,
             ease: "easeOut",
@@ -168,49 +166,60 @@ export function WaterZoneEffect() {
         />
       ))}
 
-      {/* Saturation gradient overlay */}
+      {/* Saturation gradient overlay — stronger */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(180deg, transparent 0%, hsl(205,80%,60%,0.04) 50%, transparent 100%)",
+            "linear-gradient(180deg, transparent 0%, hsl(205,80%,60%,0.08) 30%, hsl(205,85%,55%,0.12) 50%, hsl(205,80%,60%,0.08) 70%, transparent 100%)",
         }}
+      />
+
+      {/* Water shimmer — new ambient glow */}
+      <motion.div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "radial-gradient(ellipse 80% 60% at 50% 50%, hsl(205,85%,60%,0.06) 0%, transparent 70%)",
+        }}
+        animate={{ opacity: [0.4, 1, 0.4] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
     </div>
   );
 }
 
 /* ─────────────────────────────────────────────
-   3. OIL ZONE EFFECT
+   3. OIL ZONE EFFECT — enhanced visibility
    ───────────────────────────────────────────── */
-const oilDrops = Array.from({ length: 8 }, (_, i) => ({
+const oilDrops = Array.from({ length: 14 }, (_, i) => ({
   id: i,
-  left: 10 + Math.random() * 80,
+  left: 5 + Math.random() * 90,
   delay: Math.random() * 4,
-  size: 6 + Math.random() * 10,
+  size: 8 + Math.random() * 14,
 }));
 
-const oilBlobs = Array.from({ length: 12 }, (_, i) => ({
+const oilBlobs = Array.from({ length: 18 }, (_, i) => ({
   id: i,
-  left: 5 + Math.random() * 88,
+  left: 3 + Math.random() * 92,
   top: 5 + Math.random() * 88,
-  w: 12 + Math.random() * 24,
-  h: 10 + Math.random() * 18,
+  w: 18 + Math.random() * 36,
+  h: 14 + Math.random() * 28,
   delay: Math.random() * 5,
 }));
 
-const oilBubbles = Array.from({ length: 10 }, (_, i) => ({
+const oilBubbles = Array.from({ length: 16 }, (_, i) => ({
   id: i,
-  left: 5 + Math.random() * 88,
+  left: 3 + Math.random() * 92,
   delay: Math.random() * 6,
-  size: 3 + Math.random() * 7,
+  size: 4 + Math.random() * 10,
 }));
 
 export function OilZoneEffect() {
   return (
     <div style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden" }}>
-      {/* Oil drips from top */}
+      {/* Oil drips from top — bigger, more visible */}
       {oilDrops.map((d) => (
         <motion.div
           key={d.id}
@@ -219,14 +228,14 @@ export function OilZoneEffect() {
             left: `${d.left}%`,
             top: 0,
             width: `${d.size}px`,
-            height: `${d.size * 1.8}px`,
+            height: `${d.size * 2}px`,
             borderRadius: "40% 40% 50% 50%",
-            background: "hsl(25,55%,25%)",
-            boxShadow: `0 0 8px hsl(35,92%,55%,0.3)`,
+            background: "linear-gradient(180deg, hsl(30,60%,30%) 0%, hsl(25,55%,22%) 100%)",
+            boxShadow: `0 0 14px hsl(35,92%,55%,0.5), 0 0 4px hsl(35,80%,40%,0.3)`,
           }}
-          animate={{ y: [0, 120], opacity: [0, 0.8, 0] }}
+          animate={{ y: [0, 200], opacity: [0, 0.9, 0] }}
           transition={{
-            duration: 3 + d.delay,
+            duration: 3 + d.delay * 0.5,
             delay: d.delay,
             repeat: Infinity,
             ease: "easeIn",
@@ -234,7 +243,7 @@ export function OilZoneEffect() {
         />
       ))}
 
-      {/* Crude oil blobs */}
+      {/* Crude oil blobs — larger, more contrast */}
       {oilBlobs.map((b) => (
         <motion.div
           key={b.id}
@@ -245,15 +254,16 @@ export function OilZoneEffect() {
             width: `${b.w}px`,
             height: `${b.h}px`,
             borderRadius: "60% 40% 50% 55%",
-            background: "hsl(25,55%,20%,0.55)",
-            border: "1px solid hsl(35,92%,45%,0.2)",
+            background: "radial-gradient(ellipse at 40% 40%, hsl(30,50%,25%,0.7), hsl(25,55%,18%,0.5))",
+            border: "1px solid hsl(35,92%,50%,0.3)",
+            boxShadow: "0 0 12px hsl(35,80%,40%,0.2)",
           }}
-          animate={{ scale: [1, 1.08, 1], opacity: [0.5, 0.8, 0.5] }}
-          transition={{ duration: 3 + b.delay, delay: b.delay, repeat: Infinity }}
+          animate={{ scale: [1, 1.12, 1], opacity: [0.5, 0.9, 0.5] }}
+          transition={{ duration: 3 + b.delay * 0.5, delay: b.delay, repeat: Infinity }}
         />
       ))}
 
-      {/* Rising oil bubbles */}
+      {/* Rising oil bubbles — brighter glow */}
       {oilBubbles.map((b) => (
         <motion.div
           key={b.id}
@@ -264,12 +274,13 @@ export function OilZoneEffect() {
             width: `${b.size}px`,
             height: `${b.size}px`,
             borderRadius: "50%",
-            background: "hsl(25,55%,30%,0.6)",
-            border: "1px solid hsl(35,92%,55%,0.3)",
+            background: "radial-gradient(circle at 35% 35%, hsl(35,80%,45%,0.7), hsl(25,55%,30%,0.5))",
+            border: "1px solid hsl(35,92%,55%,0.5)",
+            boxShadow: "0 0 8px hsl(35,92%,55%,0.4)",
           }}
-          animate={{ y: [0, -150], opacity: [0, 0.6, 0] }}
+          animate={{ y: [0, -250], opacity: [0, 0.8, 0] }}
           transition={{
-            duration: 5 + b.delay,
+            duration: 4 + b.delay * 0.4,
             delay: b.delay,
             repeat: Infinity,
             ease: "easeOut",
@@ -277,26 +288,37 @@ export function OilZoneEffect() {
         />
       ))}
 
-      {/* Amber glow */}
+      {/* Amber glow — much stronger */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           background:
-            "radial-gradient(ellipse 70% 50% at 50% 70%, hsl(35,92%,55%,0.07) 0%, transparent 100%)",
+            "radial-gradient(ellipse 80% 60% at 50% 60%, hsl(35,92%,55%,0.14) 0%, hsl(30,80%,40%,0.06) 50%, transparent 100%)",
         }}
+      />
+
+      {/* Pulsing oil shimmer */}
+      <motion.div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "radial-gradient(ellipse 70% 50% at 60% 40%, hsl(35,85%,50%,0.08) 0%, transparent 70%)",
+        }}
+        animate={{ opacity: [0.3, 1, 0.3] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
     </div>
   );
 }
 
 /* ─────────────────────────────────────────────
-   4. PERFORATION EFFECT
+   4. PERFORATION EFFECT — enhanced
    ───────────────────────────────────────────── */
-const charges = Array.from({ length: 10 }, (_, i) => ({
+const charges = Array.from({ length: 14 }, (_, i) => ({
   id: i,
-  left: 5 + i * 9.5,
-  top: 20 + Math.random() * 60,
+  left: 3 + i * 7,
+  top: 15 + Math.random() * 70,
   delay: Math.random() * 4,
 }));
 
@@ -307,20 +329,20 @@ export function PerforationEffect() {
         <motion.div
           key={c.id}
           style={{ position: "absolute", left: `${c.left}%`, top: `${c.top}%` }}
-          animate={{ scale: [0, 1, 0], opacity: [0, 0.9, 0] }}
-          transition={{ duration: 1.5, delay: c.delay, repeat: Infinity, repeatDelay: 3 }}
+          animate={{ scale: [0, 1.2, 0], opacity: [0, 1, 0] }}
+          transition={{ duration: 1.5, delay: c.delay, repeat: Infinity, repeatDelay: 2.5 }}
         >
-          {/* Detonation flash */}
+          {/* Detonation flash — bigger, brighter */}
           <div
             style={{
-              width: "12px",
-              height: "12px",
+              width: "18px",
+              height: "18px",
               borderRadius: "50%",
-              background: "radial-gradient(circle, hsl(35,100%,80%) 0%, hsl(28,92%,58%) 60%, transparent 100%)",
-              boxShadow: "0 0 16px 6px hsl(28,92%,58%,0.5)",
+              background: "radial-gradient(circle, hsl(45,100%,90%) 0%, hsl(35,100%,70%) 40%, hsl(28,92%,58%) 70%, transparent 100%)",
+              boxShadow: "0 0 24px 10px hsl(28,92%,58%,0.6), 0 0 8px 2px hsl(45,100%,80%,0.4)",
             }}
           />
-          {/* Jets radiating outward */}
+          {/* Jets radiating outward — longer, brighter */}
           {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, j) => (
             <motion.div
               key={j}
@@ -328,24 +350,26 @@ export function PerforationEffect() {
                 position: "absolute",
                 top: "50%",
                 left: "50%",
-                width: "20px",
-                height: "2px",
-                background: "linear-gradient(90deg, hsl(28,92%,58%,0.8), transparent)",
+                width: "32px",
+                height: "3px",
+                background: "linear-gradient(90deg, hsl(35,100%,70%,0.9), hsl(28,92%,58%,0.5), transparent)",
                 transformOrigin: "left center",
                 transform: `rotate(${angle}deg)`,
+                borderRadius: "2px",
               }}
-              animate={{ scaleX: [0, 1, 0], opacity: [0, 0.8, 0] }}
-              transition={{ duration: 0.8, delay: c.delay + 0.1, repeat: Infinity, repeatDelay: 3.2 }}
+              animate={{ scaleX: [0, 1, 0], opacity: [0, 0.9, 0] }}
+              transition={{ duration: 0.8, delay: c.delay + 0.1, repeat: Infinity, repeatDelay: 2.7 }}
             />
           ))}
         </motion.div>
       ))}
 
-      {/* Rock debris particles */}
-      {Array.from({ length: 20 }, (_, i) => ({
+      {/* Rock debris particles — more visible */}
+      {Array.from({ length: 30 }, (_, i) => ({
         left: Math.random() * 100,
         top: Math.random() * 100,
         delay: Math.random() * 5,
+        size: 3 + Math.random() * 4,
       })).map((d, i) => (
         <motion.div
           key={i}
@@ -353,65 +377,79 @@ export function PerforationEffect() {
             position: "absolute",
             left: `${d.left}%`,
             top: `${d.top}%`,
-            width: "3px",
-            height: "3px",
+            width: `${d.size}px`,
+            height: `${d.size}px`,
             borderRadius: "1px",
-            background: "hsl(25,30%,50%)",
+            background: "hsl(25,40%,55%)",
+            boxShadow: "0 0 4px hsl(28,60%,50%,0.4)",
           }}
           animate={{
-            x: [(Math.random() - 0.5) * 40],
-            y: [Math.random() * 30],
-            opacity: [0, 0.7, 0],
+            x: [(Math.random() - 0.5) * 60],
+            y: [Math.random() * 50],
+            opacity: [0, 0.8, 0],
           }}
-          transition={{ duration: 1.2, delay: d.delay, repeat: Infinity, repeatDelay: 2 }}
+          transition={{ duration: 1.2, delay: d.delay, repeat: Infinity, repeatDelay: 1.8 }}
         />
       ))}
+
+      {/* Ambient perf glow */}
+      <motion.div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "radial-gradient(ellipse 70% 50% at 50% 50%, hsl(28,80%,55%,0.08) 0%, transparent 70%)",
+        }}
+        animate={{ opacity: [0.3, 0.8, 0.3] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      />
     </div>
   );
 }
 
 /* ─────────────────────────────────────────────
-   5. RESERVOIR SIMULATION EFFECT
+   5. RESERVOIR SIMULATION EFFECT — enhanced
    ───────────────────────────────────────────── */
-const flowParticles = Array.from({ length: 12 }, (_, i) => ({
+const flowParticles = Array.from({ length: 20 }, (_, i) => ({
   id: i,
-  left: 20 + Math.random() * 60,
-  top: 20 + Math.random() * 60,
+  left: 15 + Math.random() * 70,
+  top: 15 + Math.random() * 70,
   delay: Math.random() * 4,
+  size: 4 + Math.random() * 5,
 }));
 
 export function ReservoirSimEffect() {
   return (
     <div style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden" }}>
-      {/* Grid mesh overlay */}
+      {/* Grid mesh overlay — more visible */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           backgroundImage:
-            "linear-gradient(rgba(0,180,140,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,180,140,0.04) 1px, transparent 1px)",
+            "linear-gradient(rgba(0,180,140,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,180,140,0.08) 1px, transparent 1px)",
           backgroundSize: "40px 40px",
         }}
       />
 
-      {/* Rotating saturation front */}
+      {/* Rotating saturation front — more vivid */}
       <motion.div
         style={{
           position: "absolute",
-          top: "25%",
-          left: "25%",
-          width: "50%",
-          height: "50%",
+          top: "20%",
+          left: "20%",
+          width: "60%",
+          height: "60%",
           borderRadius: "50%",
           background:
-            "conic-gradient(hsl(175,60%,48%,0.12) 0deg, transparent 120deg, hsl(35,92%,55%,0.08) 240deg, transparent 360deg)",
+            "conic-gradient(hsl(175,60%,48%,0.2) 0deg, transparent 120deg, hsl(35,92%,55%,0.15) 240deg, transparent 360deg)",
+          filter: "blur(2px)",
         }}
         animate={{ rotate: [0, 360] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
       />
 
-      {/* Pressure contour rings */}
-      {[30, 45, 60].map((size, i) => (
+      {/* Pressure contour rings — brighter */}
+      {[28, 42, 58, 72].map((size, i) => (
         <motion.div
           key={i}
           style={{
@@ -422,43 +460,48 @@ export function ReservoirSimEffect() {
             width: `${size}%`,
             height: `${size}%`,
             borderRadius: "50%",
-            border: `1px solid hsl(175,60%,48%,${0.15 - i * 0.04})`,
+            border: `1.5px solid hsl(175,60%,48%,${0.25 - i * 0.04})`,
+            boxShadow: `0 0 10px hsl(175,60%,48%,${0.1 - i * 0.02})`,
           }}
-          animate={{ scale: [1, 1.04, 1], opacity: [0.6, 1, 0.6] }}
-          transition={{ duration: 4 + i, delay: i * 1.5, repeat: Infinity }}
+          animate={{ scale: [1, 1.06, 1], opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 3.5 + i, delay: i * 1.2, repeat: Infinity }}
         />
       ))}
 
-      {/* Injector marker */}
-      <div
+      {/* Injector marker — bigger glow */}
+      <motion.div
         style={{
           position: "absolute",
-          left: "15%",
+          left: "12%",
           top: "50%",
           transform: "translateY(-50%)",
-          width: "10px",
-          height: "10px",
+          width: "14px",
+          height: "14px",
           borderRadius: "50%",
           background: "hsl(205,80%,60%)",
-          boxShadow: "0 0 12px 4px hsl(205,80%,60%,0.5)",
+          boxShadow: "0 0 20px 8px hsl(205,80%,60%,0.6), 0 0 40px 16px hsl(205,80%,60%,0.2)",
         }}
+        animate={{ scale: [1, 1.2, 1] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       />
-      {/* Producer marker */}
-      <div
+      {/* Producer marker — bigger glow */}
+      <motion.div
         style={{
           position: "absolute",
-          right: "15%",
+          right: "12%",
           top: "50%",
           transform: "translateY(-50%)",
-          width: "10px",
-          height: "10px",
+          width: "14px",
+          height: "14px",
           borderRadius: "50%",
           background: "hsl(35,92%,55%)",
-          boxShadow: "0 0 12px 4px hsl(35,92%,55%,0.5)",
+          boxShadow: "0 0 20px 8px hsl(35,92%,55%,0.6), 0 0 40px 16px hsl(35,92%,55%,0.2)",
         }}
+        animate={{ scale: [1, 1.2, 1] }}
+        transition={{ duration: 2, delay: 1, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Fluid flow particles between wells */}
+      {/* Fluid flow particles — bigger, brighter */}
       {flowParticles.map((p) => (
         <motion.div
           key={p.id}
@@ -466,18 +509,32 @@ export function ReservoirSimEffect() {
             position: "absolute",
             left: `${p.left}%`,
             top: `${p.top}%`,
-            width: "4px",
-            height: "4px",
+            width: `${p.size}px`,
+            height: `${p.size}px`,
             borderRadius: "50%",
-            background: p.id % 2 === 0 ? "hsl(205,80%,60%)" : "hsl(35,92%,55%)",
+            background: p.id % 2 === 0 ? "hsl(205,80%,65%)" : "hsl(35,92%,60%)",
+            boxShadow: p.id % 2 === 0
+              ? "0 0 6px hsl(205,80%,60%,0.5)"
+              : "0 0 6px hsl(35,92%,55%,0.5)",
           }}
           animate={{
-            x: p.id % 2 === 0 ? [0, 80] : [0, -80],
-            opacity: [0, 0.8, 0],
+            x: p.id % 2 === 0 ? [0, 120] : [0, -120],
+            opacity: [0, 0.9, 0],
           }}
-          transition={{ duration: 3 + p.delay, delay: p.delay, repeat: Infinity }}
+          transition={{ duration: 3 + p.delay * 0.5, delay: p.delay, repeat: Infinity }}
         />
       ))}
+
+      {/* Ambient reservoir glow */}
+      <motion.div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "radial-gradient(ellipse 60% 50% at 50% 50%, hsl(175,50%,45%,0.07) 0%, transparent 70%)",
+        }}
+        animate={{ opacity: [0.4, 1, 0.4] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      />
     </div>
   );
 }

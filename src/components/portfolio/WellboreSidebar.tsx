@@ -12,10 +12,11 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 const FORMATIONS = [
   { pct: 0,   label: "SURFACE",      icon: "▽", color: "hsl(215,12%,55%)",  depth: 0      },
   { pct: 18,  label: "SHALE CAP",    icon: "≡", color: "hsl(215,12%,42%)",  depth: 2400   },
-  { pct: 38,  label: "WATER SAND",   icon: "≋", color: "hsl(205,80%,60%)",  depth: 3800   },
-  { pct: 57,  label: "OIL SAND",     icon: "●", color: "hsl(35,92%,55%)",   depth: 6800   },
-  { pct: 74,  label: "PERF ZONE",    icon: "✶", color: "hsl(28,92%,58%)",   depth: 10800  },
-  { pct: 88,  label: "RESERVOIR TD", icon: "◆", color: "hsl(175,60%,48%)",  depth: 14000  },
+  { pct: 32,  label: "RESERVOIR",    icon: "◆", color: "hsl(175,60%,48%)",  depth: 3800   },
+  { pct: 48,  label: "WATER SAND",   icon: "≋", color: "hsl(205,80%,60%)",  depth: 6800   },
+  { pct: 63,  label: "OIL SAND",     icon: "●", color: "hsl(35,92%,55%)",   depth: 9200   },
+  { pct: 78,  label: "PERF ZONE",    icon: "✶", color: "hsl(28,92%,58%)",   depth: 12000  },
+  { pct: 92,  label: "BOTTOM HOLE",  icon: "◉", color: "hsl(20,65%,50%)",   depth: 14000  },
 ];
 
 const MAX_DEPTH = 14000;

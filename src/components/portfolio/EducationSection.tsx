@@ -36,9 +36,9 @@ export default function EducationSection() {
               color: "rgba(255,255,255,0.2)",
             }}
           >
-            <span style={{ color: "hsl(var(--brand))" }}>10,000 FT</span>
+            <span style={{ color: "hsl(var(--brand))" }}>3,800 FT</span>
             <span className="h-px w-8 bg-white/10" />
-            <span>Completion Zone</span>
+            <span>Reservoir Zone</span>
           </div>
           <h2
             style={{
