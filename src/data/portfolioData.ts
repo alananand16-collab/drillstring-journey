@@ -264,7 +264,7 @@ export const skillCategories: SkillCategory[] = [
 ];
 
 export const contactInfo = {
-  email: "alananand15@gmail.com",
+  email: "alananand16@gmail.com",
   phone: "+1 (403) 461-6579",
   linkedin: "https://linkedin.com/in/alananand/",
   location: "Calgary, AB",

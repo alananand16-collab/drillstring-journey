@@ -222,6 +222,7 @@ function PDCBit({ vibrating }: { vibrating: boolean }) {
                     fill="url(#cutterFace)" stroke={C.cutter(62)} strokeWidth="0.25" />
                   {/* Diamond shimmer */}
                   <motion.ellipse cx="-0.4" cy="-1.1" rx="1.0" ry="0.5" fill={C.cutter(90)}
+                    initial={{ opacity: 0.1 }}
                     animate={{ opacity: [0.1, 0.8, 0.1] }}
                     transition={{ duration: 0.8 + bi * 0.12 + ci * 0.08, repeat: Infinity }} />
                 </g>
@@ -245,6 +246,7 @@ function PDCBit({ vibrating }: { vibrating: boolean }) {
             <motion.ellipse cx={nx} cy={ny + 9} rx="3" ry="6"
               fill={C.water(62, 0.7)}
               filter="url(#glowF)"
+              initial={{ opacity: 0, scaleY: 0.2, scaleX: 1.5 }}
               animate={{ opacity: [0, 0.9, 0.4, 0], scaleY: [0.2, 1.6, 1.1, 0.2], scaleX: [1.5, 0.5, 0.8, 1.5] }}
               transition={{ duration: 0.55, delay: ni * 0.18, repeat: Infinity, ease: "easeInOut" }}
             />
@@ -280,14 +282,16 @@ function PDCBit({ vibrating }: { vibrating: boolean }) {
 
       {/* ── CUTTING HEAT GLOW ── */}
       <motion.ellipse cx="0" cy="25" rx="24" ry="9" fill="url(#heatGlow)"
-        animate={{ opacity: [0.3, 0.8, 0.4, 0.7, 0.3], ry: [7, 10, 8, 11, 7] }}
+        initial={{ opacity: 0.3, scaleY: 7 / 9 }}
+        animate={{ opacity: [0.3, 0.8, 0.4, 0.7, 0.3], scaleY: [7 / 9, 10 / 9, 8 / 9, 11 / 9, 7 / 9] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* ── WHITE-HOT CENTRE FLASH ── */}
       <motion.ellipse cx="0" cy="27" rx="8" ry="3.5"
         fill="hsl(45,100%,90%)" opacity="0.5"
-        animate={{ opacity: [0.2, 0.6, 0.2, 0.5, 0.2], rx: [4, 8, 5, 7, 4] }}
+        initial={{ opacity: 0.2, scaleX: 4 / 8 }}
+        animate={{ opacity: [0.2, 0.6, 0.2, 0.5, 0.2], scaleX: [4 / 8, 8 / 8, 5 / 8, 7 / 8, 4 / 8] }}
         transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
       />
 
@@ -295,11 +299,11 @@ function PDCBit({ vibrating }: { vibrating: boolean }) {
       {SPARKS.map((s) => (
         <motion.line key={s.id}
           x1="0" y1="25"
-          x2={s.ex * 0.15} y2={25 + s.ey * 0.15}
+          x2={s.ex} y2={25 + s.ey}
           stroke="hsl(48,100%,88%)" strokeWidth={s.len} strokeLinecap="round"
+          initial={{ pathLength: 0, opacity: 1 }}
           animate={{
-            x2: [0, s.ex * 0.5, s.ex * 0.9, s.ex],
-            y2: [25, 25 + s.ey * 0.5, 25 + s.ey * 0.9, 25 + s.ey],
+            pathLength: [0, 0.5, 0.9, 1],
             opacity: [1, 0.8, 0.4, 0],
           }}
           transition={{ duration: 0.35, delay: s.delay, repeat: Infinity, ease: "easeOut" }}

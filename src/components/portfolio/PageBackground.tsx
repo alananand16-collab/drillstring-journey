@@ -108,6 +108,7 @@ export default function PageBackground() {
           className="absolute inset-0 w-full h-full"
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="none"
+          viewBox="0 0 100 100"
         >
           {/* 22 wavy horizontal strata lines at irregular intervals */}
           {[4, 9, 13, 18, 23, 27, 31, 36, 41, 46, 52, 57, 62, 67, 72, 76, 80, 84, 88, 91, 95, 98].map((yPct, i) => {
@@ -116,7 +117,7 @@ export default function PageBackground() {
             return (
               <path
                 key={i}
-                d={`M0,${yPct}% Q25%,${yPct - amplitude * 0.3}% 50%,${yPct}% T100%,${yPct}%`}
+                d={`M0,${yPct} Q25,${yPct - amplitude * 0.3} 50,${yPct} T100,${yPct}`}
                 stroke={`rgba(255,255,255,${opacity})`}
                 strokeWidth="0.5"
                 fill="none"
@@ -128,7 +129,7 @@ export default function PageBackground() {
           {[38, 43, 48, 55, 60, 65].map((yPct, i) => (
             <path
               key={`brown-${i}`}
-              d={`M0,${yPct}% Q30%,${yPct + 1}% 60%,${yPct - 0.5}% T100%,${yPct}%`}
+              d={`M0,${yPct} Q30,${yPct + 1} 60,${yPct - 0.5} T100,${yPct}`}
               stroke={`rgba(100,70,20,${0.04 + i * 0.01})`}
               strokeWidth="0.5"
               fill="none"

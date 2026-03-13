@@ -321,12 +321,13 @@ export default function StratigraphyBackground() {
       <svg
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.055 }}
         preserveAspectRatio="none"
+        viewBox="0 0 100 100"
         xmlns="http://www.w3.org/2000/svg"
       >
         {[8, 14, 22, 28, 35, 41, 48, 54, 62, 68, 75, 81, 88, 94].map((y, i) => (
           <path
             key={i}
-            d={`M0,${y}% Q25%,${y - 0.4 + (i % 3) * 0.3}% 50%,${y + 0.3}% T100%,${y - 0.2}%`}
+            d={`M0,${y} Q25,${y - 0.4 + (i % 3) * 0.3} 50,${y + 0.3} T100,${y - 0.2}`}
             stroke="rgba(255,255,255,0.5)"
             strokeWidth={i % 4 === 0 ? "1.5" : "0.8"}
             fill="none"

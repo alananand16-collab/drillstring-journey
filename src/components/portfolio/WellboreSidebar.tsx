@@ -133,6 +133,7 @@ function PDCBit() {
                   <ellipse cx="0" cy="0" rx="2.4" ry="1.3" fill={C.collar(18)} stroke={C.collar(34)} strokeWidth="0.25" />
                   <ellipse cx="0" cy="-0.6" rx="2.0" ry="0.95" fill="url(#sbCutter)" stroke={C.cutter(60)} strokeWidth="0.2" />
                   <motion.ellipse cx="-0.3" cy="-0.9" rx="0.7" ry="0.35" fill={C.cutter(88)}
+                    initial={{ opacity: 0.1 }}
                     animate={{ opacity: [0.1, 0.85, 0.1] }}
                     transition={{ duration: 0.7 + bi * 0.1 + ci * 0.07, repeat: Infinity }} />
                 </g>
@@ -153,6 +154,7 @@ function PDCBit() {
             <circle cx={nx} cy={ny} r="1.5" fill="hsl(205,70%,35%)" />
             <motion.ellipse cx={nx} cy={ny + 7} rx="2.2" ry="4.5"
               fill="hsl(205,70%,62%)" opacity="0.65" filter="url(#sbGlow)"
+              initial={{ opacity: 0, scaleY: 0.2 }}
               animate={{ opacity: [0, 0.85, 0.35, 0], scaleY: [0.2, 1.5, 1.0, 0.2] }}
               transition={{ duration: 0.5, delay: ni * 0.16, repeat: Infinity }}
             />
@@ -169,25 +171,27 @@ function PDCBit() {
 
       {/* Heat glow */}
       <motion.ellipse cx="0" cy="20" rx="18" ry="7" fill="url(#sbHeat)"
-        animate={{ opacity: [0.4, 0.8, 0.45, 0.75, 0.4], ry: [6, 8, 6.5, 8.5, 6] }}
+        initial={{ opacity: 0.4, scaleY: 6 / 7 }}
+        animate={{ opacity: [0.4, 0.8, 0.45, 0.75, 0.4], scaleY: [6 / 7, 8 / 7, 6.5 / 7, 8.5 / 7, 6 / 7] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* White-hot centre flash */}
       <motion.ellipse cx="0" cy="21" rx="6" ry="2.8"
         fill="hsl(45,100%,92%)" opacity="0.5"
-        animate={{ opacity: [0.2, 0.6, 0.2, 0.5, 0.2], rx: [3, 6, 3.5, 5.5, 3] }}
+        initial={{ opacity: 0.2, scaleX: 3 / 6 }}
+        animate={{ opacity: [0.2, 0.6, 0.2, 0.5, 0.2], scaleX: [3 / 6, 6 / 6, 3.5 / 6, 5.5 / 6, 3 / 6] }}
         transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* Spark streaks */}
       {SPARKS.map((s) => (
         <motion.line key={s.id}
-          x1="0" y1="20" x2={s.ex * 0.12} y2={20 + s.ey * 0.12}
+          x1="0" y1="20" x2={s.ex} y2={20 + s.ey}
           stroke="hsl(48,100%,88%)" strokeWidth={s.len} strokeLinecap="round"
+          initial={{ pathLength: 0, opacity: 1 }}
           animate={{
-            x2: [0, s.ex * 0.5, s.ex * 0.85, s.ex],
-            y2: [20, 20 + s.ey * 0.5, 20 + s.ey * 0.85, 20 + s.ey],
+            pathLength: [0, 0.5, 0.85, 1],
             opacity: [1, 0.7, 0.3, 0],
           }}
           transition={{ duration: 0.3, delay: s.delay, repeat: Infinity }}
