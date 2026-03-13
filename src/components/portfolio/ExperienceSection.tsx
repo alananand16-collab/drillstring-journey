@@ -37,9 +37,9 @@ export default function ExperienceSection() {
               textTransform: "uppercase",
             }}
           >
-            <span className="text-experience-accent-warm">0 – 2,500 FT</span>
+            <span className="text-experience-accent-warm">0 – 2,400 FT</span>
             <span className="h-px w-8 bg-experience-border/50" />
-            <span>Sedimentary Zone</span>
+            <span>Shale Cap Zone</span>
           </div>
 
           <h2

@@ -10,6 +10,7 @@ const formations = [
   { depth: 6800,   label: "WATER SAND",   pct: 48,  icon: "≋", color: "hsl(200,85%,58%)",  glow: "rgba(60,170,230,0.35)" },
   { depth: 9200,   label: "OIL SAND",     pct: 63,  icon: "●", color: "hsl(38,95%,58%)",   glow: "rgba(230,170,40,0.35)" },
   { depth: 12000,  label: "PERF ZONE",    pct: 78,  icon: "✶", color: "hsl(25,95%,60%)",   glow: "rgba(240,130,50,0.35)" },
+  { depth: 14000,  label: "BOTTOM HOLE",  pct: 92,  icon: "◉", color: "hsl(20,90%,58%)",   glow: "rgba(220,110,40,0.35)" },
 ];
 
 const FONT_MONO = "'JetBrains Mono', monospace";

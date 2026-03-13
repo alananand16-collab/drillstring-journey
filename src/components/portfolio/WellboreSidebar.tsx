@@ -16,6 +16,7 @@ const FORMATIONS = [
   { pct: 48,  label: "WATER SAND",   icon: "≋", color: "hsl(205,80%,60%)",  depth: 6800   },
   { pct: 63,  label: "OIL SAND",     icon: "●", color: "hsl(35,92%,55%)",   depth: 9200   },
   { pct: 78,  label: "PERF ZONE",    icon: "✶", color: "hsl(28,92%,58%)",   depth: 12000  },
+  { pct: 92,  label: "BOTTOM HOLE",  icon: "◉", color: "hsl(20,65%,50%)",   depth: 14000  },
 ];
 
 const MAX_DEPTH = 14000;
