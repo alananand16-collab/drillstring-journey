@@ -80,6 +80,31 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               </p>
             </div>
 
+            {/* Screenshots */}
+            {project.screenshots && project.screenshots.length > 0 && (
+              <div className="mb-6">
+                <h4 className="text-[10px] tracking-[0.2em] uppercase text-white/30 mb-3">
+                  Screenshots
+                </h4>
+                <div className="grid gap-3 grid-cols-2">
+                  {project.screenshots.map((src, i) => (
+                    <div
+                      key={i}
+                      className={`overflow-hidden rounded-lg ${i === 0 ? "col-span-2" : ""}`}
+                      style={{ border: "1px solid rgba(255,255,255,0.06)" }}
+                    >
+                      <img
+                        src={src}
+                        alt={`${project.title} screenshot ${i + 1}`}
+                        className="h-auto w-full object-cover transition-transform duration-300 hover:scale-105"
+                        loading="lazy"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Tech Stack */}
             <div className="mb-5">
               <h4 className="text-[10px] tracking-[0.2em] uppercase text-white/30 mb-2">
