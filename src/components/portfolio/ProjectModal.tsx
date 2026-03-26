@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Github } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +10,16 @@ interface ProjectModalProps {
 }
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
+  useEffect(() => {
+    // Lock body scroll when modal is open
+    if (project) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [project]);
+
   if (!project) return null;
 
   return (
