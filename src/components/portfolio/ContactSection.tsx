@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { contactInfo } from "@/data/portfolioData";
-import { Mail, Linkedin, Download } from "lucide-react";
+import { Mail, Linkedin, Download, Github } from "lucide-react";
 import SectionBackground from "./SectionBackground";
 
 const FONT_DISPLAY = "'Outfit', sans-serif";
