@@ -30,12 +30,14 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           exit={{ opacity: 0, y: 40, scale: 0.96 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
           onClick={(e) => e.stopPropagation()}
-          className="relative z-10 w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-2xl"
+          className="relative z-10 w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-2xl scroll-smooth"
           style={{
             background: "rgba(12, 14, 20, 0.95)",
             backdropFilter: "blur(20px)",
             border: "1px solid rgba(255,255,255,0.08)",
             boxShadow: "0 0 60px rgba(0,0,0,0.6), 0 0 30px hsla(var(--brand) / 0.08)",
+            scrollbarWidth: "thin",
+            scrollbarColor: "rgba(255,255,255,0.2) transparent"
           }}
         >
           {/* Close button */}
@@ -84,18 +86,18 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             {project.screenshots && project.screenshots.length > 0 && (
               <div className="mb-6">
                 <h4 className="text-[10px] tracking-[0.2em] uppercase text-white/30 mb-3">
-                  Screenshots
+                  Process Flow Architecture
                 </h4>
-                <div className="grid gap-3 grid-cols-2">
+                <div className="grid gap-3 grid-cols-1">
                   {project.screenshots.map((src, i) => (
                     <div
                       key={i}
-                      className={`overflow-hidden rounded-lg ${i === 0 ? "col-span-2" : ""}`}
+                      className={`overflow-hidden rounded-lg`}
                       style={{ border: "1px solid rgba(255,255,255,0.06)" }}
                     >
                       <img
                         src={src}
-                        alt={`${project.title} screenshot ${i + 1}`}
+                        alt={`${project.title} architecture flow`}
                         className="h-auto w-full object-cover transition-transform duration-300 hover:scale-105"
                         loading="lazy"
                       />

@@ -137,15 +137,13 @@ export const projects: Project[] = [
     tagline: "RAG-powered chatbot for upstream petroleum engineering Q&A",
     narrative: "Petroleum engineers constantly sift through hundreds of pages of dense technical literature — drilling reports, completion manuals, and scanned legacy documents — just to find a single answer. I built this assistant to eliminate that friction: drop your PDFs in, and ask questions in plain English. It handles scanned documents via OCR fallback, chunks and vectorizes everything locally, and returns precise answers with transparent source citations so engineers can trust and verify every response.",
     description: "A production-ready Retrieval-Augmented Generation (RAG) pipeline built with LangChain. The ingestion module processes petroleum engineering PDFs through a dual-mode extractor — standard text extraction with automatic RapidOCR fallback for scanned documents. Text is split into configurable chunks, embedded using HuggingFace's all-MiniLM-L6-v2 model, and stored in a local Chroma vector database. At query time, the top-k most relevant chunks are retrieved and fed as context to Google's Gemini 2.5 Flash LLM, which generates domain-specific answers with full source attribution. The entire system is served through an interactive Gradio web interface with comprehensive error handling, structured logging, and environment-based configuration management.",
-    image: "reservoir",
+    image: "process-flow-ai",
     tools: ["Python", "LangChain", "HuggingFace", "ChromaDB", "Google Gemini", "Gradio", "RapidOCR"],
     connectsTo: "S&P Global AI Workflow Automation + Petroleum Domain Knowledge",
     status: "Project Completed",
     githubUrl: "https://github.com/alananand16-collab/petroleum_ai/",
     screenshots: [
       "/images/projects/petroleum-ai-architecture.jpg",
-      "/images/projects/petroleum-ai-chat.jpg",
-      "/images/projects/petroleum-ai-code.jpg",
     ],
   },
   {

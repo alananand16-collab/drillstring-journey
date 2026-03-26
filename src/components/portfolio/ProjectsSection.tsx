@@ -15,12 +15,14 @@ const imageMap: Record<string, string | null> = {
   land: null,
   well: null,
   eor: null,
+  "process-flow-ai": null,
 };
 
 const gradientMap: Record<string, string> = {
   land: "linear-gradient(135deg, hsl(140,30%,12%) 0%, hsl(160,25%,8%) 50%, hsl(120,20%,6%) 100%)",
   well: "linear-gradient(135deg, hsl(210,40%,12%) 0%, hsl(220,35%,8%) 50%, hsl(200,30%,6%) 100%)",
   eor: "linear-gradient(135deg, hsl(35,50%,14%) 0%, hsl(25,40%,10%) 50%, hsl(15,35%,7%) 100%)",
+  "process-flow-ai": "linear-gradient(135deg, hsl(230,40%,14%) 0%, hsl(240,35%,10%) 50%, hsl(250,30%,8%) 100%)",
 };
 
 const FONT_DISPLAY = "'Outfit', sans-serif";
