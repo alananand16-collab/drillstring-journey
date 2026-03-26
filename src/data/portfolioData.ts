@@ -26,6 +26,7 @@ export interface Project {
   connectsTo: string;
   status: string;
   githubUrl?: string;
+  screenshots?: string[];
 }
 
 export interface Award {
