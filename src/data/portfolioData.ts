@@ -142,6 +142,11 @@ export const projects: Project[] = [
     connectsTo: "S&P Global AI Workflow Automation + Petroleum Domain Knowledge",
     status: "Project Completed",
     githubUrl: "https://github.com/alananand16-collab/petroleum_ai/",
+    screenshots: [
+      "/images/projects/petroleum-ai-architecture.jpg",
+      "/images/projects/petroleum-ai-chat.jpg",
+      "/images/projects/petroleum-ai-code.jpg",
+    ],
   },
   {
     title: "Production Decline Curve Analyzer",
