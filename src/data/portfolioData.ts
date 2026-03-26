@@ -269,5 +269,6 @@ export const contactInfo = {
   email: "alananand16@gmail.com",
   phone: "+1 (403) 461-6579",
   linkedin: "https://linkedin.com/in/alananand/",
+  github: "https://github.com/alananand16-collab",
   location: "Calgary, AB",
 };

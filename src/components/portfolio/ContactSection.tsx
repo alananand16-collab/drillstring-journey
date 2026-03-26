@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { contactInfo } from "@/data/portfolioData";
-import { Mail, Linkedin, Download } from "lucide-react";
+import { Mail, Linkedin, Download, Github } from "lucide-react";
 import SectionBackground from "./SectionBackground";
 
 const FONT_DISPLAY = "'Outfit', sans-serif";
@@ -81,7 +81,7 @@ export default function ContactSection() {
               lineHeight: 1.7,
             }}
           >
-            Total depth reached. Open to opportunities in data engineering, subsurface analytics, and AI-driven energy solutions.
+            Total depth reached. Open to opportunities in data engineering, subsurface analytics, and AI-driven energy solutions. Check out my work on GitHub!
           </p>
         </motion.div>
 
@@ -142,6 +142,33 @@ export default function ContactSection() {
           >
             <Linkedin className="h-4 w-4" />
             LinkedIn
+          </a>
+
+          <a
+            href={contactInfo.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2.5 rounded-xl px-6 py-3 transition-all duration-300"
+            style={{
+              fontFamily: FONT_DISPLAY,
+              fontWeight: 400,
+              fontSize: "14px",
+              background: "rgba(255,255,255,0.03)",
+              backdropFilter: "blur(12px)",
+              border: "1px solid rgba(255,255,255,0.08)",
+              color: "rgba(255,255,255,0.55)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "hsl(var(--brand) / 0.3)";
+              e.currentTarget.style.color = "white";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+              e.currentTarget.style.color = "rgba(255,255,255,0.55)";
+            }}
+          >
+            <Github className="h-4 w-4" />
+            GitHub
           </a>
 
           <a
