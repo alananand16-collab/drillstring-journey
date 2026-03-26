@@ -25,6 +25,7 @@ export interface Project {
   tools: string[];
   connectsTo: string;
   status: string;
+  githubUrl?: string;
 }
 
 export interface Award {
@@ -131,14 +132,15 @@ export const experiences: Experience[] = [
 
 export const projects: Project[] = [
   {
-    title: "AI Drilling Report Summarizer",
-    tagline: "Transforming dense daily drilling reports into structured intelligence in seconds",
-    narrative: "Daily drilling reports are 5–15 pages of dense operational text. Engineers and project managers waste hours reading through them to extract what actually matters: NPT events, stuck pipe incidents, mud losses, bit changes, and formation transitions. This tool automates that extraction using AI.",
-    description: "The system accepts PDF uploads or pasted text from daily drilling reports, processes them through an LLM-based AI API, and extracts structured data: current depth, rate of penetration, active formation, non-productive time events, mud properties, and risk flags. The output is a clean one-page summary card with color-coded risk indicators. A trend tracking module compares consecutive reports to flag whether NPT is increasing, ROP is declining, or operational patterns suggest emerging problems.",
+    title: "Petroleum Engineering AI Assistant",
+    tagline: "Context-aware AI assistant powered by specialized petroleum literature",
+    narrative: "Petroleum engineers deal with massive amounts of complex literature and scanned documents. Tracking down specific technical answers across hundreds of pages is time-consuming. This assistant bridges the gap by providing localized RAG capabilities, allowing users to query a specialized knowledge base and get context-aware answers with accurate source attribution.",
+    description: "A sophisticated Retrieval-Augmented Generation (RAG) application that ingests petroleum engineering PDFs (with OCR support for scanned documents), chunks and embeds them using HuggingFace models, and stores them in a Chroma vector database. Users interact with the assistant through a Gradio web interface, querying Google's Gemini 2.5 Flash LLM to receive highly accurate answers with full source citations.",
     image: "reservoir",
-    tools: ["Python", "Streamlit", "Claude/OpenAI API", "pdfplumber", "pandas"],
-    connectsTo: "S&P Global Calgary (AI API integration) + ONGC (drilling domain knowledge)",
-    status: "In Development",
+    tools: ["Python", "LangChain", "HuggingFace", "ChromaDB", "Google Gemini", "Gradio"],
+    connectsTo: "S&P Global AI Workflow Automation + Petroleum Domain Knowledge",
+    status: "Project Completed",
+    githubUrl: "https://github.com/alananand16-collab/petroleum_ai/",
   },
   {
     title: "Production Decline Curve Analyzer",

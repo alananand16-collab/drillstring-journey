@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { X, Github } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { Project } from "@/data/portfolioData";
 
@@ -104,7 +104,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             </div>
 
             {/* Connects To */}
-            <div>
+            <div className={project.githubUrl ? "mb-6" : ""}>
               <h4 className="text-[10px] tracking-[0.2em] uppercase text-white/30 mb-2">
                 Connects To
               </h4>
@@ -112,6 +112,21 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 {project.connectsTo}
               </p>
             </div>
+
+            {/* GitHub Link */}
+            {project.githubUrl && (
+              <div>
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-white/5 hover:bg-white/10 text-white/70 hover:text-white transition-colors text-sm border border-white/10"
+                >
+                  <Github className="h-4 w-4" />
+                  <span>View Repository</span>
+                </a>
+              </div>
+            )}
           </div>
         </motion.div>
       </motion.div>
