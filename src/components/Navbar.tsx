@@ -76,6 +76,33 @@ export default function Navbar() {
           ))}
 
           <a
+            href="https://github.com/alananand16-collab"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 rounded-full px-5 py-2 text-[11px] tracking-[0.18em] uppercase transition-all duration-300"
+            style={{
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 600,
+              background: "rgba(255,255,255,0.05)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              color: "rgba(255,255,255,0.5)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(255,255,255,0.1)";
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)";
+              e.currentTarget.style.color = "rgba(255,255,255,0.8)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(255,255,255,0.05)";
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+              e.currentTarget.style.color = "rgba(255,255,255,0.5)";
+            }}
+          >
+            <Github className="h-3.5 w-3.5" />
+            GitHub
+          </a>
+
+          <a
             href="/resume.pdf"
             download
             className="flex items-center gap-2 rounded-full px-5 py-2 text-[11px] tracking-[0.18em] uppercase transition-all duration-300"
