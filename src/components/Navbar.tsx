@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Download } from "lucide-react";
+import { Download, Github } from "lucide-react";
 
 const navLinks = [
   { label: "Experience", href: "#experience" },
